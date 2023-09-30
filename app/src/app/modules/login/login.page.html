@@ -1,0 +1,54 @@
+<ion-content id="content">
+  <ion-grid class="class-grid">
+    <form class="submit-container" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-row class="ion-justify-content-center">
+        <img src="assets/imgs/logo.svg" width="120px">
+      </ion-row>
+
+      <ion-row class="ion-margin-top">
+        <ion-col size="12">
+          <ion-item class="w100 ion-margin-top" lines="none">
+            <ion-label color="tertiary" position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="username"></ion-input>
+          </ion-item>
+          <div *ngIf="!isFieldValid('username')" class="invalid-input-message">
+            {{getFieldError('username')}}
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="ion-align-items-center w100" lines="none">
+            <ion-label color="tertiary" position="floating">Contraseña</ion-label>
+            <ion-icon color="tertiary" slot="end" [name]="showPassword ? 'eye-off' : 'eye'"
+              (click)="showPassword = !showPassword"></ion-icon>
+            <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
+          </ion-item>
+          <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
+            {{getFieldError('password')}}
+          </div>
+        </ion-col>
+
+        <ion-col size="12" class="ion-text-center">
+          <ion-text class="w100" type="button" (click)="goToRecoverPassword()">
+            <p class="recover">Olvidé mi contraseña</p>
+          </ion-text>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-button type="button" class="global-btn ion-text-capitalize" color="secondary" expand="block" (click)="goToHome()">
+            Iniciar sesión
+          </ion-button>
+
+          <ion-button type="button" class="global-btn ion-text-capitalize ion-margin-top" color="tertiary" expand="block" (click)="goToUser()">
+            Registrarse
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <ion-row class="ion-justify-content-center ion-margin-top">
+      <ion-text class="ion-text-center versionText">
+        <p>v{{ settings.APP_VERSION }}</p>
+      </ion-text>
+    </ion-row>
+  </ion-grid>
+</ion-content>

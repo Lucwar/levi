@@ -1,0 +1,25 @@
+ion-content {
+    ion-item {
+        color: var(--ion-color-primary);
+        text-align: center;
+    }
+
+    ion-checkbox {
+        --border-color: var(--ion-color-primary);
+    }
+
+    .title {
+        color: var(--ion-color-primary);
+        font-weight: 700;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .item-check {
+        height: 40px;
+
+        ion-label {
+            text-align: left;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+.notes{
+    display: flex;
+    margin: 8px 0px;
+    .note{
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        background-color: rgb(44, 44, 44);
+        place-content: center;
+        color: white;
+        font-weight: 900;
+        font-size: 1.6rem;
+        display: flex;
+        align-items: center;
+        margin: 0px 8px;
+    }
+}
+
+ion-chip {
+    text-align: center !important;
+    width: 100% !important;
+    justify-content: center !important;
+    font-family: 'Poppins';
+
+    &.active {
+        background: var(--ion-color-primary);
+        color: white;
+        border-radius: 16px;
+    }
+}

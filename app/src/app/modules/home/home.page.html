@@ -1,0 +1,76 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center ion-margin-top">
+      <img src="assets/imgs/logo_header.svg" alt="">
+    </ion-title>
+    <div class="ion-padding-start ion-padding-bottom ion-padding-end">
+      <ion-row>
+        <ion-text color="light">
+          <h5>Hola Mario Caceres!</h5>
+        </ion-text>
+
+        <ion-item lines="none">
+          <ion-icon name="search" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Buscar"></ion-input>
+          <ion-button slot="end" fill="clear" class="ion-text-capitalize">
+            <ion-icon name="options-outline" slot="start" class="rotate"></ion-icon>
+            Ordenar
+          </ion-button>
+        </ion-item>
+      </ion-row>
+    </div>
+  </ion-toolbar>
+
+  <ion-toolbar color="light">
+    <swiper [config]="swiperConfig" class="ion-padding-start ion-padding-end">
+      <ng-template swiperSlide>
+        <ion-chip class="active">Bares</ion-chip>
+      </ng-template>
+
+      <ng-template swiperSlide>
+        <ion-chip>Restaurantes</ion-chip>
+      </ng-template>
+
+      <ng-template swiperSlide>
+        <ion-chip>Cafeterias</ion-chip>
+      </ng-template>
+
+      <ng-template swiperSlide>
+        <ion-chip>Otros Locales</ion-chip>
+      </ng-template>
+    </swiper>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text color="tertiary">
+    <h5 class="ion-margin-start">Mi reserva</h5>
+  </ion-text>
+
+  <ion-card *ngFor="let i of [1,1,1,1]">
+    <ion-item (click)="goToDetail()" lines="none" class="ion-align-items-center">
+      <ion-label class="ion-text-wrap">
+        <p>Domingo - 19/07/2023</p>
+        <ion-label><p>Creada por: <b>Alexis</b></p></ion-label>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <!-- <ion-card (click)="goToStore()" class="ion-margin-top">
+    <img src="assets/imgs/example.png" alt="">
+
+    <div class="person">
+      <ion-icon name="person" color="primary"></ion-icon>
+      <p>15/20</p>
+    </div>
+
+    <ion-card-content>
+      <ion-card-title>Café Paris</ion-card-title>
+      <ion-item lines="none">
+        <ion-icon name="location" color="primary"></ion-icon>
+        <p>Hipólito Yrigoyen 131, X5152 Villa Carlos Paz, Córdoba</p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card> -->
+
+</ion-content>

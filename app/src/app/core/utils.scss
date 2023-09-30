@@ -1,0 +1,182 @@
+// Utils
+
+/*
+ * USO CON @extend
+ * ----------------------------------------------------------------------------
+ *
+ * Para utilizar con @extend importar en el css del módulo 
+ * de la siguiente manera
+ * @import "./../../core/utils.scss";
+ *
+*/
+
+.u-fit-contain {
+    object-fit: contain;
+}
+
+.u-fit-cover {
+    object-fit: cover;
+}
+
+.u-transparent {
+    --background: transparent;
+}
+
+.u-center-v-h {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.u-column-center-v-h {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.u-center-v {
+    display: flex;
+    align-items: center;
+}
+
+.u-center-h {
+    display: flex;
+    justify-content: center;
+}
+
+// Added Utils
+
+// Stepper in toolbar inside header
+
+ion-header {
+    .stepper {
+        --background: #f0f0f0;
+
+        .container {
+            width: 100%;
+            margin: 0 0 20px 0;
+        }
+
+        .progressbar {
+            counter-reset: step;
+        }
+
+        .progressbar li {
+            list-style-type: none;
+            width: 25%;
+            float: left;
+            font-size: 0.6em;
+            position: relative;
+            text-align: center;
+            text-transform: uppercase;
+            color: var(--ion-color-light-shade);
+            opacity: 0.9;
+            margin-bottom: 1em;
+        }
+
+        .progressbar li:before {
+            width: 30px;
+            height: 30px;
+            content: counter(step);
+            counter-increment: step;
+            line-height: 30px;
+            border: 2px solid var(--ion-color-light-shade);
+            display: block;
+            text-align: center;
+            margin: 0 auto 10px auto;
+            border-radius: 50%;
+            background-color: var(--ion-color-light-shade);
+            font-size: 1em;
+            color: white;
+        }
+
+        .progressbar li:after {
+            width: 100%;
+            height: 2px;
+            content: '';
+            position: absolute;
+            background-color: var(--ion-color-light-shade);
+            top: 15px;
+            z-index: -1;
+            left: -34%;
+            @media (min-width: 576px) {
+                left: -50%;
+            }
+        }
+
+        .progressbar li:first-child:after {
+            content: none;
+        }
+
+        .progressbar li.active {
+            color: var(--ion-color-primary);
+        }
+
+        .progressbar li:first-child {
+            margin-left: -2em;
+        }
+
+        .progressbar li.active:before {
+            border-color: var(--ion-color-primary);
+            background-color: var(--ion-color-primary);
+            color: white;
+        }
+
+        .progressbar li.active + li:after {
+            background-color: var(--ion-color-primary);
+        }
+    }
+}
+
+//buttons no shadow
+
+.u-btn-no-shadow {
+    --box-shadow: none;
+}
+
+//badge on ion-icon
+
+.u-badge-one {
+    position: absolute;
+    top: 0px;
+    right: -5px;
+    font-size: 0.6em;
+    border-radius: 50%;
+    --padding-start: 5px;
+    --padding-end: 5px;
+    color: var(--ion-color-danger);
+}
+
+//badge on ion-icon with numbers
+.u-badge-two {
+    position: absolute;
+    top: 0px;
+    right: -5px;
+    font-size: 0.6em;
+    --padding-start: 3px;
+    --padding-end: 3px;
+}
+
+//custom dates
+
+.u-date {
+    border: 1px solid rgb(85, 85, 85);
+    border-radius: 10px;
+    width: 65px;
+    padding: 6px;
+    span {
+        color: rgb(85, 85, 85);
+    }
+}
+
+// <ion-item>
+//     <div slot="start" class="date ion-text-center">
+//     <ion-text color="medium">01/02 2021</ion-text>
+//     </div>
+//     <ion-label>
+//     <h2 class="ion-text-wrap">Feria de platos para el viaje de estudio!</h2>
+//     <ion-note>6° D - Ivan Duri</ion-note>
+//     </ion-label>
+//     <ion-badge color="tertiary">Nuevo</ion-badge>
+// </ion-item>

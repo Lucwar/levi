@@ -1,0 +1,23 @@
+.inner-content {
+  --background: #ECECEC;
+
+  .close-btn {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .title {
+    color: var(--ion-color-primary);
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .first-row {
+    margin-top: 1vh;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

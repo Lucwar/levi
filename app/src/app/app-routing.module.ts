@@ -1,0 +1,85 @@
+import { NgModule } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RoleGuard } from './core/guards/role.guard';
+
+const routes: Routes = [
+  {
+    path: 'login',
+    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginPageModule),
+    data: { noUser: true },
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'address/:register',
+    loadChildren: () => import('./modules/address/address.module').then(m => m.AddressPageModule),
+    data: { noUser: true },
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'store',
+    loadChildren: () => import('./modules/store/store.module').then(m => m.StorePageModule),
+    data: { noUser: true },
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'success',
+    loadChildren: () => import('./modules/success/success.module').then(m => m.SuccessPageModule),
+    data: { noUser: true },
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'booking',
+    loadChildren: () => import('./modules/booking/booking.module').then(m => m.BookingPageModule),
+    data: { noUser: true },
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'register/:id',
+    loadChildren: () => import('./modules/user/user.module').then(m => m.UserPageModule),
+    data: { noUser: true },
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'change-password',
+    loadChildren: () => import('./modules/change-password/change-password.module').then(m => m.ChangePasswordPageModule),
+    data: { noUser: true },
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'recover-password',
+    loadChildren: () => import('./modules/recover-password/recover-password.module').then(m => m.RecoverPasswordPageModule),
+    data: { noUser: true },
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'recover-password-success',
+    loadChildren: () =>
+      import('./modules/recover-password-success/recover-password-success.module').then(m => m.RecoverPasswordSuccessPageModule),
+    data: { noUser: true },
+    canActivate: [RoleGuard]
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./modules/tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'service',
+    loadChildren: () => import('./modules/service/service.module').then( m => m.ServicePageModule)
+  },
+  {
+    path: 'song',
+    loadChildren: () => import('./modules/song/song.module').then( m => m.SongPageModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'login'
+  },
+
+];
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

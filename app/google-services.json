@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "927915106602",
+    "project_id": "d90app-47c41",
+    "storage_bucket": "d90app-47c41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927915106602:android:964a956e812ae31df97e53",
+        "android_client_info": {
+          "package_name": "com.diproach.finde"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927915106602-laba6dv1q0f9b34ducui2if8v9rkko3t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOOelaQmfgJj8esXJFBAr_kpvTRw7wv3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927915106602-laba6dv1q0f9b34ducui2if8v9rkko3t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

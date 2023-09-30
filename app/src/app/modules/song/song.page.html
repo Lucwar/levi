@@ -1,0 +1,82 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Es tiempo - Hillsong</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment [(ngModel)]="segmentValue" value="default"
+      class="w100 segment-custom">
+      <ion-segment-button [value]="segmentSong" value="default">
+        <ion-label>Letra</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [value]="segmentNotes" value="products">
+        <ion-label>Notas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="segmentValue">
+      <div *ngSwitchCase="segmentSong">
+        
+        <ion-card class="ion-padding">
+          <h4><b>Estrofa 1:</b></h4>
+          <h3>
+            Amor inexplicable, tu vida diste en la cruz <br>
+            Tuyo soy por siempre<br>
+            En tu misericordia, me diste vida, diste amor<br>
+            Tu gran amor<br>
+          </h3>
+          <h4><b>Estrofa 2:</b></h4>
+          <h3>
+            Amor inexplicable, tu vida diste en la cruz <br>
+            Tuyo soy por siempre<br>
+            En tu misericordia, me diste vida, diste amor<br>
+            Tu gran amor<br>
+          </h3>
+        </ion-card>
+      </div>
+
+      <div *ngSwitchCase="segmentNotes">
+        <swiper [config]="swiperConfig" class="ion-padding-start ion-padding-end">
+          <ng-template swiperSlide>
+            <ion-chip class="active">Bajo</ion-chip>
+          </ng-template>
+    
+          <ng-template swiperSlide>
+            <ion-chip>Teclado</ion-chip>
+          </ng-template>
+    
+          <ng-template swiperSlide>
+            <ion-chip>Guitarra</ion-chip>
+          </ng-template>
+    
+        </swiper>
+        
+        <ion-card class="ion-padding">
+          <h4><b>Estrofa 1:</b></h4>
+          <div class="notes">
+            <div class="note">C</div>
+            <div class="note">D</div>
+            <div class="note">E</div>
+          </div>
+          <div class="notes">
+            <div class="note">C</div>
+            <div class="note">D</div>
+            <div class="note">E</div>
+          </div>
+          <h4><b>Coro:</b></h4>
+          <div class="notes">
+            <div class="note">C</div>
+            <div class="note">D</div>
+            <div class="note">E</div>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+
+  
+</ion-content>

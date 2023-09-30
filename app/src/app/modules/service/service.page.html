@@ -1,0 +1,83 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Domingo - 19/07/2023</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <ion-segment [(ngModel)]="segmentValue" value="default"
+      class="w100 segment-custom">
+      <ion-segment-button [value]="segmentSong" value="default">
+        <ion-label>Letra</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [value]="segmentNotes" value="products">
+        <ion-label>Notas</ion-label>
+      </ion-segment-button>
+    </ion-segment> -->
+
+    <h1 class="ion-padding-start">Alabanzas</h1>
+        <ion-card *ngFor="let i of [1,1,1,1]; let index = index">
+          <ion-item (click)="goToSong()" lines="none" class="ion-align-items-center">
+            <ion-buttons slot="start">
+             <h1>{{index + 1}}</h1>
+            </ion-buttons>
+            <ion-label class="ion-text-wrap">
+              <h2>Es tiempo</h2>
+              <ion-label>Hillsong</ion-label>
+            </ion-label>
+            <ion-buttons slot="end">
+              <div class="note">D</div>
+            </ion-buttons>
+          </ion-item>
+        </ion-card>
+        <h1 class="ion-padding-start">Adoraciones</h1>
+        <ion-card *ngFor="let i of [1,1]; let index = index">
+          <ion-item (click)="goToSong()" lines="none" class="ion-align-items-center">
+            <ion-buttons slot="start">
+             <h1>{{index + 1}}</h1>
+            </ion-buttons>
+            <ion-label class="ion-text-wrap">
+              <h2>Es tiempo</h2>
+              <ion-label>Hillsong</ion-label>
+            </ion-label>
+            <ion-buttons slot="end">
+              <div class="note">D</div>
+            </ion-buttons>
+          </ion-item>
+        </ion-card>
+
+    <div [ngSwitch]="segmentValue">
+      <div *ngSwitchCase="segmentSong">
+        
+      </div>
+
+      <div *ngSwitchCase="segmentNotes">
+        
+        <ion-card class="ion-padding">
+          <h4><b>Estrofa 1:</b></h4>
+          <div class="notes">
+            <div class="note">C</div>
+            <div class="note">D</div>
+            <div class="note">E</div>
+          </div>
+          <div class="notes">
+            <div class="note">C</div>
+            <div class="note">D</div>
+            <div class="note">E</div>
+          </div>
+          <h4><b>Coro:</b></h4>
+          <div class="notes">
+            <div class="note">C</div>
+            <div class="note">D</div>
+            <div class="note">E</div>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+
+  
+</ion-content>

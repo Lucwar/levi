@@ -1,0 +1,102 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" *ngIf="profile === 'register'">
+      <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">{{profile == 'register' ? 'Registro' : 'Perfil'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id='content' class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-text color="tertiary">
+      <h5>Datos de usuario</h5>
+    </ion-text>
+
+    <ion-item lines="none" class="ion-margin-top">
+      <ion-label position="floating" color="tertiary">Nombre</ion-label>
+      <ion-input type="text" formControlName="firstName"></ion-input>
+    </ion-item>
+    <div *ngIf="!isFieldValid('firstName')" class="invalid-input-message">
+      {{getFieldError('firstName')}}
+    </div>
+    <ion-item lines="none" class="ion-margin-top">
+      <ion-label position="floating" color="tertiary">Apellido</ion-label>
+      <ion-input type="text" formControlName="lastName"></ion-input>
+    </ion-item>
+    <div *ngIf="!isFieldValid('lastName')" class="invalid-input-message">
+      {{getFieldError('lastName')}}
+    </div>
+    <ion-item lines="none" class="ion-margin-top">
+      <ion-label position="floating" color="tertiary">Email</ion-label>
+      <ion-input type="email" formControlName="lastName"></ion-input>
+    </ion-item>
+    <div *ngIf="!isFieldValid('lastName')" class="invalid-input-message">
+      {{getFieldError('lastName')}}
+    </div>
+    <ion-item lines="none" class="ion-margin-top ion-align-items-center">
+      <ion-label position="stacked" color="tertiary">Dirección</ion-label>
+      <ion-input type="text" formControlName="lastName"></ion-input>
+      <ion-button slot="end" fill="clear" color="primary" (click)="goToAddress()">
+        <ion-icon name="earth-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <div *ngIf="!isFieldValid('lastName')" class="invalid-input-message">
+      {{getFieldError('lastName')}}
+    </div>
+
+    <ng-container *ngIf="profile == 'register'">
+      <ion-text color="tertiary">
+        <h5>Contraseña</h5>
+      </ion-text>
+  
+      <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
+        <ion-label color="tertiary" position="floating">Contraseña</ion-label>
+        <ion-icon color="tertiary" slot="end" [name]="showPassword ? 'eye-off' : 'eye'"
+          (click)="showPassword = !showPassword"></ion-icon>
+        <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
+        {{getFieldError('password')}}
+      </div>
+  
+      <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
+        <ion-label color="tertiary" position="floating">Repetir Contraseña</ion-label>
+        <ion-icon color="tertiary" slot="end" [name]="showPassword ? 'eye-off' : 'eye'"
+          (click)="showPassword = !showPassword"></ion-icon>
+        <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
+        {{getFieldError('password')}}
+      </div>
+    </ng-container>
+   
+    <ion-item lines="none" class="ion-margin-top" class="terms-item" *ngIf="profile == 'register'">
+      <ion-checkbox formControlName="termsAndConditionsAccepted" color="secondary"
+        class="ion-margin-end"></ion-checkbox>
+      <ion-text color="primary">Acepto los <u (click)="pageService.openLink(settings.links.terms)">Términos y
+          Condiciones</u></ion-text>
+    </ion-item>
+    <div *ngIf="!isFieldValid('termsAndConditionsAccepted')" class="invalid-input-message">
+      {{getFieldError('termsAndConditionsAccepted')}}
+    </div>
+
+    <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="clear" color="primary" expand="block"
+      type="button" (click)="goToChangePassword()" *ngIf="!profile">
+      <u>Cambiar contraseña</u> 
+    </ion-button>
+    <ion-button class="ion-margin-top ion-margin-bottom ion-text-capitalize global-btn" color="secondary" expand="block"
+      type="submit" [disabled]="!form.valid">
+        {{ profile == 'register' ? 'Registrarse' : 'Guardar cambios' }}
+    </ion-button>
+    <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="outline" color="primary"
+      expand="block" (click)="pageService.logout()" *ngIf="!profile">
+      Cerrar sesión
+    </ion-button>
+
+    <ion-button class="ion-margin-top global-btn custom-margin-top ion-text-capitalize" size="small" fill="clear"
+      shape="round" color="danger" expand="block" *ngIf="!profile" (click)="deleteAccount()">
+      Eliminar cuenta
+    </ion-button>
+  </form>
+</ion-content>

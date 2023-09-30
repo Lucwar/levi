@@ -1,0 +1,39 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <!-- <ion-menu contentId="main-content" type="overlay" >
+      <ion-content>
+
+        <div class="custom-list-header">
+          <ion-item lines="none" class="ion-align-items-center" (click)="goToUser()" >
+            <ion-icon name="person" slot="start" color="secondary"></ion-icon>
+            <ion-label class="header" color="light">
+              <h2>Front Diproach</h2>
+              <small>test@diproach.com</small>
+            </ion-label>
+          </ion-item>
+        </div>
+
+        <ion-list id="inbox-list" class="menu">
+          <ion-menu-toggle auto-hide="false" class="custom-menu-toogle">
+
+            <div>
+              <ng-container *ngFor="let p of appPages">
+                <ion-item routerDirection="root" [routerLink]="[p.url]" (click)="handleClick($event, p)" *ngIf="showRoute(p)"
+                  lines="none" detail="false" [class.selected]="location.path() === p.url && !p.disabled">
+                  <ion-icon color="light" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon"></ion-icon>
+                  <ion-label color="light">{{ p.title }}</ion-label>
+                </ion-item>
+              </ng-container>
+            </div>
+          </ion-menu-toggle>
+
+          <div class="custom-label">
+            <p>v0.0.1</p>
+          </div>
+        </ion-list>
+
+      </ion-content>
+    </ion-menu> -->
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

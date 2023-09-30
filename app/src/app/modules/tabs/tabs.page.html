@@ -1,0 +1,17 @@
+<ion-tabs #myTabs (ionTabsDidChange)="setCurrentTab($event)">
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" layout="icon-top">
+      <ion-icon [name]="tabSelected == 'home' ? 'home':'home-outline'"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="address" layout="icon-top">
+      <ion-icon [name]="tabSelected == 'address' ? 'navigate':'navigate-outline'"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="user" layout="icon-top">
+      <ion-icon [name]="tabSelected == 'user' ? 'person-circle':'person-circle-outline'"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

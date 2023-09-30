@@ -1,0 +1,17 @@
+ion-content::part(scroll) {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-top: 16px !important;
+}
+
+ion-content {
+    ion-item::part(native) {
+        border-radius: 10px !important;
+    }
+
+    ion-label {
+        color: var(--ion-color-tertiary) !important;
+        font-weight: 400 !important;
+        font-size: 0.9rem !important;
+    }
+}

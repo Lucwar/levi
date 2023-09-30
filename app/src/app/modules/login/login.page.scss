@@ -1,0 +1,36 @@
+ion-content {
+    .class-grid {
+        justify-content: center;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        padding: 10vh 10px;
+    }
+
+    .recover {
+        font-size: 0.9rem;
+        color: var(--ion-color-primary);
+    }
+
+    .versionText {
+        p {
+            color: var(--ion-color-primary) !important;
+        }
+    
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    ion-item::part(native) {
+        border-radius: 10px !important;
+    }
+
+    ion-label {
+        color: var(--ion-color-tertiary) !important;
+        font-weight: 400 !important;
+        font-size: 0.9rem !important;
+    }
+
+}

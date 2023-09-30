@@ -1,0 +1,31 @@
+<ion-content>
+  <ion-list>
+    
+    <ng-container *ngFor="let element of elements">
+      <p class="title" *ngIf="element.elementType === 'label'">{{ element.label }}</p>
+      
+      <ion-item *ngIf="element.elementType === 'item'" [ngClass]="{'item-check': element.itemType === 'checkbox'}" lines="full" (click)="handleClick(element)">
+        <ion-label>{{ element.label }}</ion-label>
+
+        <!-- <ion-datetime display-format="DD/MM/YYYY" doneText="Aceptar" cancelText="cancelar" placeholder="Seleccione Fecha" [max]="maxYear" [(ngModel)]="filters[element.key]" *ngIf="element.itemType === 'dateTime'"></ion-datetime> -->
+
+        <ion-checkbox slot="start" color="secondary" [checked]="filters[element.key] && filters[element.key].includes(element.value)" (ionChange)="handleCheck(element)" *ngIf="element.itemType === 'checkbox'"></ion-checkbox>
+      </ion-item>
+    </ng-container>
+
+  </ion-list>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-button (click)="close()" expand="block" fill="clear" shape="round" color="danger">
+        Cerrar
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button (click)="filter()" expand="block" fill="clear"  shape="round" color="primary">
+        Filtrar
+      </ion-button>
+    </ion-col>
+
+  </ion-row>
+</ion-content>

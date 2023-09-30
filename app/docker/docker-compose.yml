@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+
+  euvamos-app:
+    container_name: ${NAME}
+    image: ${NAME}
+    build: 
+      context: ${CONTEXT}/
+      dockerfile: docker/Dockerfile
+      args:
+        NAME: ${NAME}
+        BASE_URL: ${BASE_URL}
+        HTTP_PORT: ${HTTP_PORT}
+    environment:
+      DOCKER_ON: "true"
+    ports:
+      - "${HTTP_PORT_LOCAL}:${HTTP_PORT}"
+    volumes:
+      - ${CONTEXT}/:${BASE_URL}/${NAME}
+      - ${BASE_URL}/${NAME}/node_modules
+      - ${BASE_URL}/${NAME}/docker
+    command: ionic s --external --no-open
+
+networks:
+  euvamos-app:
+    name: ${NAME}
+    driver: bridge
