@@ -1,0 +1,23 @@
+ion-content{
+    .notes{
+        display: flex;
+        margin: 8px 0px;
+    }
+    .note{
+        height: 30px;
+        width: 30px;
+        border-radius: 100%;
+        background-color: rgb(44, 44, 44);
+        place-content: center;
+        color: white;
+        font-weight: 900;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        margin: 0px 8px;
+    }
+
+    .ion-fab-custom{
+        margin-bottom: 36px;
+    }
+}

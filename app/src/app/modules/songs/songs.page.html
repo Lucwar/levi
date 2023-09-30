@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Canciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div class="ion-padding-start ion-padding-end ion-margin-top">
+    <ion-row>
+      <ion-item lines="none">
+        <ion-icon name="search" slot="start"></ion-icon>
+        <ion-input type="text" placeholder="Buscar"></ion-input>
+        <ion-button slot="end" fill="clear" class="ion-text-capitalize">
+          <ion-icon name="options-outline" slot="start" class="rotate"></ion-icon>
+          Ordenar
+        </ion-button>
+      </ion-item>
+    </ion-row>
+    <span>Más nuevas - A-Z - Z-A</span>
+  </div>
+
+  <ion-list>
+    <ion-card *ngFor="let i of [1,1,1,1]; let index = index">
+      <ion-item (click)="goToSong()" lines="none" class="ion-align-items-center">
+        <ion-label class="ion-text-wrap">
+          <h2>Es tiempo</h2>
+          <ion-label>Hillsong</ion-label>
+        </ion-label>
+        <ion-buttons slot="end">
+          <div class="note">D</div>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <ion-fab class="ion-fab-custom" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="goToCreateSong()">
+      <ion-icon color="secondary" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

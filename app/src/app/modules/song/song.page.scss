@@ -1,9 +1,10 @@
 .notes{
     display: flex;
     margin: 8px 0px;
+    
     .note{
-        height: 40px;
-        width: 40px;
+        height: 45px;
+        width: 45px;
         border-radius: 100%;
         background-color: rgb(44, 44, 44);
         place-content: center;
@@ -13,6 +14,23 @@
         display: flex;
         align-items: center;
         margin: 0px 8px;
+
+        .minor-note{
+            font-size: .7rem !important;
+            text-transform: lowercase;
+            margin-top: 10px;
+        }
+        .numeral{
+            font-size: .8rem !important;
+            text-transform: lowercase;
+            margin-top: -10px;
+        }
+
+        &.placeholder-note{
+            background-color: white;
+            border: 2px solid rgb(44, 44, 44);
+            color: rgb(44, 44, 44);
+        }
     }
 }
 
@@ -27,4 +45,16 @@ ion-chip {
         color: white;
         border-radius: 16px;
     }
+}
+
+.quill-editor-container{
+    height: 100vh;
+    max-height: 100vh;
+    overflow: auto;
+    background-color: white;
+    // border-radius: 15px;
+    padding: 5px;
+}
+.quill-editor{
+    height: 100%;
 }

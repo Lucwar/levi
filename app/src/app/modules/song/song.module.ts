@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -8,6 +8,7 @@ import { SongPageRoutingModule } from './song-routing.module';
 
 import { SongPage } from './song.page';
 import { SwiperModule } from 'swiper/angular';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   imports: [
@@ -15,7 +16,9 @@ import { SwiperModule } from 'swiper/angular';
     FormsModule,
     IonicModule,
     SongPageRoutingModule,
-    SwiperModule
+    SwiperModule,
+    ReactiveFormsModule,
+    QuillModule,
   ],
   declarations: [SongPage]
 })

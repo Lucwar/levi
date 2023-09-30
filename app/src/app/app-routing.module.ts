@@ -16,24 +16,6 @@ const routes: Routes = [
     canActivate: [RoleGuard]
   },
   {
-    path: 'store',
-    loadChildren: () => import('./modules/store/store.module').then(m => m.StorePageModule),
-    data: { noUser: true },
-    canActivate: [RoleGuard]
-  },
-  {
-    path: 'success',
-    loadChildren: () => import('./modules/success/success.module').then(m => m.SuccessPageModule),
-    data: { noUser: true },
-    canActivate: [RoleGuard]
-  },
-  {
-    path: 'booking',
-    loadChildren: () => import('./modules/booking/booking.module').then(m => m.BookingPageModule),
-    data: { noUser: true },
-    canActivate: [RoleGuard]
-  },
-  {
     path: 'register/:id',
     loadChildren: () => import('./modules/user/user.module').then(m => m.UserPageModule),
     data: { noUser: true },
@@ -67,13 +49,18 @@ const routes: Routes = [
     loadChildren: () => import('./modules/service/service.module').then( m => m.ServicePageModule)
   },
   {
-    path: 'song',
+    path: 'song/:action/:id',
     loadChildren: () => import('./modules/song/song.module').then( m => m.SongPageModule)
+  },
+  {
+    path: 'songs',
+    loadChildren: () => import('./modules/songs/songs.module').then( m => m.SongsPageModule)
   },
   {
     path: '**',
     redirectTo: 'login'
   },
+
 
 ];
 @NgModule({

@@ -15,6 +15,6 @@ export class ServicePage extends BasePage{
 
 
     goToSong(){
-      this.pageService.navigateRoute('song')
+      this.pageService.navigateRoute('song/view/1')
     }
 }
