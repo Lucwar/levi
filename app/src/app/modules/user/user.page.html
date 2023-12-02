@@ -55,7 +55,7 @@
     </ng-container>
 
     <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="clear" color="primary" expand="block"
-      type="button" (click)="goToChangePassword()" *ngIf="!profile">
+      type="button" (click)="goToChangePassword()" *ngIf="profile!='new'">
       <u>Cambiar contraseña</u>
     </ion-button>
     <ion-button class="ion-margin-top ion-margin-bottom ion-text-capitalize global-btn" color="secondary" expand="block"
@@ -63,7 +63,7 @@
       {{ profile == 'new' ? 'Registrarse' : 'Guardar cambios' }}
     </ion-button>
     <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="outline" color="primary" expand="block"
-      (click)="logout()" *ngIf="!profile">
+      (click)="logout()" *ngIf="profile!='new'">
       Cerrar sesión
     </ion-button>
   </form>
