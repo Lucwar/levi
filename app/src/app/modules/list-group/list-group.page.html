@@ -16,7 +16,7 @@
   <form class="ion-margin-top" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ion-grid class="ion-padding" *ngIf="!isWatching">
       <ion-row>
-        <ion-item class="ion-align-items-center w100" lines="none">
+        <ion-item class="ion-align-items-center w100 fix-floating" lines="none">
           <ion-label color="tertiary" position="floating">Nombre</ion-label>
           <ion-input type="text" formControlName="name"></ion-input>
         </ion-item>

@@ -497,3 +497,11 @@ ion-modal{
         width: 95%;
     }
 }
+
+ion-item{
+    &.fix-floating{
+        &::part(native){
+            height: 48px;
+        }
+    }
+}

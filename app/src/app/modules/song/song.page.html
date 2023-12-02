@@ -26,7 +26,7 @@
       <div *ngSwitchCase="segmentGeneral">
         <ion-grid class="ion-padding">
           <ion-row>
-            <ion-item class="ion-align-items-center w100" lines="none">
+            <ion-item class="ion-align-items-center w100 fix-floating" lines="none">
               <ion-label color="tertiary" position="floating">Nombre de la canción</ion-label>
               <ion-input type="text" formControlName="name"></ion-input>
             </ion-item>
@@ -34,7 +34,7 @@
               {{getFieldError('name')}}
             </div>
 
-            <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
+            <ion-item class="ion-align-items-center w100 ion-margin-top fix-floating" lines="none">
               <ion-label color="tertiary" position="floating">Autor</ion-label>
               <ion-input type="text" formControlName="author"></ion-input>
             </ion-item>
@@ -42,7 +42,7 @@
               {{getFieldError('author')}}
             </div>
 
-            <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
+            <ion-item class="ion-align-items-center w100 ion-margin-top fix-floating" lines="none">
               <ion-label color="tertiary" position="floating">Tono</ion-label>
               <ion-input type="text" formControlName="author"></ion-input>
             </ion-item>
@@ -50,7 +50,7 @@
               {{getFieldError('author')}}
             </div>
 
-            <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
+            <ion-item class="ion-align-items-center w100 ion-margin-top fix-floating" lines="none">
               <ion-label color="tertiary" position="floating">Cantante</ion-label>
               <!-- <ion-input type="text" formControlName="password"></ion-input> -->
             </ion-item>

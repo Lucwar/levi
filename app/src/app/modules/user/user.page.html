@@ -13,14 +13,14 @@
       <h5>Datos de usuario</h5>
     </ion-text>
 
-    <ion-item lines="none" class="ion-margin-top">
+    <ion-item lines="none" class="ion-margin-top fix-floating">
       <ion-label position="floating" color="tertiary">Nombre completo</ion-label>
       <ion-input type="text" formControlName="fullName"></ion-input>
     </ion-item>
     <div *ngIf="!isFieldValid('fullName')" class="invalid-input-message">
       {{getFieldError('fullName')}}
     </div>
-    <ion-item lines="none" class="ion-margin-top">
+    <ion-item lines="none" class="ion-margin-top fix-floating">
       <ion-label position="floating" color="tertiary">Email</ion-label>
       <ion-input type="email" formControlName="emailAddress"></ion-input>
     </ion-item>
@@ -33,7 +33,7 @@
         <h5>Contraseña</h5>
       </ion-text>
 
-      <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
+      <ion-item class="ion-align-items-center w100 ion-margin-top fix-floating" lines="none">
         <ion-label color="tertiary" position="floating">Contraseña</ion-label>
         <ion-icon color="tertiary" slot="end" [name]="showPassword ? 'eye-off' : 'eye'"
           (click)="showPassword = !showPassword"></ion-icon>
@@ -43,7 +43,7 @@
         {{getFieldError('password')}}
       </div>
 
-      <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
+      <ion-item class="ion-align-items-center w100 ion-margin-top fix-floating" lines="none">
         <ion-label color="tertiary" position="floating">Repetir Contraseña</ion-label>
         <ion-icon color="tertiary" slot="end" [name]="showPassword2 ? 'eye-off' : 'eye'"
           (click)="showPassword2 = !showPassword2"></ion-icon>
