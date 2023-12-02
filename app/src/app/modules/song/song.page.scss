@@ -68,3 +68,11 @@ ion-chip {
 ion-item::part(native) {
     border-radius: 10px !important;
 }
+
+.height-custom-btn {
+    margin-top: 0px;
+    height: 59px;
+    &::part(native){
+        border-radius: 10px;
+    }
+}

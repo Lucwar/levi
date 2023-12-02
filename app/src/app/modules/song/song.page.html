@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title color="light">Es tiempo - Hillsong</ion-title>
+    <ion-title color="light">{{form?.value.name}} {{ form?.value.author ? '- '+ form?.value.author : ''}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,7 +27,7 @@
         <ion-grid class="ion-padding">
           <ion-row>
             <ion-item class="ion-align-items-center w100" lines="none">
-              <ion-label color="tertiary" position="floating">Nombre de la canción</ion-label>
+              <ion-label color="tertiary" position="floating">Nombre</ion-label>
               <ion-input type="text" formControlName="name"></ion-input>
             </ion-item>
             <div *ngIf="!isFieldValid('name')" class="invalid-input-message">
@@ -43,20 +43,64 @@
             </div>
 
             <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
-              <ion-label color="tertiary" position="floating">Tono</ion-label>
-              <ion-input type="text" formControlName="author"></ion-input>
+              <ion-label position="floating">Tono</ion-label>
+              <ion-select interface="popover" value="tone" placeholder="Seleccione el tono">
+                <ion-select-option *ngFor="let note of settings.notes"
+                  [value]="note.grado">{{note.name}}</ion-select-option>
+              </ion-select>
             </ion-item>
-            <div *ngIf="!isFieldValid('author')" class="invalid-input-message">
-              {{getFieldError('author')}}
+            <div *ngIf="!isFieldValid('tone')" class="invalid-input-message">
+              {{getFieldError('tone')}}
             </div>
 
-            <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
-              <ion-label color="tertiary" position="floating">Cantante</ion-label>
-              <!-- <ion-input type="text" formControlName="password"></ion-input> -->
-            </ion-item>
-            <!-- <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
-              {{getFieldError('password')}}
-            </div> -->
+            <ion-row class="w100 ion-margin-top ion-no-padding" *ngFor="let s of form.value?.singers; index as i">
+              <ion-col size="7" class="ion-no-padding ion-padding-end">
+                <ion-item class="ion-align-items-center w100" lines="none">
+                  <ion-label color="tertiary" position="floating">Cantante</ion-label>
+                  <ion-input [(ngModel)]="form.value?.singers[i].singer" [ngModelOptions]="{standalone: true}"
+                    type="text"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="3" class="ion-no-padding ion-padding-end">
+                <ion-item class="ion-align-items-center w100" lines="none">
+                  <ion-label position="floating">Tono</ion-label>
+                  <ion-select [(ngModel)]="form.value?.singers[i].note" [ngModelOptions]="{standalone: true}"
+                    interface="popover" value="tone" placeholder="Seleccione el tono">
+                    <ion-select-option *ngFor="let note of settings.notes"
+                      [value]="note.grado">{{note.name}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size="2" class="ion-no-padding ion-no-margin">
+                <ion-button (click)="addOrRemoveSinger(i, i+1!=form.value?.singers.length)" class="height-custom-btn">
+                  <ion-icon [name]="i+1==form.value?.singers.length ? 'add': 'remove'" color="light"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="w100 ion-margin-top ion-no-padding" *ngFor="let s of form.value?.links; index as i">
+              <ion-col size="7" class="ion-no-padding ion-padding-end">
+                <ion-item class="ion-align-items-center w100" lines="none">
+                  <ion-label color="tertiary" position="floating">Titulo</ion-label>
+                  <ion-input [(ngModel)]="form.value?.links[i].name" [ngModelOptions]="{standalone: true}"
+                    type="text"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="3" class="ion-no-padding ion-padding-end">
+                <ion-item class="ion-align-items-center w100" lines="none">
+                  <ion-label color="tertiary" position="floating">Link</ion-label>
+                  <ion-input [(ngModel)]="form.value?.links[i].link" [ngModelOptions]="{standalone: true}"
+                    type="text"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="2" class="ion-no-padding ion-no-margin">
+                <ion-button (click)="addOrRemoveLink(i, i+1!=form.value?.links.length)" class="height-custom-btn">
+                  <ion-icon [name]="i+1==form.value?.links.length ? 'add': 'remove'" color="light"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+
           </ion-row>
         </ion-grid>
       </div>

@@ -70,8 +70,8 @@ export class SongPage extends ItemPage {
       tone: [null, Validators.required],
       lyrics: [null],
       annotations: [null],
-      singers: [null],
-      links: [null],
+      singers: [[{singer: '', note: ''}]],
+      links: [[{name: '', link: ''}]],
     })
   }
 
@@ -86,6 +86,26 @@ export class SongPage extends ItemPage {
       singers: [item.singers],
       links: [item.links],
     })
+  }
+
+  addOrRemoveSinger(index, remove) {
+    if(!remove) {
+      if(!this.form.value.singers[index].singer || !this.form.value.singers[index].note) return this.pageService.showError('Debes completar los campos necesarios');
+      this.form.value.singers.push({singer: '', note: ''});
+    } else {
+      this.form.value.singers = this.form.value.singers.slice(0,index).concat(this.form.value.singers.slice(index+1));
+      if(index == this.form.value.singers.length) this.form.value.singers.push({singer: '', note: ''});
+    }
+  }
+
+  addOrRemoveLink(index, remove) {
+    if(!remove) {
+      if(!this.form.value.links[index].name || !this.form.value.links[index].link) return this.pageService.showError('Debes completar los campos necesarios');
+      this.form.value.links.push({name: '', link: ''});
+    } else {
+      this.form.value.links = this.form.value.links.slice(0,index).concat(this.form.value.links.slice(index+1));
+      if(index == this.form.value.links.length) this.form.value.links.push({name: '', link: ''});
+    }
   }
 
   save(){
