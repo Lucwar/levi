@@ -1,6 +1,6 @@
 export class Settings {
   // Global Settings
-  public static APP_NAME = 'AIC';
+  public static APP_NAME = 'LeviApp';
   public static APP_VERSION = '0.0.1';
   public static APP_MODE_INT = false;
 

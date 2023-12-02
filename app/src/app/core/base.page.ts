@@ -24,8 +24,8 @@ export abstract class BasePage implements OnInit, OnDestroy {
     public activatedRoute: ActivatedRoute
   ) {
     this.checkUser();
-    this.checkEvents();
-    this.checkActions();
+    // this.checkEvents();
+    // this.checkActions();
     this.handleBackButton();
     this.todayDate = moment().format('YYYY-MM-DD');
   }

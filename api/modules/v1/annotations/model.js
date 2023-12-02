@@ -8,10 +8,17 @@ module.exports = (module) => {
 	 */
 	module.schema = new global.database.mongodb.mongoose.Schema({
 		id: { type: String },
-		titlePositive: { type: String },
-		titleNegative: { type: String },
-		positiveMail: { type: String },
-		negativeMail: { type: String },
-
+		name: { type: String },
+		segments: [
+			{
+				label: String,
+				notes: [
+					{
+						note: Number,
+						extension: String
+					}
+				]
+			}
+		],
 	}, { timestamps: true });
 };

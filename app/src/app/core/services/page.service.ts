@@ -255,7 +255,7 @@ export class PageService {
   logout() {
     this.disablePush();
     this.global.removeUser();
-    this.socket.emit('logout');
+    // this.socket.emit('logout');
     this.navigateRoute('login', { key: 'prevent' });
   }
 

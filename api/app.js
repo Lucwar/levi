@@ -128,7 +128,6 @@ const lib = {
   trae: require('trae'),
   url: require('url'),
   uuid: require('uuid'),
-  twilioClient: require('twilio')(settings.twilio.SID, settings.twilio.token),
   // androidpublisher: null
 };
 

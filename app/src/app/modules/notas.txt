@@ -1,9 +1,9 @@
 
 Models:
 > Users (fullname, username, emailAddres)
-> Lists (name, date, ref User, groups: [ref]) 
- > Groups (name, songs: [ref Song])
-> Songs (name, tone, author, tag, lyrics, Annotations: [ref], singers: [{sings: 'Mica', note: 1}], links: [{name, linl}])
+> Lists (name, date, ref User, listGroups: [ref]) 
+ > ListGroups (name, songs: [ref Song])
+> Songs (name, tone, author, tag, lyrics, annotations: [ref], singers: [{singer: 'Mica', note: 1}], links: [{name, link}])
  > Annotations (name, segments: [{ label:'estrofa', notes: [ [{note,extencion}] ] }])
 
 
@@ -22,7 +22,7 @@ G  8
 G# 9
 A  10
 A# 11
-B  12
+B  12   
 
 // Función para calcular la diferencia entre dos notas
 function calcularDiferencia(notaNueva, notaPrincipal) {
