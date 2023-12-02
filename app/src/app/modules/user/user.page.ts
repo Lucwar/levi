@@ -13,6 +13,7 @@ export class UserPage extends ItemPage {
 
   endPoint = this.settings.endPoints.users;
   showPassword: boolean;
+  showPassword2: boolean;
   profile: any;
 
   ionViewDidEnter() {
@@ -33,58 +34,52 @@ export class UserPage extends ItemPage {
   goToChangePassword() {
     this.pageService.navigateRoute('change-password');
   }
-
+  
   savePre(item) {
-    item.fullName = item.firstName + ' ' + item.lastName;
+    item.username = item.emailAddress;
     return item;
   }
 
   savePost(item): void {
-    if (!this.user.firstName) this.pageService.navigateRoute('tabs/home', { key: 'prevent' });
-    this.global.saveUser({ ...item.data, refreshToken: null });
-    this.pageService.showSuccess('Actualizado con exito!');
+    if (this.creating) this.pageService.navigateRoute('tabs/home', { key: 'prevent' });
+    this.global.saveUser(item.data);
+    this.pageService.showSuccess(this.creating ? 'Bienvenido!' : 'Actualizado con exito!');
   };
 
   getFormNew() {
     return this.formBuilder.group({
-      termsAndConditionsAccepted: [false, Validators.requiredTrue],
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
-      password: [null, Validators.required],
-      picture: [null],
-      gmt: [moment().format('Z')]
+      fullName: [null, Validators.required],
+      emailAddress: [null, Validators.compose([Validators.required, Validators.email])],
+      password: [null, Validators.compose([Validators.minLength(4), Validators.required])],
+      verifyPassword: [null, Validators.compose([Validators.minLength(4), Validators.required])],
     })
   }
 
   getFormEdit(item) {
     return this.formBuilder.group({
       id: [item.id],
-      termsAndConditionsAccepted: [!!item.firstName, Validators.requiredTrue],
-      firstName: [item.firstName, Validators.required],
-      lastName: [item.lastName, Validators.required],
-      password: [item.password],
-      gmt: [moment().format('Z')]
+      fullName: [item.fullName, Validators.required],
+      emailAddress: [item.emailAddress, Validators.compose([Validators.required, Validators.email])],
+      password: [item.password,Validators.compose([Validators.minLength(4), Validators.required])],
+      verifyPassword: [item.password,Validators.compose([Validators.minLength(4), Validators.required])]
     })
   }
 
-  handlePicture(field = 'picture') {
-    this.pageService.showImageUpload({ image: this.getImage(this.form.value[field], 'default') })
-      .then(res => {
-        if (res?.data?.file) this.form.patchValue({ [field]: res.data.file });
-      }).catch(e => this.pageService.showError(e));
+  savePreCheck(item) {
+    console.log(">", item)
+    if (item.password !== item.verifyPassword) {
+      this.pageService.showError('Las contraseñas deben ser las mismas');
+      return false;
+    }
+    return true;
   }
 
-  async deleteAccount() {
-    const title = '¿Está seguro que desea eliminar su cuenta?';
-
-    if (!await this.isSure(title)) return;
-
-    const endPoint = this.settings.endPoints.users + this.settings.endPointsMethods.users.deleteAccount;
-
-    this.pageService.httpPut(endPoint)
-      .then(res => this.pageService.logout())
-      .catch(e => this.pageService.showError(e));
-  }
+  // handlePicture(field = 'picture') {
+  //   this.pageService.showImageUpload({ image: this.getImage(this.form.value[field], 'default') })
+  //     .then(res => {
+  //       if (res?.data?.file) this.form.patchValue({ [field]: res.data.file });
+  //     }).catch(e => this.pageService.showError(e));
+  // }
 
   goToAddress() {
     this.pageService.navigateRoute('address/' + true);

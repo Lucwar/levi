@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start" *ngIf="profile === 'register'">
+    <ion-buttons slot="start" *ngIf="profile === 'new'">
       <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/login"></ion-back-button>
     </ion-buttons>
-    <ion-title color="light">{{profile == 'register' ? 'Registro' : 'Perfil'}}</ion-title>
+    <ion-title color="light">{{profile == 'new' ? 'Registro' : 'Perfil'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,24 +15,24 @@
 
     <ion-item lines="none" class="ion-margin-top">
       <ion-label position="floating" color="tertiary">Nombre completo</ion-label>
-      <ion-input type="text" formControlName="firstName"></ion-input>
+      <ion-input type="text" formControlName="fullName"></ion-input>
     </ion-item>
-    <div *ngIf="!isFieldValid('firstName')" class="invalid-input-message">
-      {{getFieldError('firstName')}}
+    <div *ngIf="!isFieldValid('fullName')" class="invalid-input-message">
+      {{getFieldError('fullName')}}
     </div>
     <ion-item lines="none" class="ion-margin-top">
       <ion-label position="floating" color="tertiary">Email</ion-label>
-      <ion-input type="email" formControlName="lastName"></ion-input>
+      <ion-input type="email" formControlName="emailAddress"></ion-input>
     </ion-item>
-    <div *ngIf="!isFieldValid('lastName')" class="invalid-input-message">
-      {{getFieldError('lastName')}}
+    <div *ngIf="!isFieldValid('emailAddress')" class="invalid-input-message">
+      {{getFieldError('emailAddress')}}
     </div>
 
-    <ng-container *ngIf="profile == 'register'">
+    <ng-container *ngIf="profile == 'new'">
       <ion-text color="tertiary">
         <h5>Contraseña</h5>
       </ion-text>
-  
+
       <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
         <ion-label color="tertiary" position="floating">Contraseña</ion-label>
         <ion-icon color="tertiary" slot="end" [name]="showPassword ? 'eye-off' : 'eye'"
@@ -42,28 +42,28 @@
       <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
         {{getFieldError('password')}}
       </div>
-  
+
       <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
         <ion-label color="tertiary" position="floating">Repetir Contraseña</ion-label>
-        <ion-icon color="tertiary" slot="end" [name]="showPassword ? 'eye-off' : 'eye'"
-          (click)="showPassword = !showPassword"></ion-icon>
-        <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
+        <ion-icon color="tertiary" slot="end" [name]="showPassword2 ? 'eye-off' : 'eye'"
+          (click)="showPassword2 = !showPassword2"></ion-icon>
+        <ion-input [type]="showPassword2 ? 'text' : 'password'" formControlName="verifyPassword"></ion-input>
       </ion-item>
-      <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
-        {{getFieldError('password')}}
+      <div *ngIf="!isFieldValid('verifyPassword')" class="invalid-input-message">
+        {{getFieldError('verifyPassword')}}
       </div>
     </ng-container>
 
     <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="clear" color="primary" expand="block"
       type="button" (click)="goToChangePassword()" *ngIf="!profile">
-      <u>Cambiar contraseña</u> 
+      <u>Cambiar contraseña</u>
     </ion-button>
     <ion-button class="ion-margin-top ion-margin-bottom ion-text-capitalize global-btn" color="secondary" expand="block"
       type="submit" [disabled]="!form.valid">
-        {{ profile == 'register' ? 'Registrarse' : 'Guardar cambios' }}
+      {{ profile == 'new' ? 'Registrarse' : 'Guardar cambios' }}
     </ion-button>
-    <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="outline" color="primary"
-      expand="block" (click)="pageService.logout()" *ngIf="!profile">
+    <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="outline" color="primary" expand="block"
+      (click)="pageService.logout()" *ngIf="!profile">
       Cerrar sesión
     </ion-button>
   </form>

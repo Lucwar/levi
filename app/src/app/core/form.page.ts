@@ -68,14 +68,14 @@ export abstract class FormPage extends BasePage {
     let message = 'Validacion OK';
 
     if (this.form.controls[field]?.errors) {
-
+      
       let error = this.form.controls[field].errors;
 
       if (error.required) message = 'Requerido';
       else if (error.minlength) message = 'Debe tener al menos ' + error.minlength.requiredLength + ' caracteres';
       else if (error.minYear) message = 'Debe ser mayor a ' + error.minYear.requiredYear + ' años';
       else if (error.yearBike) message = error.yearBike
-      else if (error.mailFormat) message = 'Email inválido';
+      else if (error.email) message = 'Email inválido';
       else if (error.pattern) message = 'Formato inválido';
       else if (error.min) message = 'El valor no puede ser menor a ' + error.min.min;
       else if (error.max) message = 'El valor no puede ser mayor a ' + error.max.max;

@@ -302,8 +302,7 @@ export class PageService {
   }
 
   showError(message, icon?, color?) {
-    // Cambiarrrrrrrrrrrrrrrrrrrrr
-    // this.showMessage(icon, color, message, 'toast-error');
+    this.showMessage(icon, color, message, 'toast-error');
   }
 
   showWarning(message, icon?, color?) {
@@ -315,7 +314,7 @@ export class PageService {
       message: this.getMessage(message),
       cssClass,
       duration: 2000,
-      position: 'bottom',
+      position: 'top',
       icon: icon,
       color: color
     });

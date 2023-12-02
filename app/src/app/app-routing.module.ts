@@ -10,12 +10,6 @@ const routes: Routes = [
     canActivate: [RoleGuard]
   },
   {
-    path: 'address/:register',
-    loadChildren: () => import('./modules/address/address.module').then(m => m.AddressPageModule),
-    data: { noUser: true },
-    canActivate: [RoleGuard]
-  },
-  {
     path: 'register/:id',
     loadChildren: () => import('./modules/user/user.module').then(m => m.UserPageModule),
     data: { noUser: true },

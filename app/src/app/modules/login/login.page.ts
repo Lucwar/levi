@@ -45,7 +45,7 @@ export class LoginPage extends FormPage implements OnInit {
   }
 
   goToUser() {
-    this.pageService.navigateRoute('register/register');
+    this.pageService.navigateRoute('register/new');
   }
 
   goToHome() {

@@ -16,31 +16,18 @@ export class Settings {
 
   // (+) EndPoints
   public static endPoints = {
-
-    bnaRates: '/bnaRates',
-    construya: '/construya',
-    icc: '/icc',
-    iop: '/iop',
-    iopFactors: '/iopFactors',
-    isac: '/isac',
-    labor: '/labor',
-    materials: '/materials',
-    registeredEmployment: '/registeredEmployment',
     actions: '/actions',
     administrators: '/administrators',
     files: '/files',
     logs: '/logs',
     users: '/users',
-    rates: '/rates',
+    songs: '/songs',
+    lists: '/lists',
+    listGroups: '/listGroups',
+    annotations: '/annotations',
   };
 
   public static endPointsMethods = {
-    iopFactors: {
-      code: '/code'
-    },
-    rates: {
-      lastDataAvailable: '/lastDataAvailable'
-    },
     users: {
       create: '/create',
       login: '/login',
@@ -53,12 +40,12 @@ export class Settings {
   };
 
   public static storage = {
-    accessToken: 'finde.accessToken',
-    actions: 'finde.actions',
-    actionsToPerform: 'finde.actionsToPerform',
-    refreshToken: 'finde.refreshToken',
-    user: 'finde.user',
-    address: 'finde.address'
+    accessToken: 'levi.accessToken',
+    actions: 'levi.actions',
+    actionsToPerform: 'levi.actionsToPerform',
+    refreshToken: 'levi.refreshToken',
+    user: 'levi.user',
+    address: 'levi.address'
   };
 
   public static actions = {

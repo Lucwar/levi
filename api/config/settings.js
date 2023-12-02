@@ -99,7 +99,14 @@ const settings = {
 			accepted: 'accepted',
 			pending: 'pending'
 		},
-	}
+	},
+	crypto: {
+		saltRounds: 12,
+		key: process.env.CRYPTO_KEY_BASE, 		// 8 char Hex string
+		example: process.env.CRYPTO_KEY_EXAMPLE, 	// 32 char Hex string
+		refreshToken: process.env.CRYPTO_KEY_REFRESH_TOKEN,
+		phoneNumberValidation: process.env.CRYPTO_KEY_PHONE_NUMBER_VALIDATION,
+	},
 };
 
 if (settings.docker) settings.database.uri = process.env.DB_URI + settings.database.name;

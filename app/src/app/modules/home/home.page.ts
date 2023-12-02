@@ -16,15 +16,6 @@ export class HomePage extends BasePage {
   };
 
   ionViewWillEnter() {
-    this.getLastDataAvailable();
-  }
-
-  getLastDataAvailable() {
-    const endPoint = this.settings.endPoints.rates + this.settings.endPointsMethods.rates.lastDataAvailable;
-
-    this.pageService.httpGet(endPoint)
-      .then(res => this.data = res.data)
-      .catch(e => this.pageService.showError(e));
   }
 
   goToDetail() {
