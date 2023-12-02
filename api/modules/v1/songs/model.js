@@ -11,6 +11,7 @@ module.exports = (module) => {
 		name: { type: String },
 		tone: { type: String },
 		author: { type: String },
+		tag: { type: String },
 		lyrics: { type: String },
 		annotations: { type: global.database.mongodb.mongoose.Schema.Types.ObjectId, ref: 'annotations' },
 		singers: [
