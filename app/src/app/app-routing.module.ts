@@ -45,7 +45,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'service',
+    path: 'service/new',
+    loadChildren: () => import('./modules/service/service.module').then( m => m.ServicePageModule)
+  },
+  {
+    path: 'service/:action/:id',
     loadChildren: () => import('./modules/service/service.module').then( m => m.ServicePageModule)
   },
   {

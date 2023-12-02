@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Gesture } from '@ionic/angular';
 import { BasePage } from 'src/app/core/base.page';
 import { ItemPage } from 'src/app/core/item.page';
 import { SwiperOptions } from 'swiper';
@@ -49,6 +50,7 @@ export class SongPage extends ItemPage {
    /* SEGMENT */
    segmentSong: string = 'song';
    segmentNotes: string = 'notes';
+   segmentGeneral: string = 'general';
    segmentValue: string = this.segmentSong;
 
    config = {
@@ -63,4 +65,34 @@ export class SongPage extends ItemPage {
     this.textRecipe = `<div style="width: 683px">${this.textRecipe ? this.textRecipe : ''}</div>`;
   }
 
+  tap(){
+    console.log('TAP')
+  }
+  press(){
+    console.log('HOLD')
+  }
+  touchend(){
+    console.log('TOUCHEND')
+  }
+
+
+    // el: HTMLElement;
+    // pressGesture: Gesture;
+
+    // ionViewWillEnter() {
+    //   this.pressGesture = this.pageService.gestureCtrl.create( () = this.el, {
+    //     recognizers: [
+    //       [Hammer.Press, {time: 6000}] // Should be pressed for 6 seconds
+    //     ]
+    //   });
+    //   this.pressGesture.listen();
+    //   this.pressGesture.on('press', e => {
+    //     // Here you could also emit a value and subscribe to it
+    //     // in the component that hosts the element with the directive
+    //     console.log('pressed!!');
+    //   });
+    // }
+    // ngOnDestroy() {
+    //   this.pressGesture.destroy();
+    // }
 }

@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { ModalController, ToastController, ActionSheetController, LoadingController, AlertController, PopoverController, ActionSheetOptions } from '@ionic/angular';
+import { ModalController, ToastController, ActionSheetController, LoadingController, AlertController, PopoverController, ActionSheetOptions, GestureController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';;
@@ -68,6 +68,7 @@ export class PageService {
     public appVersion: AppVersion,
     public qrScanner: QRScanner,
     public photoViewer: PhotoViewer,
+    public gestureCtrl: GestureController,
     // public translateService: TranslateService,
     public file: File,
     public speechRecognition: SpeechRecognition,

@@ -14,32 +14,15 @@
     </ion-text>
 
     <ion-item lines="none" class="ion-margin-top">
-      <ion-label position="floating" color="tertiary">Nombre</ion-label>
+      <ion-label position="floating" color="tertiary">Nombre completo</ion-label>
       <ion-input type="text" formControlName="firstName"></ion-input>
     </ion-item>
     <div *ngIf="!isFieldValid('firstName')" class="invalid-input-message">
       {{getFieldError('firstName')}}
     </div>
     <ion-item lines="none" class="ion-margin-top">
-      <ion-label position="floating" color="tertiary">Apellido</ion-label>
-      <ion-input type="text" formControlName="lastName"></ion-input>
-    </ion-item>
-    <div *ngIf="!isFieldValid('lastName')" class="invalid-input-message">
-      {{getFieldError('lastName')}}
-    </div>
-    <ion-item lines="none" class="ion-margin-top">
       <ion-label position="floating" color="tertiary">Email</ion-label>
       <ion-input type="email" formControlName="lastName"></ion-input>
-    </ion-item>
-    <div *ngIf="!isFieldValid('lastName')" class="invalid-input-message">
-      {{getFieldError('lastName')}}
-    </div>
-    <ion-item lines="none" class="ion-margin-top ion-align-items-center">
-      <ion-label position="stacked" color="tertiary">Dirección</ion-label>
-      <ion-input type="text" formControlName="lastName"></ion-input>
-      <ion-button slot="end" fill="clear" color="primary" (click)="goToAddress()">
-        <ion-icon name="earth-outline" slot="icon-only"></ion-icon>
-      </ion-button>
     </ion-item>
     <div *ngIf="!isFieldValid('lastName')" class="invalid-input-message">
       {{getFieldError('lastName')}}
@@ -70,16 +53,6 @@
         {{getFieldError('password')}}
       </div>
     </ng-container>
-   
-    <ion-item lines="none" class="ion-margin-top" class="terms-item" *ngIf="profile == 'register'">
-      <ion-checkbox formControlName="termsAndConditionsAccepted" color="secondary"
-        class="ion-margin-end"></ion-checkbox>
-      <ion-text color="primary">Acepto los <u (click)="pageService.openLink(settings.links.terms)">Términos y
-          Condiciones</u></ion-text>
-    </ion-item>
-    <div *ngIf="!isFieldValid('termsAndConditionsAccepted')" class="invalid-input-message">
-      {{getFieldError('termsAndConditionsAccepted')}}
-    </div>
 
     <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="clear" color="primary" expand="block"
       type="button" (click)="goToChangePassword()" *ngIf="!profile">
@@ -92,11 +65,6 @@
     <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="outline" color="primary"
       expand="block" (click)="pageService.logout()" *ngIf="!profile">
       Cerrar sesión
-    </ion-button>
-
-    <ion-button class="ion-margin-top global-btn custom-margin-top ion-text-capitalize" size="small" fill="clear"
-      shape="round" color="danger" expand="block" *ngIf="!profile" (click)="deleteAccount()">
-      Eliminar cuenta
     </ion-button>
   </form>
 </ion-content>

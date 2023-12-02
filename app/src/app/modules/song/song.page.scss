@@ -58,3 +58,13 @@ ion-chip {
 .quill-editor{
     height: 100%;
 }
+
+.height-custom{
+    &::part(native){
+        height: 32px !important;
+    }
+}
+
+ion-item::part(native) {
+    border-radius: 10px !important;
+}
