@@ -119,6 +119,38 @@ export class Settings {
     '#ffc409',
   ]
 
+  public static notes = [
+    { name: 'C', grado: 1},
+    { name: 'C#', grado: 2},
+    { name: 'D', grado: 3},
+    { name: 'D#', grado: 4},
+    { name: 'E', grado: 5},
+    { name: 'F', grado: 6},
+    { name: 'F#', grado: 7},
+    { name: 'G', grado: 8},
+    { name: 'G#', grado: 9},
+    { name: 'A', grado: 10},
+    { name: 'A#', grado: 11},
+    { name: 'B', grado: 12},
+  ]
+
+  public static notesWithMinors = [
+    { name: 'C', grado: 1, extension: ''},
+    { name: 'C#', grado: 2},
+    { name: 'D', grado: 3},
+    { name: 'D#', grado: 4},
+    { name: 'E', grado: 5},
+    { name: 'F', grado: 6},
+    { name: 'F#', grado: 7},
+    { name: 'G', grado: 8},
+    { name: 'G#', grado: 9},
+    { name: 'A', grado: 10},
+    { name: 'A#', grado: 11},
+    { name: 'B', grado: 12},
+  ]
+
+  public static extension = ['','m','m7','7','maj7','9']
+
   public static rates = {
     iop: {
       code: 'iop',
