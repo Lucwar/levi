@@ -53,9 +53,18 @@ const routes: Routes = [
     loadChildren: () => import('./modules/songs/songs.module').then( m => m.SongsPageModule)
   },
   {
+    path: 'list-group/new',
+    loadChildren: () => import('./modules/list-group/list-group.module').then( m => m.ListGroupPageModule)
+  },
+  {
+    path: 'list-group/:action/:id',
+    loadChildren: () => import('./modules/list-group/list-group.module').then( m => m.ListGroupPageModule)
+  },
+  {
     path: '**',
     redirectTo: 'login'
   },
+
 
 
 ];

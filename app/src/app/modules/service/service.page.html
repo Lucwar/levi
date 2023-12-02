@@ -3,89 +3,92 @@
     <ion-buttons slot="start">
       <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title color="light">Domingo - 19/07/2023</ion-title>
+    <ion-title *ngIf="isWatching" color="light">{{ form?.value?.name }} - {{ form?.value?.dateTo | date:'dd/MM/yyyy' }}</ion-title>
+    <ion-title *ngIf="creating" color="light">Nueva lista</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form class="ion-margin-top" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <ion-grid class="ion-padding" *ngIf="!isWatching">
-    <ion-row>
-      <ion-item class="ion-align-items-center w100" lines="none">
-        <ion-label color="tertiary" position="floating">Nombre del servicio</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
-        {{getFieldError('password')}}
-      </div>
+    <ion-grid class="ion-padding" *ngIf="!isWatching">
+      <ion-row>
+        <ion-item class="ion-align-items-center w100" lines="none">
+          <ion-label color="tertiary" position="floating">Nombre del servicio</ion-label>
+          <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <div *ngIf="!isFieldValid('name')" class="invalid-input-message">
+          {{getFieldError('name')}}
+        </div>
 
-      <ion-item id="service-open-modal-dateFrom" class="ion-align-items-center w100 ion-margin-top" lines="none">
-        <ion-label color="tertiary">Fecha
-          <ion-label>{{ dateFrom }}</ion-label>
-        </ion-label>
-        <ion-icon slot="end" name="calendar"></ion-icon>
-      </ion-item>
-      <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
-        {{getFieldError('password')}}
-      </div>
+        <ion-item id="service-open-modal-dateFrom" class="ion-align-items-center w100 ion-margin-top" lines="none">
+          <ion-label color="tertiary">Fecha
+            <ion-label>{{ form.value.dateTo | date:'dd/MM/yyyy' }}</ion-label>
+          </ion-label>
+          <ion-icon slot="end" name="calendar"></ion-icon>
+        </ion-item>
+        <div *ngIf="!isFieldValid('dateTo')" class="invalid-input-message">
+          {{getFieldError('dateTo')}}
+        </div>
 
-      <ion-modal trigger="service-open-modal-dateFrom">
-        <ng-template>
-          <ion-content class="customContent">
-            <ion-datetime presentation='date' #datetimeFrom size='contain' [(ngModel)]='dateFrom'
-              display-format='DD.MM.YYYY' >
-              <ion-buttons slot='buttons'>
-                <ion-button color="danger" (click)="datetimeFrom.cancel(true); dateFrom = undefined">Borrar
-                </ion-button>
-                <ion-button color='dark' class='ion-margin-end' (click)='datetimeFrom.cancel(true)'>Cancelar
-                </ion-button>
-                <ion-button color='primary' (click)='datetimeFrom.confirm(true)'>Aceptar</ion-button>
-              </ion-buttons>
-            </ion-datetime>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-      
-    </ion-row>
-  </ion-grid>
+        <ion-modal trigger="service-open-modal-dateFrom">
+          <ng-template>
+            <ion-content class="customContent">
+              <ion-datetime presentation='date' #datetimeFrom size='contain' formControlName="dateTo"
+                display-format='DD.MM.YYYY'>
+                <ion-buttons slot='buttons'>
+                  <ion-button color="danger" (click)="datetimeFrom.cancel(true); form.value.dateTo = undefined">Borrar
+                  </ion-button>
+                  <ion-button color='dark' class='ion-margin-end' (click)='datetimeFrom.cancel(true)'>Cancelar
+                  </ion-button>
+                  <ion-button color='primary' (click)='datetimeFrom.confirm(true)'>Aceptar</ion-button>
+                </ion-buttons>
+              </ion-datetime>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
 
-  <h1 class="ion-padding-start">Alabanzas</h1>
-  <ion-card *ngFor="let i of [1,1,1,1]; let index = index">
-    <ion-item (click)="goToSong()" lines="none" class="ion-align-items-center">
-      <ion-buttons slot="start">
-        <h1>{{index + 1}}</h1>
-      </ion-buttons>
-      <ion-label class="ion-text-wrap">
-        <h2>Es tiempo</h2>
-        <ion-label>Hillsong</ion-label>
-      </ion-label>
-      <ion-buttons slot="end">
-        <div class="note">D</div>
-      </ion-buttons>
-    </ion-item>
-  </ion-card>
-  <h1 class="ion-padding-start">Adoraciones</h1>
-  <ion-card *ngFor="let i of [1,11,1,1,1,1,1,1,1,1,1]; let index = index">
-    <ion-item (click)="goToSong()" lines="none" class="ion-align-items-center">
-      <ion-buttons slot="start">
-        <h1>{{index + 1}}</h1>
-      </ion-buttons>
-      <ion-label class="ion-text-wrap">
-        <h2>Es tiempo</h2>
-        <ion-label>Hillsong</ion-label>
-      </ion-label>
-      <ion-buttons slot="end">
-        <div class="note">D</div>
-      </ion-buttons>
-    </ion-item>
-  </ion-card>
-  <ion-footer class="footer-custom" *ngIf="!isWatching">
-    <ion-toolbar>
-      <ion-button class="ion-padding-start ion-padding-end" color="secondary" expand="block" fill="solid" shape="round">
-        Guardar
-        <ion-icon slot="start" name="save"></ion-icon>
-      </ion-button>
-    </ion-toolbar>
-  </ion-footer>
-</form>
+      </ion-row>
+    </ion-grid>
+    <div *ngFor="let group of listGroups">
+      <ion-row class="d-flex ion-align-items-center">
+        <h1 class="ion-padding-start">{{ group?.name }}</h1>
+          <ion-button *ngIf="!isWatching" class="btn-custom" (click)="pageService.navigateRoute('list-group/edit/' + group.id)" expand="block" fill="clear"
+            shape="round">
+            Editar
+            <ion-icon slot="start" name="create-outline"></ion-icon>
+          </ion-button>
+      </ion-row>
+      <ion-card>
+        <ion-item (click)="goToSong()" lines="none" class="ion-align-items-center">
+          <ion-buttons slot="start">
+            <h1>1</h1>
+          </ion-buttons>
+          <ion-label class="ion-text-wrap">
+            <h2>Es tiempo</h2>
+            <ion-label>Hillsong</ion-label>
+          </ion-label>
+          <ion-buttons slot="end">
+            <div class="note">D</div>
+          </ion-buttons>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <ion-footer class="footer-custom" *ngIf="!isWatching">
+      <ion-toolbar>
+        <ion-button [disabled]="!form.valid" class="ion-padding-start ion-padding-end" color="secondary" expand="block" fill="solid"
+          shape="round" type="submit">
+          Guardar
+          <ion-icon slot="start" name="save"></ion-icon>
+        </ion-button>
+      </ion-toolbar>
+    </ion-footer>
+  </form>
 </ion-content>
+
+
+<ion-fab *ngIf="!isWatching" class="ion-fab-custom-2" slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button color="primary" (click)="pageService.navigateRoute('list-group/new/')">
+    <ion-icon color="secondary" name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

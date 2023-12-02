@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BasePage } from 'src/app/core/base.page';
+import { ItemsPage } from 'src/app/core/items.page';
 import { SwiperOptions } from 'swiper';
 
 @Component({
@@ -7,19 +8,20 @@ import { SwiperOptions } from 'swiper';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage extends BasePage {
+export class HomePage extends ItemsPage {
 
-  data: any = {};
-  swiperConfig: SwiperOptions = {
-    slidesPerView: 2.5,
-    spaceBetween: 5
-  };
-
-  ionViewWillEnter() {
-  }
+  endPoint: string = this.settings.endPoints.lists;
 
   goToDetail() {
     this.pageService.navigateRoute('service');
+  }
+
+  getParams(): Partial<EndPointParams> {
+    const filters = { ...this.handleTextSearch() };
+    const populates = ['user'];
+    const sort = { dateTo: -1 };
+
+    return { filters, populates, sort };
   }
 
 }

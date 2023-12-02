@@ -485,3 +485,15 @@ ion-list {
 .border-10{
     border-radius: 10px;
 }
+
+.ion-fab-custom-2{
+    margin-bottom: 95px;
+}
+
+ion-modal{
+    &::part(content){
+        height: 50%;
+        border-radius: 15px;
+        width: 95%;
+    }
+}
