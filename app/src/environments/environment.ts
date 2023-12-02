@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   apiVersion: 'v1',
-  // serverUrl: 'http://localhost:3165/api',
-  // filesUrl: 'http://localhost:3165/files',
-  // socketUrl: 'http://localhost:3165',
+  serverUrl: 'http://localhost:3122/api',
+  filesUrl: 'http://localhost:3122/files',
+  socketUrl: 'http://localhost:3122',
 
-  serverUrl: 'https://camarcoapp.com.ar/api',
-  filesUrl: 'https://camarcoapp.com.ar/files',
-  socketUrl: 'https://camarcoapp.com.ar',
+  // serverUrl: 'https://camarcoapp.com.ar/api',
+  // filesUrl: 'https://camarcoapp.com.ar/files',
+  // socketUrl: 'https://camarcoapp.com.ar',
 };
 
 /*

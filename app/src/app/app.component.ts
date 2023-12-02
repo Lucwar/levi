@@ -53,7 +53,7 @@ export class AppComponent {
       this.pageService.global.getLoadingAsObservable().subscribe(async result => result ? await this.showLoading() : await this.hideLoading());
 
       this.pageService.global.checkUser();
-      this.pageService.initializeSocket();
+      // this.pageService.initializeSocket();
       this.pageService.enablePush();
       this.handleDeepLinks();
 
@@ -63,7 +63,7 @@ export class AppComponent {
         if (!this.user) this.logged = false;
 
         else {
-          if (!this.logged) this.pageService.socket.emit('handleUser', this.user.id);
+          // if (!this.logged) this.pageService.socket.emit('handleUser', this.user.id);
 
           this.logged = true;
         }
