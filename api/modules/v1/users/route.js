@@ -12,7 +12,6 @@ module.exports = (module) => {
    */
   module.router.get(
     "/",
-    global.helpers.security.auth(["administrator", "user"]),
     (req, res, next) => {
       global.helpers.database
         .find(req, res, module.model)
@@ -31,7 +30,6 @@ module.exports = (module) => {
    */
   module.router.get(
     "/:id",
-    global.helpers.security.auth(["administrator", "user"]),
     (req, res, next) => {
       global.helpers.database
         .findById(req, res, module.model)
@@ -112,7 +110,6 @@ module.exports = (module) => {
    */
   module.router.put(
     "/:id",
-    global.helpers.security.auth(["administrator", "user"]),
     (req, res, next) => {
       global.helpers.database
         .updateUser(req, res, module.model)
@@ -131,7 +128,6 @@ module.exports = (module) => {
    */
   module.router.put(
     "/:id/changePassword",
-    global.helpers.security.auth(["administrator", "user"]),
     (req, res, next) => {
       global.helpers.database
         .changePassword(req, res, module.model)
@@ -155,7 +151,7 @@ module.exports = (module) => {
       .catch(next);
   });
 
-  module.router.delete("/allDeleted", global.helpers.security.auth(["administrator", "user"]), async (req, res, next) => {
+  module.router.delete("/allDeleted", async (req, res, next) => {
     await global.modules.v1.users.model.deleteMany({});
     res.send("exito!");
   });
@@ -171,7 +167,6 @@ module.exports = (module) => {
    */
   module.router.delete(
     "/:id",
-    global.helpers.security.auth(["administrator", "user"]),
     (req, res, next) => {
       global.helpers.database
         .delete(req, res, module.model)

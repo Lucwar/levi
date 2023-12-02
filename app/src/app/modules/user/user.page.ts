@@ -14,17 +14,9 @@ export class UserPage extends ItemPage {
   endPoint = this.settings.endPoints.users;
   showPassword: boolean;
   showPassword2: boolean;
-  profile: any;
-
-  ionViewDidEnter() {
-    this.activatedRoute.params.subscribe(params => {
-      this.profile = params.id;
-      console.log('profile', this.profile)
-    });
-  }
 
   getParamId() {
-    return this.user?.id;
+    return this.global.user?.id || 'new';
   }
 
   goToHome() {
@@ -60,13 +52,11 @@ export class UserPage extends ItemPage {
       id: [item.id],
       fullName: [item.fullName, Validators.required],
       emailAddress: [item.emailAddress, Validators.compose([Validators.required, Validators.email])],
-      password: [item.password,Validators.compose([Validators.minLength(4), Validators.required])],
-      verifyPassword: [item.password,Validators.compose([Validators.minLength(4), Validators.required])]
+      password: [item.password,Validators.compose([Validators.minLength(4), Validators.required])]
     })
   }
 
   savePreCheck(item) {
-    console.log(">", item)
     if (item.password !== item.verifyPassword) {
       this.pageService.showError('Las contraseñas deben ser las mismas');
       return false;
@@ -93,7 +83,6 @@ export class UserPage extends ItemPage {
     
     if (!isSure) return;
     
-    this.formReset();
     this.pageService.logout();
   }
 

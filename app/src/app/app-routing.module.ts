@@ -18,8 +18,6 @@ const routes: Routes = [
   {
     path: 'change-password',
     loadChildren: () => import('./modules/change-password/change-password.module').then(m => m.ChangePasswordPageModule),
-    data: { noUser: true },
-    canActivate: [RoleGuard]
   },
   {
     path: 'recover-password',

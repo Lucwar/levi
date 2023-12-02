@@ -4,6 +4,7 @@ import { BasePage } from 'src/app/core/base.page';
 import { ItemPage } from 'src/app/core/item.page';
 import { SwiperOptions } from 'swiper';
 import { PopoverNotesComponent } from '../popover-notes/popover-notes.component';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-song',
@@ -52,7 +53,7 @@ export class SongPage extends ItemPage {
    segmentSong: string = 'song';
    segmentNotes: string = 'notes';
    segmentGeneral: string = 'general';
-   segmentValue: string = this.segmentSong;
+   segmentValue: string = this.segmentGeneral;
 
    config = {
     toolbar: [
@@ -62,10 +63,34 @@ export class SongPage extends ItemPage {
     ],
   };
 
+  getFormNew() {
+    return this.formBuilder.group({
+      name: [null, Validators.required],
+      author: [null, Validators.required],
+      tone: [null, Validators.required],
+      lyrics: [null],
+      annotations: [null],
+      singers: [null],
+      links: [null],
+    })
+  }
+
+  getFormEdit(item) {
+    return this.formBuilder.group({
+      id: [item.id],
+      name: [item.name, Validators.required],
+      author: [item.author],
+      tone: [item.tone, Validators.required],
+      lyrics: [item.lyrics],
+      annotations: [item.annotations],
+      singers: [item.singers],
+      links: [item.links],
+    })
+  }
+
   save(){
     this.textRecipe = `<div style="width: 683px">${this.textRecipe ? this.textRecipe : ''}</div>`;
   }
-
  
   press(e){
     console.log('HOLD', e)
@@ -78,20 +103,20 @@ export class SongPage extends ItemPage {
     console.log(e);
     this.openPopover(e)
     this.tap++;
-}
+  }
 
-async openPopover(ev){
-  const popover = this.pageService.popoverController.create({
-    component: PopoverNotesComponent,
-    cssClass: 'popover-notes',
-    event: ev,
-    side: 'top',
-    showBackdrop: false
-  });
+  async openPopover(ev){
+    const popover = this.pageService.popoverController.create({
+      component: PopoverNotesComponent,
+      cssClass: 'popover-notes',
+      event: ev,
+      side: 'top',
+      showBackdrop: false
+    });
 
-  (await popover).present();
+    (await popover).present();
 
-}
+  }
 
 //   @ViewChild('paragraph') p: ElementRef;
 

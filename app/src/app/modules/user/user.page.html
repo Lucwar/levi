@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start" *ngIf="profile === 'new'">
+    <ion-buttons slot="start" *ngIf="creating">
       <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/login"></ion-back-button>
     </ion-buttons>
-    <ion-title color="light">{{profile == 'new' ? 'Registro' : 'Perfil'}}</ion-title>
+    <ion-title color="light">{{creating ? 'Registro' : 'Perfil'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -28,7 +28,7 @@
       {{getFieldError('emailAddress')}}
     </div>
 
-    <ng-container *ngIf="profile == 'new'">
+    <ng-container *ngIf="creating">
       <ion-text color="tertiary">
         <h5>Contraseña</h5>
       </ion-text>
@@ -55,15 +55,15 @@
     </ng-container>
 
     <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="clear" color="primary" expand="block"
-      type="button" (click)="goToChangePassword()" *ngIf="!profile">
+      type="button" (click)="goToChangePassword()" *ngIf="!creating">
       <u>Cambiar contraseña</u>
     </ion-button>
     <ion-button class="ion-margin-top ion-margin-bottom ion-text-capitalize global-btn" color="secondary" expand="block"
       type="submit" [disabled]="!form.valid">
-      {{ profile == 'new' ? 'Registrarse' : 'Guardar cambios' }}
+      {{ creating ? 'Registrarse' : 'Guardar cambios' }}
     </ion-button>
     <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="outline" color="primary" expand="block"
-      (click)="logout()" *ngIf="!profile">
+      (click)="logout()" *ngIf="!creating">
       Cerrar sesión
     </ion-button>
   </form>
