@@ -13,7 +13,7 @@ module.exports = (module) => {
    * @param {Object} next - Next
    * @return {void}
    */
-  module.router.get('/', global.helpers.security.auth(['administrator']), async (req, res, next) => {
+  module.router.get('/', global.helpers.security.auth(['user']), async (req, res, next) => {
     const result = await global.helpers.database.find(req, res, module.model).catch(next);
 
     res.send(result);
@@ -27,7 +27,7 @@ module.exports = (module) => {
    * @param {Object} next - Next
    * @return {void}
    */
-  module.router.get('/:id', global.helpers.security.auth(['administrator']), async (req, res, next) => {
+  module.router.get('/:id', global.helpers.security.auth(['user']), async (req, res, next) => {
     const result = await global.helpers.database.findById(req, res, module.model).catch(next);
 
     res.send(result);
@@ -41,7 +41,7 @@ module.exports = (module) => {
   * @param {Object} next - Next
   * @return {void}
   */
-  module.router.post('/', global.helpers.security.auth(['administrator']), async (req, res, next) => {
+  module.router.post('/', global.helpers.security.auth(['user']), async (req, res, next) => {
     const result = await global.helpers.database.create(req, res, module.model).catch(next);
 
     res.send(result);
@@ -55,7 +55,7 @@ module.exports = (module) => {
    * @param {Object} next - Next
    * @return {void}
    */
-  module.router.post('/createOrUpdate', global.helpers.security.auth(['administrator']), async (req, res, next) => {
+  module.router.post('/createOrUpdate', global.helpers.security.auth(['user']), async (req, res, next) => {
   
     let templates = await global.modules.v1.templates.model.find().catch(e => console.log(e));
     let result
@@ -76,7 +76,7 @@ module.exports = (module) => {
    * @param {Object} next - Next
    * @return {void}
    */
-  module.router.put('/:id', global.helpers.security.auth(['administrator']), async (req, res, next) => {
+  module.router.put('/:id', global.helpers.security.auth(['user']), async (req, res, next) => {
     const result = await global.helpers.database.update(req, res, module.model).catch(next);
 
     res.send(result);
@@ -90,7 +90,7 @@ module.exports = (module) => {
    * @param {Object} next - Next
    * @return {void}
    */
-  module.router.delete('/:id', global.helpers.security.auth(['administrator']), async (req, res, next) => {
+  module.router.delete('/:id', global.helpers.security.auth(['user']), async (req, res, next) => {
     const result = await global.helpers.database.delete(req, res, module.model).catch(next);
 
     res.send(result);
