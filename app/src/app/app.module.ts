@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
@@ -32,11 +32,12 @@ import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { StreamingMedia } from '@awesome-cordova-plugins/streaming-media/ngx';
 import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
 import { FilterPopoverPage } from './core/components/filter-popover/filter-popover.page';
+import { PopoverNotesComponent } from './modules/popover-notes/popover-notes.component';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
 @NgModule({
-  declarations: [AppComponent, AlertModalPage, FilterPopoverPage],
+  declarations: [AppComponent, AlertModalPage, FilterPopoverPage, PopoverNotesComponent],
   entryComponents: [],
   imports: [
     HttpClientModule,
@@ -45,7 +46,8 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
       mode: 'md'
     }),
     AppRoutingModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    HammerModule,
   ],
   providers: [
     LocalNotifications,

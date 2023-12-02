@@ -136,6 +136,11 @@
           <div class="note">D</div>
           <div class="note">E</div>
         </div>
+        <ion-card >
+          <ion-item>
+            Tapped: {{tap}} times
+          </ion-item>
+        </ion-card>
       </ion-card>
     </div>
   </div>
@@ -148,7 +153,7 @@
         <ion-buttons class="w100">
           <swiper [config]="swiperConfigNotes" class="ion-padding-start ion-padding-end">
             <ng-template swiperSlide>
-              <ion-button  (tap)="tap()" (on-hold)="press()" (touchend)="touchend()" class="note ion-text-capitalize" shape="round">
+              <ion-button (press)="tapEvent($event)" class="note ion-text-capitalize" shape="round">
                 C
               </ion-button>
             </ng-template>

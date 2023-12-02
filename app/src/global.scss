@@ -474,3 +474,14 @@ ion-list {
         border-radius: 8px;
     }
 }
+
+.popover-notes{
+    &::part(content){
+
+        border-radius: 15px;
+    }
+}
+
+.border-10{
+    border-radius: 10px;
+}
