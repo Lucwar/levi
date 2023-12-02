@@ -11,7 +11,6 @@ module.exports = (module) => {
 		name: { type: String },
 		dateTo: { type: Date, required: true },
 		user: { type: global.database.mongodb.mongoose.Schema.Types.ObjectId, ref: 'users' },
-		groups: [{ type: global.database.mongodb.mongoose.Schema.Types.ObjectId, ref: 'groups' }]
-
+		listGroups: [{ type: global.database.mongodb.mongoose.Schema.Types.ObjectId, ref: 'listGroups' }]
 	}, { timestamps: true });
 };
