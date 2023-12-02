@@ -501,7 +501,8 @@ ion-modal{
 .footer-custom{
     position: fixed;
     bottom: 0;
-    
+}
+
 ion-item{
     &.fix-floating{
         &::part(native){
