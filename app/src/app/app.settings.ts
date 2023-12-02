@@ -45,7 +45,8 @@ export class Settings {
     actionsToPerform: 'levi.actionsToPerform',
     refreshToken: 'levi.refreshToken',
     user: 'levi.user',
-    address: 'levi.address'
+    address: 'levi.address',
+    listGroups: 'levi.listGroups',
   };
 
   public static actions = {

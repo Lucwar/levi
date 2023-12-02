@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" icon="arrow-back-circle"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light"></ion-title>
+    <ion-buttons *ngIf="!creating && !isWatching" slot="end">
+      <ion-button (click)="deleteListGroup()" fill="clear" shape="round">
+        <ion-icon name="trash-outline" color=danger></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form class="ion-margin-top" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-grid class="ion-padding" *ngIf="!isWatching">
+      <ion-row>
+        <ion-item class="ion-align-items-center w100" lines="none">
+          <ion-label color="tertiary" position="floating">Nombre</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <div *ngIf="!isFieldValid('name')" class="invalid-input-message">
+          {{getFieldError('name')}}
+        </div>
+      </ion-row>
+
+      <ion-row class="w100 ion-margin-top">
+        <ion-searchbar animated placeholder="Buscar" inputmode='search' type='search' [(ngModel)]='textSearch'
+          (ionChange)='getSongs()' [ngModelOptions]="{standalone: true}"></ion-searchbar>
+      </ion-row>
+    </ion-grid>
+
+    <ion-card class="d-flex" *ngFor="let i of [{id:'1'},{id:'2'},1,1]; let index = index">
+      <ion-buttons>
+        <ion-button (click)="removeSong(i)" fill="clear" shape="round">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-item (click)="addSong(i)" lines="none" class="ion-align-items-center w100">
+        <ion-label class="ion-text-wrap">
+          <h2>Es tiempo</h2>
+          <ion-label>Hillsong</ion-label>
+        </ion-label>
+        <ion-buttons slot="end">
+          <div class="note">D</div>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+    <ion-footer class="footer-custom" *ngIf="!isWatching">
+      <ion-toolbar>
+        <ion-button [disabled]="!form.valid" class="ion-padding-start ion-padding-end" color="secondary" expand="block" type="submit"
+          fill="solid" shape="round">
+          Guardar
+          <ion-icon slot="start" name="save"></ion-icon>
+        </ion-button>
+      </ion-toolbar>
+    </ion-footer>
+  </form>
+</ion-content>
