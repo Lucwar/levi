@@ -1,52 +1,21 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center ion-margin-top">
-      <!-- <img src="assets/imgs/logo_header.svg" alt=""> -->
-      <ion-title>Levi</ion-title>
-    </ion-title>
-    <!-- <div class="ion-padding-start ion-padding-bottom ion-padding-end">
-      <ion-row>
-        <ion-text color="light">
-          <h5>Hola Mario Caceres!</h5>
-        </ion-text>
-
-        <ion-item lines="none">
-          <ion-icon name="search" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Buscar"></ion-input>
-          <ion-button slot="end" fill="clear" class="ion-text-capitalize">
-            <ion-icon name="options-outline" slot="start" class="rotate"></ion-icon>
-            Ordenar
-          </ion-button>
-        </ion-item>
-      </ion-row>
-    </div> -->
+    <ion-title color="light">Levi</ion-title>
   </ion-toolbar>
-
-  <!-- <ion-toolbar color="light">
-    <swiper [config]="swiperConfig" class="ion-padding-start ion-padding-end">
-      <ng-template swiperSlide>
-        <ion-chip class="active">Bares</ion-chip>
-      </ng-template>
-
-      <ng-template swiperSlide>
-        <ion-chip>Restaurantes</ion-chip>
-      </ng-template>
-
-      <ng-template swiperSlide>
-        <ion-chip>Cafeterias</ion-chip>
-      </ng-template>
-
-      <ng-template swiperSlide>
-        <ion-chip>Otros Locales</ion-chip>
-      </ng-template>
-    </swiper>
-  </ion-toolbar> -->
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="pageService.navigateRoute('service/new/')" class="ion-margin" expand="block" color="secondary" fill="solid" shape="round">
-    Crear servicio
-  </ion-button>
+
+  <div class="ion-padding-start ion-padding-end ion-margin-top">
+    <ion-row class="w100">
+      <ion-item lines="none" class="w100 border-10">
+        <ion-icon name="search" slot="start"></ion-icon>
+        <ion-input type="text" placeholder="Buscar"></ion-input>
+      </ion-item>
+    </ion-row>
+
+  </div>
+
   <ion-text color="tertiary">
     <h5 class="ion-margin-start">Mis servicios</h5>
   </ion-text>
@@ -68,6 +37,12 @@
     </ion-item-sliding>
    
   </ion-card>
+
+  <ion-fab class="ion-fab-custom" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="pageService.navigateRoute('service/new/')">
+      <ion-icon color="secondary" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <!-- <ion-card (click)="goToStore()" class="ion-margin-top">
     <img src="assets/imgs/example.png" alt="">

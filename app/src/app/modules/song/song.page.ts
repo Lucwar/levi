@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Gesture } from '@ionic/angular';
 import { BasePage } from 'src/app/core/base.page';
 import { ItemPage } from 'src/app/core/item.page';
 import { SwiperOptions } from 'swiper';
+import { PopoverNotesComponent } from '../popover-notes/popover-notes.component';
 
 @Component({
   selector: 'app-song',
@@ -65,16 +66,47 @@ export class SongPage extends ItemPage {
     this.textRecipe = `<div style="width: 683px">${this.textRecipe ? this.textRecipe : ''}</div>`;
   }
 
-  tap(){
-    console.log('TAP')
-  }
-  press(){
-    console.log('HOLD')
+ 
+  press(e){
+    console.log('HOLD', e)
   }
   touchend(){
     console.log('TOUCHEND')
   }
+  tap = 0;
+  tapEvent(e){
+    console.log(e);
+    this.openPopover(e)
+    this.tap++;
+}
 
+async openPopover(ev){
+  const popover = this.pageService.popoverController.create({
+    component: PopoverNotesComponent,
+    cssClass: 'popover-notes',
+    event: ev,
+    side: 'top',
+    showBackdrop: false
+  });
+
+  (await popover).present();
+
+}
+
+//   @ViewChild('paragraph') p: ElementRef;
+
+// ionViewWillEnter() {
+//   const gesture = this.pageService.gestureCtrl.create({
+//     el: this.rectangle.nativeElement,
+//    [Hammer.press]: (detail) => { this.onMove(detail); }
+//   })
+
+//   gesture.enable();
+// }
+
+// private onHold(detail) {
+//   console.log('HOLDDDDD')
+// }
 
     // el: HTMLElement;
     // pressGesture: Gesture;

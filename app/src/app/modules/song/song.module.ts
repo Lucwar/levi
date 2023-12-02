@@ -9,6 +9,7 @@ import { SongPageRoutingModule } from './song-routing.module';
 import { SongPage } from './song.page';
 import { SwiperModule } from 'swiper/angular';
 import { QuillModule } from 'ngx-quill';
+import { HammerModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [

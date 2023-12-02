@@ -1,0 +1,35 @@
+.notes{
+    display: flex;
+    margin: 8px 0px;
+    
+    .note{
+        height: 45px;
+        width: 45px;
+        border-radius: 100%;
+        background-color: rgb(44, 44, 44);
+        place-content: center;
+        color: white;
+        font-weight: 900;
+        font-size: 1.6rem;
+        display: flex;
+        align-items: center;
+        margin: 0px 8px;
+
+        .minor-note{
+            font-size: .7rem !important;
+            text-transform: lowercase;
+            margin-top: 10px;
+        }
+        .numeral{
+            font-size: .8rem !important;
+            text-transform: lowercase;
+            margin-top: -10px;
+        }
+
+        &.placeholder-note{
+            background-color: white;
+            border: 2px solid rgb(44, 44, 44);
+            color: rgb(44, 44, 44);
+        }
+    }
+}
