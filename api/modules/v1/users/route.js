@@ -84,8 +84,6 @@ module.exports = (module) => {
       .login(req, res, module.model)
       .catch(next);
 
-    if (result && result.data && result.data.status === "unsubscribed") return next({ message: "Su cuenta ha sido eliminada" });
-
     res.send(result);
   });
 

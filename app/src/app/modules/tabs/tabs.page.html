@@ -9,7 +9,7 @@
       <ion-icon [name]="tabSelected == 'songs' ? 'musical-notes':'musical-notes-outline'"></ion-icon>
     </ion-tab-button>
 
-    <ion-tab-button tab="user" layout="icon-top">
+    <ion-tab-button [tab]="'user/'+global.user.id" layout="icon-top">
       <ion-icon [name]="tabSelected == 'user' ? 'person-circle':'person-circle-outline'"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>

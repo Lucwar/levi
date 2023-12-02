@@ -15,7 +15,7 @@ export class LoginPage extends FormPage implements OnInit {
 
   getFormNew() {
     return this.formBuilder.group({
-      username: [null, Validators.compose([Validators.required, mailFormat()])],
+      username: [null, Validators.compose([Validators.required, Validators.email])],
       password: [null, Validators.required],
     });
   }
@@ -35,8 +35,7 @@ export class LoginPage extends FormPage implements OnInit {
 
   onSubmitPerformComplete(user: any) {
     this.pageService.showSuccess('Bienvenido!');
-    const route = (!user.firstName || !user.lastName) ? ('user/' + user.id) : 'tabs/home';
-    this.pageService.navigateRoute(route);
+    this.pageService.navigateRoute('tabs/home');
     this.form.reset();
   }
 

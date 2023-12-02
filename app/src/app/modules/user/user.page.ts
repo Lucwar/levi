@@ -74,12 +74,28 @@ export class UserPage extends ItemPage {
     return true;
   }
 
-  // handlePicture(field = 'picture') {
-  //   this.pageService.showImageUpload({ image: this.getImage(this.form.value[field], 'default') })
-  //     .then(res => {
-  //       if (res?.data?.file) this.form.patchValue({ [field]: res.data.file });
-  //     }).catch(e => this.pageService.showError(e));
-  // }
+  async logout() {
+    const isSure = await this.pageService.createAlertModal({
+      title: 'Cerrar sesión',
+      subtitle: '¿Está seguro que desea cerrar sesión?',
+      actions: [
+        {
+          label: 'Cerrar sesión',
+          handler: () => this.pageService.modalCtrl.dismiss(true),
+          class: 'btn-orange orange-gradient',
+        },
+        {
+          label: 'Cancelar',
+          handler: () => this.pageService.modalCtrl.dismiss(false),
+        },
+      ],
+    });
+    
+    if (!isSure) return;
+    
+    this.formReset();
+    this.pageService.logout();
+  }
 
   goToAddress() {
     this.pageService.navigateRoute('address/' + true);

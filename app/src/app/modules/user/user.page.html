@@ -63,7 +63,7 @@
       {{ profile == 'new' ? 'Registrarse' : 'Guardar cambios' }}
     </ion-button>
     <ion-button class="ion-margin-top global-btn ion-text-capitalize" fill="outline" color="primary" expand="block"
-      (click)="pageService.logout()" *ngIf="!profile">
+      (click)="logout()" *ngIf="!profile">
       Cerrar sesión
     </ion-button>
   </form>
