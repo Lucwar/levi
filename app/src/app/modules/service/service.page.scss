@@ -15,3 +15,12 @@
     align-items: center;
     margin: 0px 8px;
 }
+
+ion-item::part(native) {
+    border-radius: 10px !important;
+}
+
+.footer-custom{
+    position: sticky;
+    bottom: 0;
+}

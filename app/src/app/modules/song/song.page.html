@@ -10,6 +10,9 @@
 <ion-content>
 
   <ion-segment [(ngModel)]="segmentValue" value="song" class="w100 segment-custom">
+    <ion-segment-button *ngIf="!isWatching" [value]="segmentGeneral" value="general">
+      <ion-label>General</ion-label>
+    </ion-segment-button>
     <ion-segment-button [value]="segmentSong" value="song">
       <ion-label>Letra</ion-label>
     </ion-segment-button>
@@ -19,9 +22,40 @@
   </ion-segment>
 
   <div [ngSwitch]="segmentValue">
+    <div *ngSwitchCase="segmentGeneral">
+      <ion-grid class="ion-padding">
+        <ion-row>
+          <ion-item class="ion-align-items-center w100" lines="none">
+            <ion-label color="tertiary" position="floating">Nombre de la canción</ion-label>
+            <ion-input type="text" formControlName="password"></ion-input>
+          </ion-item>
+          <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
+            {{getFieldError('password')}}
+          </div>
+
+          <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
+            <ion-label color="tertiary" position="floating">Autor</ion-label>
+            <ion-input type="text" formControlName="password"></ion-input>
+          </ion-item>
+          <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
+            {{getFieldError('password')}}
+          </div>
+
+          <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
+            <ion-label color="tertiary" position="floating">Cantante</ion-label>
+            <ion-input type="text" formControlName="password"></ion-input>
+          </ion-item>
+          <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
+            {{getFieldError('password')}}
+          </div>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+
     <div *ngSwitchCase="segmentSong">
 
-      <ion-card class="ion-padding">
+      <ion-card class="ion-padding" *ngIf="isWatching">
         <h4><b>Estrofa 1:</b></h4>
         <h3>
           Amor inexplicable, tu vida diste en la cruz <br>
@@ -39,7 +73,7 @@
       </ion-card>
 
 
-      <div class="quill-editor-container">
+      <div class="quill-editor-container" *ngIf="!isWatching">
         <quill-editor class="quill-editor" format="text" placeholder="Escribe o pega la canción aquí"
           [(ngModel)]="textRecipe" [modules]="config" theme="snow"></quill-editor>
       </div>
@@ -47,7 +81,7 @@
     </div>
 
     <div *ngSwitchCase="segmentNotes">
-      <swiper [config]="swiperConfig" class="ion-padding-start ion-padding-end">
+      <swiper [config]="swiperConfig" class="ion-padding-start ion-padding-end ion-align-items-center d-flex">
         <ng-template swiperSlide>
           <ion-chip class="active">Bajo</ion-chip>
         </ng-template>
@@ -58,6 +92,14 @@
 
         <ng-template swiperSlide>
           <ion-chip>Guitarra</ion-chip>
+        </ng-template>
+
+        <ng-template swiperSlide>
+          <!-- <ion-chip> -->
+          <ion-button class="height-custom" fill="solid" color="primary" shape="round">
+            <ion-icon color="light" slot="icon-only" name="add-circle"></ion-icon>
+          </ion-button>
+          <!-- </ion-chip> -->
         </ng-template>
 
       </swiper>
@@ -99,14 +141,14 @@
   </div>
 </ion-content>
 
-<ion-footer *ngIf="creating">
+<ion-footer *ngIf="!isWatching">
   <ion-toolbar>
-    <div *ngIf="segmentValue == segmentNotes">
+    <div *ngIf="segmentValue == segmentNotes && segmentValue != segmentGeneral">
       <div class="notes">
         <ion-buttons class="w100">
           <swiper [config]="swiperConfigNotes" class="ion-padding-start ion-padding-end">
             <ng-template swiperSlide>
-              <ion-button class="note ion-text-capitalize" shape="round">
+              <ion-button  (tap)="tap()" (on-hold)="press()" (touchend)="touchend()" class="note ion-text-capitalize" shape="round">
                 C
               </ion-button>
             </ng-template>
@@ -238,11 +280,11 @@
               </ion-button>
             </ng-template>
           </swiper>
-  
+
         </ion-buttons>
       </div>
     </div>
-   
+
     <ion-button class="ion-padding-start ion-padding-end" color="secondary" expand="block" fill="solid" shape="round">
       Guardar
       <ion-icon slot="start" name="save"></ion-icon>

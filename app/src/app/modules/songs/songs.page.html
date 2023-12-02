@@ -1,14 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/tabs/home"></ion-back-button>
-    </ion-buttons>
     <ion-title color="light">Canciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+
   <div class="ion-padding-start ion-padding-end ion-margin-top">
     <ion-row>
       <ion-item lines="none">
@@ -25,15 +22,23 @@
 
   <ion-list>
     <ion-card *ngFor="let i of [1,1,1,1]; let index = index">
-      <ion-item (click)="goToSong()" lines="none" class="ion-align-items-center">
-        <ion-label class="ion-text-wrap">
-          <h2>Es tiempo</h2>
-          <ion-label>Hillsong</ion-label>
-        </ion-label>
-        <ion-buttons slot="end">
-          <div class="note">D</div>
-        </ion-buttons>
-      </ion-item>
+      <ion-item-sliding>
+        <ion-item (click)="pageService.navigateRoute('song/watch/' + i)" lines="none" class="ion-align-items-center">
+          <ion-label class="ion-text-wrap">
+            <h2>Es tiempo</h2>
+            <ion-label>Hillsong</ion-label>
+          </ion-label>
+          <ion-buttons slot="end">
+            <div class="note">D</div>
+          </ion-buttons>
+        </ion-item>
+
+        <ion-item-options>
+          <ion-item-option (click)="pageService.navigateRoute('song/edit/' + i)" color="secondary">
+            <ion-icon slot="start" name="create-outline"></ion-icon>
+            Editar</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-card>
   </ion-list>
 

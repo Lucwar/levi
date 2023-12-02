@@ -44,17 +44,29 @@
 </ion-header>
 
 <ion-content>
+  <ion-button (click)="pageService.navigateRoute('service/new/')" class="ion-margin" expand="block" color="secondary" fill="solid" shape="round">
+    Crear servicio
+  </ion-button>
   <ion-text color="tertiary">
     <h5 class="ion-margin-start">Mis servicios</h5>
   </ion-text>
 
   <ion-card *ngFor="let i of [1,1,1,1]">
-    <ion-item (click)="goToDetail()" lines="none" class="ion-align-items-center">
-      <ion-label class="ion-text-wrap">
-        <p>Domingo - 19/07/2023</p>
-        <ion-label><p>Creada por: <b>Alexis</b></p></ion-label>
-      </ion-label>
-    </ion-item>
+    <ion-item-sliding>
+      <ion-item (click)="pageService.navigateRoute('service/watch/' + i)" lines="none" class="ion-align-items-center">
+        <ion-label class="ion-text-wrap">
+          <p>Domingo - 19/07/2023</p>
+          <ion-label><p>Creada por: <b>Alexis</b></p></ion-label>
+        </ion-label>
+      </ion-item>
+  
+      <ion-item-options>
+        <ion-item-option (click)="pageService.navigateRoute('service/edit/' + i)" color="secondary">
+          <ion-icon slot="start" name="create-outline"></ion-icon>
+          Editar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+   
   </ion-card>
 
   <!-- <ion-card (click)="goToStore()" class="ion-margin-top">
