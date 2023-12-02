@@ -1,0 +1,67 @@
+
+Models:
+> Users (fullname, username, emailAddres)
+> Lists (name, date, ref User, groups: [ref]) 
+ > Groups (name, songs: [ref Song])
+> Songs (name, tone, author, tag, lyrics, Annotations: [ref], singers: [{sings: 'Mica', note: 1}], links: [{name, linl}])
+ > Annotations (name, segments: [{ label:'estrofa', notes: [ [{note,extencion}] ] }])
+
+
+[ {1, ['','m','m7','7','maj7','9'] }]
+
+
+{ note: C, grado: 1}
+C  1 <
+C# 2  
+D  3
+D# 4
+E  5
+F  6 <
+F# 7
+G  8
+G# 9
+A  10
+A# 11
+B  12
+
+// Función para calcular la diferencia entre dos notas
+function calcularDiferencia(notaNueva, notaPrincipal) {
+  // Array que representa las notas y sus números asignados
+  const notas = {
+    'C': 1,
+    'C#': 2,
+    'D': 3,
+    'D#': 4,
+    'E': 5,
+    'F': 6,
+    'F#': 7,
+    'G': 8,
+    'G#': 9,
+    'A': 10,
+    'A#': 11,
+    'B': 12,
+  };
+
+  // Validar que las notas proporcionadas existan en el array
+  if (!(notaNueva in notas) || !(notaPrincipal in notas)) {
+    console.log('Notas no válidas.');
+    return null;
+  }
+
+  // Calcular la diferencia restando los números asociados a las notas
+  const diferencia = notas[notaNueva] - notas[notaPrincipal];
+
+  // Asegurarse de que la diferencia esté en el rango [1, 12]
+  const diferenciaEnRango = (diferencia + 12) % 12 + 1;
+
+  return diferenciaEnRango;
+}
+
+// Ejemplo de uso
+const notaPrincipal = 'C';
+const notaNueva = 'F';
+const diferencia = calcularDiferencia(notaNueva, notaPrincipal);
+
+if (diferencia !== null) {
+  console.log(`La diferencia entre ${notaPrincipal} y ${notaNueva} es: ${diferencia}`);
+}

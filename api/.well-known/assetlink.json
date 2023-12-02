@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "com.diproach.prisus",
+                 "sha256_cert_fingerprints": ["28:8D:B0:35:E9:7F:14:4C:8E:02:10:6C:82:A4:CC:3C:FE:3D:1D:07:EE:A2:47:65:BA:3F:22:5A:7B:D3:B0:22"] }
+  }]
