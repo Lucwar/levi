@@ -59,7 +59,7 @@ export class ServicePage extends ItemPage {
   }
 
   getPopulates(): any[] {
-    return ['listGroups']
+    return [{ path: 'listGroups', populate: 'songs'}]
   }
   
   savePost(item): void {
@@ -80,8 +80,8 @@ export class ServicePage extends ItemPage {
       : {};
   }
 
-  goToSong(){
-    this.pageService.navigateRoute('song/view/1')
+  goToSong(id){
+    this.pageService.navigateRoute('song/watch/' + id)
   }
 
   getParams(): Partial<EndPointParams> {

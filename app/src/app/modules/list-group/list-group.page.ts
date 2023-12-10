@@ -36,7 +36,7 @@ export class ListGroupPage extends ItemPage {
   }
 
   savePre(item): { [k: string]: any } {
-    this.form.value.songs = this.songsArray;
+    this.form.value.songs = this.songsArray.map(item => item.id);
 
     return item;
   }
@@ -49,7 +49,7 @@ export class ListGroupPage extends ItemPage {
     }
 
     this.listStorage = this.global.get(this.settings.storage.listGroups) || [];
-    console.log('Localstorage', this.listStorage)
+    item.data.songs = this.songsArray;
     let existingIndex = this.listStorage.findIndex(obj => obj.id == this.form.value.id);
     if (existingIndex != -1) {
       this.listStorage[existingIndex] = item.data;
@@ -71,8 +71,6 @@ export class ListGroupPage extends ItemPage {
       this.songs = res.data;
     })
     .catch(e => this.pageService.showError(e))
-
-    console.log('CANCIONES DE LA BASE DE DATOS:', this.songs)
   }
 
   handleTextSearch(): { [k: string]: any } {
@@ -82,15 +80,15 @@ export class ListGroupPage extends ItemPage {
   }
 
   addSong(song){
-    if(!this.songsArray.includes(song.id)){
-      this.songsArray.push(song.id);
+    if(!this.songsArray.includes(song)){
+      this.songsArray.push(song);
     }
     console.log('Añadida', this.songsArray)
   }
 
   removeSong(song){
     this.songsArray = this.songsArray.filter(function(item) {
-      return item !== song.id;
+      return item !== song;
     });
     console.log('Removidxa', this.songsArray)
   }

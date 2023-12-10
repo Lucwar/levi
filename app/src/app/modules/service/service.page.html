@@ -58,17 +58,17 @@
             <ion-icon slot="start" name="create-outline"></ion-icon>
           </ion-button>
       </ion-row>
-      <ion-card>
-        <ion-item (click)="goToSong()" lines="none" class="ion-align-items-center">
-          <ion-buttons slot="start">
+      <ion-card *ngFor="let song of group.songs">
+        <ion-item (click)="goToSong(song.id)" lines="none" class="ion-align-items-center">
+          <!-- <ion-buttons slot="start">
             <h1>1</h1>
-          </ion-buttons>
+          </ion-buttons> -->
           <ion-label class="ion-text-wrap">
-            <h2>Es tiempo</h2>
-            <ion-label>Hillsong</ion-label>
+            <h2>{{ song.name }}</h2>
+            <ion-label>{{ song.author }}</ion-label>
           </ion-label>
           <ion-buttons slot="end">
-            <div class="note">D</div>
+            <div class="note">{{ settings.notesObject[song.tone-1].name }}</div>
           </ion-buttons>
         </ion-item>
       </ion-card>
@@ -87,7 +87,7 @@
 </ion-content>
 
 
-<ion-fab *ngIf="!isWatching" class="ion-fab-custom-2" slot="fixed" vertical="bottom" horizontal="end">
+<ion-fab *ngIf="creating" class="ion-fab-custom-2" slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button color="primary" (click)="pageService.navigateRoute('list-group/new/')">
     <ion-icon color="secondary" name="add"></ion-icon>
   </ion-fab-button>
