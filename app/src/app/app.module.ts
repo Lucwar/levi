@@ -33,11 +33,12 @@ import { StreamingMedia } from '@awesome-cordova-plugins/streaming-media/ngx';
 import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
 import { FilterPopoverPage } from './core/components/filter-popover/filter-popover.page';
 import { PopoverNotesComponent } from './modules/popover-notes/popover-notes.component';
+import { ModalInstrumentComponent } from './modules/modal-instrument/modal-instrument.component';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
 @NgModule({
-  declarations: [AppComponent, AlertModalPage, FilterPopoverPage, PopoverNotesComponent],
+  declarations: [AppComponent, AlertModalPage, FilterPopoverPage, PopoverNotesComponent, ModalInstrumentComponent],
   entryComponents: [],
   imports: [
     HttpClientModule,

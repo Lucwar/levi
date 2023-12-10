@@ -13,6 +13,10 @@ export class LoginPage extends FormPage implements OnInit {
 
   showPassword: boolean;
 
+  async ionViewWillLeave() {
+    this.formReset();
+  }
+
   getFormNew() {
     return this.formBuilder.group({
       username: [null, Validators.compose([Validators.required, Validators.email])],

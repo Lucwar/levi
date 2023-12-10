@@ -5,6 +5,7 @@ import { ItemPage } from 'src/app/core/item.page';
 import { SwiperOptions } from 'swiper';
 import { PopoverNotesComponent } from '../popover-notes/popover-notes.component';
 import { Validators } from '@angular/forms';
+import { ModalInstrumentComponent } from '../modal-instrument/modal-instrument.component';
 
 @Component({
   selector: 'app-song',
@@ -138,6 +139,15 @@ export class SongPage extends ItemPage {
 
     (await popover).present();
 
+  }
+
+  async openModalInstrument(){
+    const modal = await this.pageService.modalCtrl.create({
+      component: ModalInstrumentComponent,
+      cssClass: 'modal-instrument'
+    })
+
+    await modal.present()
   }
 
 //   @ViewChild('paragraph') p: ElementRef;
