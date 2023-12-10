@@ -13,31 +13,8 @@ import { Validators } from '@angular/forms';
 })
 export class SongPage extends ItemPage {
 
-  endPoint: string = '';
-  textRecipe: any = `VERSO1:
-  Antes de hablar cantaste sobre mí
-  Has sido tan buen para mí
-  Antes de respirar soplaste vida en mí
-  Has sido tan bueno para mí
-  CORO:
-  Oh tu amor me envuelve me sostiene
-  Amor sin condición
-  Me persigue y deja las noventa y nueve
-  Y va por mí
-  No puedo ganarlo ni merecerlo
-  Tu amor se entregó por mí
-  Oh tu amor me envuelve Me sostiene
-  Amor sin condición
-  VERSO 2:
-  Aun lejos de ti, tu amor luchó por mí
-  Has sido tan bueno para mí
-  Cuando no vi mi valor te entregaste por mí
-  Has sido tan bueno para mí
-  PUENTE:
-  //No hay sombra
-  que no alumbres
-  Monte que no escales
-  Para encontrarme a mí`;
+  endPoint: string = this.settings.endPoints.songs;
+  textRecipe: any = ``;
 
   swiperConfig: SwiperOptions = {
     slidesPerView: 2.5,
@@ -88,6 +65,26 @@ export class SongPage extends ItemPage {
       singers: [item.singers],
       links: [item.links],
     })
+  }
+
+  savePre(item): { [k: string]: any } {
+    
+    for (let key in item) {
+      if (item[key] === '' || (Array.isArray(item[key]) && item[key].length === 0)) {
+        delete item[key];
+      } else if (Array.isArray(item[key])) {
+        item[key] = item[key].filter(item => Object.values(item).some(value => value !== ''));
+        if (item[key].length === 0) {
+            delete item[key];
+        }
+      }
+    } 
+
+    return item;
+  }
+
+  savePost(item): void {
+    this.pageService.navigate('/tabs/songs')
   }
 
   addOrRemoveSinger(index, remove) {
