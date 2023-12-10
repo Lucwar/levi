@@ -134,6 +134,8 @@ export class Settings {
     { name: 'B', grado: 12},
   ]
 
+  public static notesObject = Object.values(this.notes);
+
   public static notesWithMinors = [
     { name: 'C', grado: 1, extension: ''},
     { name: 'C#', grado: 2},

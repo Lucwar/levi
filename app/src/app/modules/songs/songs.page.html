@@ -21,20 +21,20 @@
   </div>
 
   <ion-list>
-    <ion-card *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]; let index = index">
+    <ion-card *ngFor="let item of items; let index = index">
       <ion-item-sliding>
-        <ion-item (click)="pageService.navigateRoute('song/watch/' + i)" lines="none" class="ion-align-items-center">
+        <ion-item (click)="goToSong(item.id)" lines="none" class="ion-align-items-center">
           <ion-label class="ion-text-wrap">
-            <h2>Es tiempo</h2>
-            <ion-label>Hillsong</ion-label>
+            <h2>{{item.name}}</h2>
+            <ion-label>{{item.author}}</ion-label>
           </ion-label>
           <ion-buttons slot="end">
-            <div class="note">D</div>
+            <div class="note">{{ settings.notesObject[item.tone-1].name}}</div>
           </ion-buttons>
         </ion-item>
 
         <ion-item-options>
-          <ion-item-option (click)="pageService.navigateRoute('song/edit/' + i)" color="secondary">
+          <ion-item-option (click)="pageService.navigateRoute('song/edit/' + item.id)" color="secondary">
             <ion-icon slot="start" name="create-outline"></ion-icon>
             Editar</ion-item-option>
         </ion-item-options>
