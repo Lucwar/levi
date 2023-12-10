@@ -31,16 +31,16 @@
       </ion-row>
     </ion-grid>
 
-    <ion-card class="d-flex" *ngFor="let i of [{id:'1'},{id:'2'},1,1]; let index = index">
+    <ion-card class="d-flex" *ngFor="let song of songs; let index = index">
       <ion-buttons>
-        <ion-button (click)="removeSong(i)" fill="clear" shape="round">
+        <ion-button (click)="removeSong(song)" fill="clear" shape="round">
           <ion-icon name="trash"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-item (click)="addSong(i)" lines="none" class="ion-align-items-center w100">
+      <ion-item (click)="addSong(song)" lines="none" class="ion-align-items-center w100">
         <ion-label class="ion-text-wrap">
-          <h2>Es tiempo</h2>
-          <ion-label>Hillsong</ion-label>
+          <h2>{{ song.name }}</h2>
+          <ion-label>{{ song.author }}</ion-label>
         </ion-label>
         <ion-buttons slot="end">
           <div class="note">D</div>

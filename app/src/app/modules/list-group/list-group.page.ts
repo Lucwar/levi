@@ -61,16 +61,18 @@ export class ListGroupPage extends ItemPage {
     this.pageService.navigateBack()
   }
 
-  getSongs(){
+  async getSongs(){
     const endPoint = this.settings.endPoints.songs;
     let params = {
       filters: this.handleTextSearch()
     }
-    this.pageService.httpGetAll(endPoint, params)
+    await this.pageService.httpGetAll(endPoint, params)
     .then((res) => {
-      this.songs = res;
+      this.songs = res.data;
     })
     .catch(e => this.pageService.showError(e))
+
+    console.log('CANCIONES DE LA BASE DE DATOS:', this.songs)
   }
 
   handleTextSearch(): { [k: string]: any } {
