@@ -26,7 +26,6 @@ export class SongPage extends ItemPage {
     spaceBetween: 5
   };
 
-
    /* SEGMENT */
    segmentSong: string = 'song';
    segmentNotes: string = 'notes';
