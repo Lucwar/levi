@@ -156,7 +156,7 @@ ion-button {
 
     --background: #ECECEC;
     --border-radius: 10px;
-    --height: auto;
+    --height: 25%;
     --width: 85%;
 
     .ion-page {
@@ -492,7 +492,7 @@ ion-list {
 
 ion-modal{
     &::part(content){
-        height: 50%;
+        height: 30%;
         border-radius: 15px;
         width: 95%;
     }
