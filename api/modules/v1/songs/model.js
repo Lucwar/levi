@@ -9,7 +9,7 @@ module.exports = (module) => {
 	module.schema = new global.database.mongodb.mongoose.Schema({
 		id: { type: String },
 		name: { type: String },
-		tone: { type: String },
+		tone: { type: Number },
 		author: { type: String },
 		tag: { type: String },
 		lyrics: { type: String },
