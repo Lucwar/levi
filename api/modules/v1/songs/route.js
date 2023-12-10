@@ -42,31 +42,33 @@ module.exports = (module) => {
   * @return {void}
   */
   module.router.post('/', global.helpers.security.auth(['user']), async (req, res, next) => {
+    console.log("song >", req.body)
     const result = await global.helpers.database.create(req, res, module.model).catch(next);
 
     res.send(result);
   });
 
-  /**
-   * CreateOrUpdate
-   *
-   * @param {Object} req - Request
-   * @param {Object} res - Response
-   * @param {Object} next - Next
-   * @return {void}
-   */
-  module.router.post('/createOrUpdate', global.helpers.security.auth(['user']), async (req, res, next) => {
-  
-    let templates = await global.modules.v1.templates.model.find().catch(e => console.log(e));
-    let result
-    if(templates.length === 0){
-      result = await global.helpers.database.create(req, res, module.model).catch(next);
-    } else {
-      result = await global.modules.v1.templates.model.findOneAndUpdate(templates[0].id, req.body).catch(e => console.log(e));
-    }
-    
-    res.send(result);
-  });
+  // /**
+  //  * CreateOrUpdate
+  //  *
+  //  * @param {Object} req - Request
+  //  * @param {Object} res - Response
+  //  * @param {Object} next - Next
+  //  * @return {void}
+  //  */
+  // module.router.post('/createOrUpdate', global.helpers.security.auth(['user']), async (req, res, next) => {
+
+  //   // let templates = await global.modules.v1.templates.model.find().catch(e => console.log(e));
+  //   // let result
+  //   // if(templates.length === 0){
+  //   //   result = await global.helpers.database.create(req, res, module.model).catch(next);
+  //   // } else {
+  //   //   result = await global.modules.v1.templates.model.findOneAndUpdate(templates[0].id, req.body).catch(e => console.log(e));
+  //   // }
+
+  //   // res.send(result);
+  //   res.send({ data: 'ok' });
+  // });
 
   /**
    * Update
