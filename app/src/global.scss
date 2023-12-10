@@ -156,8 +156,14 @@ ion-button {
 
     --background: #ECECEC;
     --border-radius: 10px;
-    --height: 25%;
-    --width: 85%;
+    // --height: 25%;
+    // --width: 85%;
+
+    &::part(content){
+        height: 30%;
+        border-radius: 15px;
+        width: 95%;
+    }
 
     .ion-page {
         position: relative;
@@ -492,7 +498,7 @@ ion-list {
 
 ion-modal{
     &::part(content){
-        height: 30%;
+        height: 60%;
         border-radius: 15px;
         width: 95%;
     }

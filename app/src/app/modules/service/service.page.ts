@@ -16,28 +16,28 @@ export class ServicePage extends ItemPage {
   songsArray = [];
   textSearch: String;
   listGroups: any = [];
+  actionType;
 
   async ionViewWillEnter(): Promise<void> {
+    this.activatedRoute.params.subscribe((params) => {
+      this.actionType = params.action;
+    });
+
     if(this.creating){
       this.listGroups = this.global.get(this.settings.storage.listGroups);
-      console.log('Estoy tomando del storage')
     }
   }
 
   loadItemPost() {
-    if(this.isWatching){
+    if(this.actionType == 'edit' || this.actionType == 'watch'){
       this.listGroups = this.form.value.listGroups;
     }
-
-  
-
-    console.log('LISTA', this.listGroups, this.settings.storage.listGroups)
   }
 
   getFormNew() {
     return this.formBuilder.group({
-      name: [null,  Validators.required],
-      dateTo: [null,  Validators.required],
+      name: [null, Validators.required],
+      dateTo: [null, Validators.required],
       user: [this.global.user.id],
       listGroups: [null]
     });
@@ -70,7 +70,7 @@ export class ServicePage extends ItemPage {
     }
 
     this.global.remove(this.settings.storage.listGroups)
-    this.pageService.navigateBack()
+    this.pageService.navigateRoute('tabs/home')
   }
 
 

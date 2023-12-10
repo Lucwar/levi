@@ -22,7 +22,7 @@ export class ListGroupPage extends ItemPage {
 
   getFormNew() {
     return this.formBuilder.group({
-      name: [null],
+      name: [null, Validators.required],
       songs: [null],
     });
   }
@@ -30,7 +30,7 @@ export class ListGroupPage extends ItemPage {
   getFormEdit(item) {
     return this.formBuilder.group({
       id: [item.id],
-      name: [item.name],
+      name: [item.name, Validators.required],
       songs: [item.songs],
     });
   }

@@ -18,7 +18,7 @@ export class TabsPage extends BasePage {
 
   ionViewWillEnter() {
     try {
-      // this.tabs.outlet.activatedView.ref.instance.ionViewWillEnter();
+      this.tabs.outlet.activatedView.ref.instance.ionViewWillEnter();
     } catch (e) {
       console.log(e);
     };
