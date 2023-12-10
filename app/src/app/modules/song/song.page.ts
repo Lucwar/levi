@@ -58,6 +58,7 @@ export class SongPage extends ItemPage {
       id: [item.id],
       name: [item.name, Validators.required],
       author: [item.author],
+      // FALTAN MENORES!!!!!!!!!!!!!!!!!!!!!!!
       tone: [item.tone, Validators.required],
       tag: [item.tag, Validators.required],
       lyrics: [item.lyrics],
@@ -65,6 +66,10 @@ export class SongPage extends ItemPage {
       singers: [item.singers],
       links: [item.links],
     })
+  }
+
+  loadItemPost() {
+    this.segmentValue = this.creating ? this.segmentGeneral : this.segmentSong; 
   }
 
   savePre(item): { [k: string]: any } {
@@ -84,7 +89,7 @@ export class SongPage extends ItemPage {
   }
 
   savePost(item): void {
-    this.pageService.navigate('/tabs/songs')
+    this.pageService.navigateBack();
   }
 
   addOrRemoveSinger(index, remove) {
