@@ -16,6 +16,7 @@ export class ServicePage extends ItemPage {
   songsArray = [];
   textSearch: String;
   listGroups: any = [];
+  listGroupsStorage: any = [];
   actionType;
 
   async ionViewWillEnter(): Promise<void> {
@@ -23,15 +24,15 @@ export class ServicePage extends ItemPage {
       this.actionType = params.action;
     });
 
+    this.listGroupsStorage = await this.global.get(this.settings.storage.listGroups);
     if(this.creating){
-      this.listGroups = await this.global.get(this.settings.storage.listGroups);
-      this.form.value.listGroups = await this.listGroups;
-      console.log('Creo/edito y tomo del localstorage', this.form.value)
+      this.form.value.listGroups = await this.listGroupsStorage;
+      // console.log('Creo/edito y tomo del localstorage', this.form.value)
     }
   }
 
   async ionViewWillLeave(): Promise<void> {
-    this.global.remove(this.settings.storage.listGroups);
+    // this.global.remove(this.settings.storage.listGroups);
   }
 
   loadItemPost() {

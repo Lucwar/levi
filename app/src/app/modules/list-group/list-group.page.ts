@@ -1,10 +1,6 @@
-import { Component, NgZone, OnInit } from '@angular/core';
-import { Form, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { ItemPage } from 'src/app/core/item.page';
-import { ItemsPage } from 'src/app/core/items.page';
-import { PageService } from 'src/app/core/services/page.service';
-import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-list-group',
@@ -20,18 +16,10 @@ export class ListGroupPage extends ItemPage {
   listStorage: any;
   actionType;
 
-  constructor(formBuilder: FormBuilder, pageService: PageService, activatedRoute: ActivatedRoute, public cdr: ChangeDetectorRef, public ngZone: NgZone){
-    super(formBuilder, pageService, activatedRoute)
-  }
-
   async ionViewWillEnter(): Promise<void> {
     this.activatedRoute.params.subscribe((params) => {
       this.actionType = params.action;
     });
-
-    // if(this.actionType == 'edit' || this.actionType == 'watch'){
-    //   this.songsArray = await this.item?.songs;
-    // }
   }
 
   initializePre() {
@@ -54,14 +42,7 @@ export class ListGroupPage extends ItemPage {
   }
 
   async loadItemPost() {
-    console.log('Consola 1: ', this.songsArray)
     this.songsArray = [...await this.item.songs]; 
-    console.log('Consola 2: ', this.songsArray)
-
-    // Forzar una revisión de la jerarquía de componentes
-    this.cdr.markForCheck();
-    // Forzar una actualización de la vista dentro de la zona de Angular
-  this.ngZone.run(() => {});
   }
 
   getPopulates(): any[] {
@@ -106,6 +87,10 @@ export class ListGroupPage extends ItemPage {
     .catch(e => this.pageService.showError(e))
   }
 
+  isSelected(song){
+    return this.songsArray.some(s => s.id == song.id)
+  }
+
   handleTextSearch(): { [k: string]: any } {
     return this.textSearch
       ? { $or: [{ name: { $regex: this.textSearch, $options: 'i' } }] }
@@ -114,19 +99,16 @@ export class ListGroupPage extends ItemPage {
 
   async addSong(song){
     if(!this.songsArray.includes(song)){
-      console.log('Array', this.songsArray)
       this.songsArray.push(song);
     }
-
-    this.cdr.markForCheck()
-    this.cdr.detectChanges();
   }
 
   removeSong(song){
+    console.log('Eliminated')
     this.songsArray = this.songsArray.filter(function(item) {
-      return item !== song;
+      return item.id !== song.id;
     });
-    console.log('Removidxa', this.songsArray)
+    console.log('Arraysong final: ', this.songsArray)
   }
 
   async deleteListGroup(){
@@ -152,12 +134,14 @@ export class ListGroupPage extends ItemPage {
     this.pageService.httpDelete(endPoint)
     .then(() => {
       this.listStorage = this.global.get(this.settings.storage.listGroups);
-      let index = this.listStorage.findIndex(obj => obj.id == this.form.value.id);
+      if(this.listStorage){
+        let index = this.listStorage.findIndex(obj => obj.id == this.form.value.id);
 
-      if (index !== -1) {
-        this.listStorage.splice(index, 1);
+        if (index !== -1) {
+          this.listStorage.splice(index, 1);
+        }
+        this.listStorage = this.listStorage.filter((obj) => {obj.id == this.form.value.id});
       }
-      this.listStorage = this.listStorage.filter((obj) => {obj.id == this.form.value.id});
       this.pageService.navigateBack();
       this.pageService.showSuccess('Eliminado con éxito');
     })
