@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Form, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ItemPage } from 'src/app/core/item.page';
 import { ItemsPage } from 'src/app/core/items.page';
+import { PageService } from 'src/app/core/services/page.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-list-group',
@@ -15,6 +18,21 @@ export class ListGroupPage extends ItemPage {
   songsArray = [];
   textSearch: String;
   listStorage: any;
+  actionType;
+
+  constructor(formBuilder: FormBuilder, pageService: PageService, activatedRoute: ActivatedRoute, public cdr: ChangeDetectorRef, public ngZone: NgZone){
+    super(formBuilder, pageService, activatedRoute)
+  }
+
+  async ionViewWillEnter(): Promise<void> {
+    this.activatedRoute.params.subscribe((params) => {
+      this.actionType = params.action;
+    });
+
+    // if(this.actionType == 'edit' || this.actionType == 'watch'){
+    //   this.songsArray = await this.item?.songs;
+    // }
+  }
 
   initializePre() {
     this.getSongs()
@@ -33,6 +51,21 @@ export class ListGroupPage extends ItemPage {
       name: [item.name, Validators.required],
       songs: [item.songs],
     });
+  }
+
+  async loadItemPost() {
+    console.log('Consola 1: ', this.songsArray)
+    this.songsArray = [...await this.item.songs]; 
+    console.log('Consola 2: ', this.songsArray)
+
+    // Forzar una revisión de la jerarquía de componentes
+    this.cdr.markForCheck();
+    // Forzar una actualización de la vista dentro de la zona de Angular
+  this.ngZone.run(() => {});
+  }
+
+  getPopulates(): any[] {
+    return ['songs']
   }
 
   savePre(item): { [k: string]: any } {
@@ -79,11 +112,14 @@ export class ListGroupPage extends ItemPage {
       : {};
   }
 
-  addSong(song){
+  async addSong(song){
     if(!this.songsArray.includes(song)){
+      console.log('Array', this.songsArray)
       this.songsArray.push(song);
     }
-    console.log('Añadida', this.songsArray)
+
+    this.cdr.markForCheck()
+    this.cdr.detectChanges();
   }
 
   removeSong(song){

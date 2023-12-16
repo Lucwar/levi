@@ -24,8 +24,14 @@ export class ServicePage extends ItemPage {
     });
 
     if(this.creating){
-      this.listGroups = this.global.get(this.settings.storage.listGroups);
+      this.listGroups = await this.global.get(this.settings.storage.listGroups);
+      this.form.value.listGroups = await this.listGroups;
+      console.log('Creo/edito y tomo del localstorage', this.form.value)
     }
+  }
+
+  async ionViewWillLeave(): Promise<void> {
+    this.global.remove(this.settings.storage.listGroups);
   }
 
   loadItemPost() {
@@ -48,7 +54,7 @@ export class ServicePage extends ItemPage {
       id: [item.id],
       name: [item.name, Validators.required],
       dateTo: [item.dateTo, Validators.required],
-      listGroups: [item.listGroups],
+      listGroups: [item.listGroups, Validators.required],
     });
   }
 
@@ -82,13 +88,5 @@ export class ServicePage extends ItemPage {
 
   goToSong(id){
     this.pageService.navigateRoute('song/watch/' + id)
-  }
-
-  getParams(): Partial<EndPointParams> {
-    const filters = { ...this.handleTextSearch() };
-    const populates = [];
-    const sort = {};
-
-    return { filters, populates, sort };
   }
 }
