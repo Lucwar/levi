@@ -1,0 +1,11 @@
+<ion-content>
+  <div>
+    <div class="notes " *ngFor="let row of settings.matrizNotes">
+      <ion-buttons class="w100 ion-justify-content-center" *ngFor="let item of row">
+        <ion-button (click)="pick(item)" (press)="tapEvent($event, item.grado)" class="note ion-text-capitalize" shape="round">
+          {{item.name}}
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </div>
+</ion-content>

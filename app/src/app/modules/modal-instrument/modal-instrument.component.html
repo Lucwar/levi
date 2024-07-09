@@ -1,7 +1,6 @@
-
 <ion-header>
   <ion-toolbar>
-    <ion-title>Agregar</ion-title>
+    <ion-title>{{ !editing ? 'Agregar' : 'Editar'}}</ion-title>
 
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">
@@ -15,18 +14,18 @@
     <ion-row>
       <ion-item class="ion-align-items-center w100 fix-floating border-10" lines="none">
         <ion-label color="tertiary" position="floating">Nombre</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" [(ngModel)]="annotationName"></ion-input>
       </ion-item>
       <!-- <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
         {{getFieldError('password')}}
       </div> -->
-    
-      <ion-buttons class="w100 ion-text-center ion-margin-top">
+
+      <ion-buttons (click)="acceptLabel()" class="w100 ion-text-center ion-margin-top">
         <ion-button class="w100" expand="block" fill="solid" shape="round" color="dark">
-          Aceptar
+          Guardar
         </ion-button>
-        <ion-button class="w100" expand="block">
-          Cancelar
+        <ion-button (click)="closeModal(editing)" class="w100" expand="block">
+          {{!editing ? 'Cancelar' : 'Eliminar'}}
         </ion-button>
       </ion-buttons>
     </ion-row>

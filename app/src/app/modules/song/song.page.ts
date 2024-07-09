@@ -3,9 +3,9 @@ import { Gesture } from '@ionic/angular';
 import { BasePage } from 'src/app/core/base.page';
 import { ItemPage } from 'src/app/core/item.page';
 import { SwiperOptions } from 'swiper';
-import { PopoverNotesComponent } from '../popover-notes/popover-notes.component';
 import { Validators } from '@angular/forms';
 import { ModalInstrumentComponent } from '../modal-instrument/modal-instrument.component';
+import { ModalPickNoteComponent } from '../modal-pick-note/modal-pick-note.component';
 
 @Component({
   selector: 'app-song',
@@ -47,7 +47,7 @@ export class SongPage extends ItemPage {
       tone: [null, Validators.required],
       tag: [null, Validators.required],
       lyrics: [null],
-      annotations: [null],
+      annotations: [[{name: 'General', annotation: [], selected: true}]],
       singers: [[{singer: '', note: ''}]],
       links: [[{name: '', link: ''}]],
     })
@@ -119,36 +119,88 @@ export class SongPage extends ItemPage {
   press(e){
     console.log('HOLD', e)
   }
+
+  pickNote(segmentIndex?, noteIndex?, value?){
+    // this.segments[segmentIndex].notes[noteIndex]; 
+  }
+
   touchend(){
     console.log('TOUCHEND')
   }
-  tap = 0;
-  tapEvent(e){
-    console.log(e);
-    this.openPopover(e)
-    this.tap++;
-  }
 
-  async openPopover(ev){
-    const popover = this.pageService.popoverController.create({
-      component: PopoverNotesComponent,
-      cssClass: 'popover-notes',
-      event: ev,
-      side: 'top',
-      showBackdrop: false
-    });
-
-    (await popover).present();
-
-  }
-
-  async openModalInstrument(){
+  async openModalInstrument(index=-1){
     const modal = await this.pageService.modalCtrl.create({
       component: ModalInstrumentComponent,
-      cssClass: 'modal-instrument'
+      cssClass: 'modal-instrument',
+      componentProps: {annotationName: this.form.value.annotations[index]?.name || ''}
     })
 
-    await modal.present()
+    await modal.present();
+
+    const dismiss = await modal.onDidDismiss();
+    
+    if (dismiss.data && dismiss.data.deleted) this.form.value.annotations.splice(index, 1);
+    if (dismiss.data && dismiss.data.name) {
+      if(index!=-1){
+        this.form.value.annotations[index].name = dismiss.data.name;
+        this.selectAnnotation(index);
+      }else{
+        this.form.value.annotations.push({
+          name: dismiss.data.name,
+          segments: [],
+          selected: true
+        })
+        this.selectAnnotation(this.form.value.annotations.length-1);
+      }
+    }
+  }
+
+  selectAnnotation(index) {
+    this.form.value.annotations.forEach(a => a.selected = false);
+    this.form.value.annotations[index].selected = true;
+  }
+
+  segment = {
+    label: '',
+    notes: ['+']
+  }
+
+  segments = [];
+
+  addOrEditSegment(index = -1) {
+    console.log("addOrEditSegment > ", this.segment);
+    if(index == -1) {
+      this.segments[this.segments.length] = this.segment;
+    } 
+    // else {
+    //   this.segment[index] = 
+    // }
+    this.segment = {
+      label: '',
+      notes: ['+']
+    }
+  }
+
+  async openModalPickNote(segmentIndex, noteIndex
+  ) {
+    const modal = await this.pageService.modalCtrl.create({
+      component: ModalPickNoteComponent,
+      componentProps: {},
+      cssClass: 'modal-pick-note',
+      breakpoints: [0, 0.75],
+      initialBreakpoint: 0.75,
+    });
+
+    modal.onDidDismiss().then((item) => {
+      if (item && item.data) {
+        this.segments[segmentIndex].notes[noteIndex] = item.data;
+        if(this.segments[segmentIndex].notes.length -1 == noteIndex){
+          this.segments[segmentIndex].notes.push('+');
+        }
+      }
+    });
+
+    await modal.present();
   }
 
 //   @ViewChild('paragraph') p: ElementRef;

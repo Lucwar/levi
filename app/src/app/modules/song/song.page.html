@@ -107,8 +107,6 @@
                 </ion-button>
               </ion-col>
             </ion-row>
-
-
           </ion-row>
         </ion-grid>
       </div>
@@ -120,217 +118,88 @@
             [(ngModel)]="form?.value.lyrics" [ngModelOptions]="{standalone: true}"
             [modules]="!isWatching ? config : {toolbar: false} " theme="snow"></quill-editor>
         </div>
-
       </div>
 
       <div *ngSwitchCase="segmentNotes">
+
         <swiper [config]="swiperConfig" class="ion-padding-start ion-padding-end ion-align-items-center d-flex">
-          <ng-template swiperSlide>
-            <ion-chip class="active">Bajo</ion-chip>
+          <ng-template swiperSlide *ngFor="let annotation of form.value?.annotations; index as i">
+            
+            <ion-input type="text" placeholder="Instrumento/General"></ion-input>
+            
+            <ion-chip (click)="selectAnnotation(i)" (press)="openModalInstrument(i)"
+            [class]="annotation.selected ? 'active':''">{{annotation.name}}</ion-chip>
           </ng-template>
-
+          
           <ng-template swiperSlide>
-            <ion-chip>Teclado</ion-chip>
-          </ng-template>
-
-          <ng-template swiperSlide>
-            <ion-chip>Guitarra</ion-chip>
-          </ng-template>
-
-          <ng-template swiperSlide>
-            <!-- <ion-chip> -->
             <ion-button (click)="openModalInstrument()" class="height-custom" fill="solid" color="primary"
-              shape="round">
+            shape="round">
+              <ion-input type="text" placeholder="Instrumento/General"></ion-input>
               <ion-icon color="light" slot="icon-only" name="add-circle"></ion-icon>
             </ion-button>
-            <!-- </ion-chip> -->
           </ng-template>
-
         </swiper>
 
         <ion-card class="ion-padding">
-          <h4><b>Estrofa 1:</b></h4>
-          <div class="notes">
-            <ion-buttons>
-              <ion-button class="note ion-text-capitalize" shape="round">
-                E<span class="minor-note">m</span>
-              </ion-button>
-              <ion-button class="note ion-text-capitalize" shape="round">
-                E<span class="numeral">#</span>
-              </ion-button>
-              <ion-button class="note placeholder-note" shape="round">
-                <ion-icon name="add"></ion-icon>
-              </ion-button>
-              <ion-button class="note placeholder-note" shape="round">
-                <ion-icon name="add"></ion-icon>
-              </ion-button>
-              <ion-button class="note placeholder-note" shape="round">
-                <ion-icon name="add"></ion-icon>
-              </ion-button>
-            </ion-buttons>
+
+          <ion-item fill="outline">
+            <ion-input (keyup.enter)="addOrEditSegment()" [(ngModel)]="segment.label" [ngModelOptions]="{standalone: true}" type="text"
+              placeholder="Label"></ion-input>
+
+            <ion-button type="button" (click)="addOrEditSegment()" slot="end" class="note placeholder-note" shape="round">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </ion-item>
+
+          <div *ngFor="let segment of segments; index as i">
+
+            <h4><b>{{segment.label}}:</b></h4>
+            <div class="notes" *ngFor="let note of segment.notes; index as notei">
+              <ion-buttons>
+                <!-- <ion-button class="note ion-text-capitalize" shape="round">
+                  E<span class="minor-note">m</span>
+                </ion-button> -->
+                <!-- <ion-button (click)="openModalPickNote(i,notei)" class="note placeholder-note" shape="round"> -->
+                <ion-button (click)="openModalPickNote(i,notei)" class="note ion-text-capitalize" shape="round">
+                  <ion-icon *ngIf="note == '+'" name="add"></ion-icon>
+                  <div *ngIf="note != '+'" class="note">{{note.name}}</div>
+                </ion-button>
+
+              </ion-buttons>
+            </div>
+
+            <!-- <div class="notes">
+              <div class="note">D</div>
+              <div class="note">E</div>
+            </div> -->
+
           </div>
-          <div class="notes">
-            <div class="note">C</div>
-            <div class="note">D</div>
-            <div class="note">E</div>
-          </div>
-          <h4><b>Coro:</b></h4>
-          <div class="notes">
-            <div class="note">C</div>
-            <div class="note">D</div>
-            <div class="note">E</div>
-          </div>
-          <ion-card>
+          <!-- <h4><b>Coro:</b></h4>
+              <div class="notes">
+                <div class="note">C</div>
+                <div class="note">D</div>
+                <div class="note">E</div>
+              </div> -->
+          <!-- <ion-card>
             <ion-item>
               Tapped: {{tap}} times
             </ion-item>
-          </ion-card>
+          </ion-card> -->
         </ion-card>
       </div>
     </div>
 
-    <ion-footer *ngIf="!isWatching" class="footer-custom">
+    <!-- <ion-footer *ngIf="!isWatching" class="footer-custom"> -->
+    <!-- <ion-footer  class="footer-custom">
       <ion-toolbar>
         <div *ngIf="segmentValue == segmentNotes && segmentValue != segmentGeneral">
-          <div class="notes">
-            <ion-buttons class="w100">
-              <swiper [config]="swiperConfigNotes" class="ion-padding-start ion-padding-end">
-                <ng-template swiperSlide>
-                  <ion-button (press)="tapEvent($event)" class="note ion-text-capitalize" shape="round">
-                    C
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    C<span class="minor-note">m</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    C<span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    C<span class="minor-note">m</span><span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    D
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    D<span class="minor-note">m</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    D<span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    D<span class="minor-note">m</span><span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-              </swiper>
-            </ion-buttons>
-          </div>
-          <div class="notes">
-            <ion-buttons class="w100">
-              <swiper [config]="swiperConfigNotes" class="ion-padding-start ion-padding-end">
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    E
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    E<span class="minor-note">m</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    F
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    F<span class="minor-note">m</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    F<span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    F<span class="minor-note">m</span><span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    G
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    G<span class="minor-note">m</span>
-                  </ion-button>
-                </ng-template>
-              </swiper>
-            </ion-buttons>
-          </div>
-          <div class="notes">
-            <ion-buttons class="w100">
-              <swiper [config]="swiperConfigNotes" class="ion-padding-start ion-padding-end">
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    G<span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    G<span class="minor-note">m</span><span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    A
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    A<span class="minor-note">m</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    A<span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    A<span class="minor-note">m</span><span class="numeral">#</span>
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    B
-                  </ion-button>
-                </ng-template>
-                <ng-template swiperSlide>
-                  <ion-button class="note ion-text-capitalize" shape="round">
-                    B<span class="minor-note">m</span>
-                  </ion-button>
-                </ng-template>
-              </swiper>
 
+          <div class="notes " *ngFor="let row of settings.matrizNotes">
+            <ion-buttons class="w100 ion-justify-content-center" *ngFor="let item of row">
+              <ion-button (press)="tapEvent($event, item.grado)" class="note ion-text-capitalize" shape="round">
+                {{item.name}}
+              </ion-button>
             </ion-buttons>
-
           </div>
         </div>
 
@@ -339,8 +208,9 @@
           Guardar
           <ion-icon slot="start" name="save"></ion-icon>
         </ion-button>
+
       </ion-toolbar>
-    </ion-footer>
+    </ion-footer> -->
 
   </form>
 </ion-content>

@@ -34,11 +34,13 @@ import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
 import { FilterPopoverPage } from './core/components/filter-popover/filter-popover.page';
 import { PopoverNotesComponent } from './modules/popover-notes/popover-notes.component';
 import { ModalInstrumentComponent } from './modules/modal-instrument/modal-instrument.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalPickNoteComponent } from './modules/modal-pick-note/modal-pick-note.component';
 
 const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
 @NgModule({
-  declarations: [AppComponent, AlertModalPage, FilterPopoverPage, PopoverNotesComponent, ModalInstrumentComponent],
+  declarations: [AppComponent, AlertModalPage, FilterPopoverPage, PopoverNotesComponent, ModalInstrumentComponent, ModalPickNoteComponent],
   entryComponents: [],
   imports: [
     HttpClientModule,
@@ -46,6 +48,8 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     IonicModule.forRoot({
       mode: 'md'
     }),
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     SocketIoModule.forRoot(config),
     HammerModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BasePage } from 'src/app/core/base.page';
 
 @Component({
@@ -8,8 +8,19 @@ import { BasePage } from 'src/app/core/base.page';
 })
 export class ModalInstrumentComponent extends BasePage {
 
-  closeModal(){
-    this.pageService.modalCtrl.dismiss()
+  @Input() annotationName: any;
+  editing = false;
+
+  ionViewWillEnter() {
+    this.editing = this.annotationName.length != 0;
+  }
+
+  async acceptLabel(){
+    this.pageService.modalCtrl.dismiss({name: this.annotationName});
+  }
+
+  closeModal(deleted = false){
+    this.pageService.modalCtrl.dismiss({deleted})
   }
 
 }

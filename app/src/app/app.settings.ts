@@ -137,7 +137,7 @@ export class Settings {
   public static notesObject = Object.values(this.notes);
 
   public static notesWithMinors = [
-    { name: 'C', grado: 1, extension: ''},
+    { name: 'C', grado: 1},
     { name: 'C#', grado: 2},
     { name: 'D', grado: 3},
     { name: 'D#', grado: 4},
@@ -151,7 +151,17 @@ export class Settings {
     { name: 'B', grado: 12},
   ]
 
-  public static extension = ['','m','m7','7','maj7','9']
+  public static chunkArray(array: any[], chunkSize: number): any[] {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      chunks.push(array.slice(i, i + chunkSize));
+    }
+    return chunks;
+  }
+  
+  public static matrizNotes = this.chunkArray(Settings.notes, 4);
+  // public static extension = ['','m','m7','7','maj7','9']
+  public static extension = ['m','m7','7','maj7','9']
 
   public static rates = {
     iop: {
