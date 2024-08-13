@@ -65,3 +65,14 @@ const diferencia = calcularDiferencia(notaNueva, notaPrincipal);
 if (diferencia !== null) {
   console.log(`La diferencia entre ${notaPrincipal} y ${notaNueva} es: ${diferencia}`);
 }
+
+
+
+
+
+Tareas:
+- Falta integrar deleteNote() CHECK 
+- Editar labes y eliminarlos <<<< 
+- Inputs de instrumentos integrar y automatizar
+- Boton Guardar cancion
+- Tonos + menores en selects 

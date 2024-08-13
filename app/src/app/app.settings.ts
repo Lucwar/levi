@@ -134,6 +134,22 @@ export class Settings {
     { name: 'B', grado: 12},
   ]
 
+  public static notesWithAdds = [
+    { name: 'C', grado: 1},
+    { name: 'C#', grado: 2},
+    { name: 'D', grado: 3},
+    { name: 'D#', grado: 4},
+    { name: 'E', grado: 5},
+    { name: 'F', grado: 6},
+    { name: 'F#', grado: 7},
+    { name: 'G', grado: 8},
+    { name: 'G#', grado: 9},
+    { name: 'A', grado: 10},
+    { name: 'A#', grado: 11},
+    { name: 'B', grado: 12},
+    { name: '//', grado: -1},
+  ]
+
   public static notesObject = Object.values(this.notes);
 
   public static notesWithMinors = [
@@ -160,8 +176,9 @@ export class Settings {
   }
   
   public static matrizNotes = this.chunkArray(Settings.notes, 4);
+  public static matrizNotesWithAdds = this.chunkArray(Settings.notesWithAdds, 4);
   // public static extension = ['','m','m7','7','maj7','9']
-  public static extension = ['m','m7','7','maj7','9']
+  public static extensions = ['','m','m7','7','maj7','9']
 
   public static rates = {
     iop: {

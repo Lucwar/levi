@@ -6,6 +6,7 @@ import { SwiperOptions } from 'swiper';
 import { Validators } from '@angular/forms';
 import { ModalInstrumentComponent } from '../modal-instrument/modal-instrument.component';
 import { ModalPickNoteComponent } from '../modal-pick-note/modal-pick-note.component';
+import { PopoverNotesComponent } from '../popover-notes/popover-notes.component';
 
 @Component({
   selector: 'app-song',
@@ -162,12 +163,17 @@ export class SongPage extends ItemPage {
 
   segment = {
     label: '',
-    notes: ['+']
+    notes: [['+']]
   }
 
   segments = [];
 
   addOrEditSegment(index = -1) {
+    
+    if(this.segment.label == '') {
+      this.pageService.showError('La parte que se quiere agregar no puede estar vacia')
+      return;
+    }
     console.log("addOrEditSegment > ", this.segment);
     if(index == -1) {
       this.segments[this.segments.length] = this.segment;
@@ -175,14 +181,18 @@ export class SongPage extends ItemPage {
     // else {
     //   this.segment[index] = 
     // }
+
     this.segment = {
       label: '',
-      notes: ['+']
+      notes: [['+']]
     }
   }
 
-  async openModalPickNote(segmentIndex, noteIndex
-  ) {
+  deleteSegment(i) {
+    this.segments.splice(i, 1);
+  }
+
+  async openModalPickNote(segmentIndex, rowIndex, noteIndex) {
     const modal = await this.pageService.modalCtrl.create({
       component: ModalPickNoteComponent,
       componentProps: {},
@@ -193,14 +203,42 @@ export class SongPage extends ItemPage {
 
     modal.onDidDismiss().then((item) => {
       if (item && item.data) {
-        this.segments[segmentIndex].notes[noteIndex] = item.data;
-        if(this.segments[segmentIndex].notes.length -1 == noteIndex){
-          this.segments[segmentIndex].notes.push('+');
+        console.log(">>> ", item.data, segmentIndex, rowIndex, noteIndex);
+        this.segments[segmentIndex].notes[rowIndex][noteIndex] = item.data;
+        if(this.segments[segmentIndex].notes[rowIndex].length -1 == noteIndex) this.segments[segmentIndex].notes[rowIndex].push('+');
+
+        if(this.segments[segmentIndex].notes.length -1 == rowIndex){
+          this.segments[segmentIndex].notes.push(['+']);
         }
+        console.log(">>> ", this.segments)
       }
     });
 
     await modal.present();
+  }
+
+  tapEvent(e, note, segmentIndex, rowIndex, noteIndex){
+    if(note == '+') return;
+    this.openPopover(e, note, segmentIndex, rowIndex, noteIndex);
+  }
+
+  async openPopover(ev, note, segmentIndex, rowIndex, noteIndex){
+    const popover = await this.pageService.popoverController.create({
+      component: PopoverNotesComponent,
+      cssClass: 'popover-notes',
+      event: ev,
+      side: 'top',
+      showBackdrop: false,
+      componentProps: {note}
+    });
+
+    popover.onDidDismiss().then((item) => {
+      if (item && item.data && item.data == 'delete') {
+        this.segments[segmentIndex].notes[rowIndex].splice(noteIndex, 1);
+      }
+    });
+
+    await popover.present();
   }
 
 //   @ViewChild('paragraph') p: ElementRef;

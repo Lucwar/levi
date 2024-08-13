@@ -142,49 +142,38 @@
 
         <ion-card class="ion-padding">
 
+          
+          <div *ngFor="let segment of segments; index as i">
+                        
+            <ion-item fill="outline">
+              <ion-input [(ngModel)]="segment.label" [ngModelOptions]="{standalone: true}" type="text"
+                placeholder="Parte"></ion-input>
+              <ion-button (click)="deleteSegment(i)" class="note ion-text-capitalize" slot="end" style="background-color: #c11515" shape="round">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
+
+            <div class="notes" *ngFor="let rowNote of segment.notes; index as rowi">
+              <div class="notes" *ngFor="let note of rowNote; index as notei">
+                <ion-buttons>
+                  <ion-button (press)="tapEvent($event, note, i, rowi, notei)" (click)="openModalPickNote(i, rowi, notei)" class="note ion-text-capitalize" shape="round">
+                    <ion-icon *ngIf="note == '+'" name="add"></ion-icon>
+                    <div *ngIf="note != '+'" class="note">{{note.name}}<span *ngIf="note.extension" class="minor-note">{{note.extension}}</span></div>
+                  </ion-button>
+                  
+                </ion-buttons>
+              </div>
+            </div>
+          </div>
+          
           <ion-item fill="outline">
             <ion-input (keyup.enter)="addOrEditSegment()" [(ngModel)]="segment.label" [ngModelOptions]="{standalone: true}" type="text"
-              placeholder="Label"></ion-input>
-
+              placeholder="Parte"></ion-input>
             <ion-button type="button" (click)="addOrEditSegment()" slot="end" class="note placeholder-note" shape="round">
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ion-item>
-
-          <div *ngFor="let segment of segments; index as i">
-
-            <h4><b>{{segment.label}}:</b></h4>
-            <div class="notes" *ngFor="let note of segment.notes; index as notei">
-              <ion-buttons>
-                <!-- <ion-button class="note ion-text-capitalize" shape="round">
-                  E<span class="minor-note">m</span>
-                </ion-button> -->
-                <!-- <ion-button (click)="openModalPickNote(i,notei)" class="note placeholder-note" shape="round"> -->
-                <ion-button (click)="openModalPickNote(i,notei)" class="note ion-text-capitalize" shape="round">
-                  <ion-icon *ngIf="note == '+'" name="add"></ion-icon>
-                  <div *ngIf="note != '+'" class="note">{{note.name}}</div>
-                </ion-button>
-
-              </ion-buttons>
-            </div>
-
-            <!-- <div class="notes">
-              <div class="note">D</div>
-              <div class="note">E</div>
-            </div> -->
-
-          </div>
-          <!-- <h4><b>Coro:</b></h4>
-              <div class="notes">
-                <div class="note">C</div>
-                <div class="note">D</div>
-                <div class="note">E</div>
-              </div> -->
-          <!-- <ion-card>
-            <ion-item>
-              Tapped: {{tap}} times
-            </ion-item>
-          </ion-card> -->
+          
         </ion-card>
       </div>
     </div>

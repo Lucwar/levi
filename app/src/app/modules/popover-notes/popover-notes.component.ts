@@ -10,4 +10,15 @@ export class PopoverNotesComponent extends BasePage {
 
   @Input() note: any;
 
+  async pick(extension) {
+    try {
+      this.note['extension'] = extension;
+      await this.pageService.popoverController.dismiss(this.note);
+    } catch (error) {
+      console.error("Error closing popover:", error);
+    }
+  }
+  deleteNote(){
+    this.pageService.popoverController.dismiss('delete');
+  }
 }

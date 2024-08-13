@@ -20,24 +20,29 @@ export class ModalPickNoteComponent extends BasePage {
     this.pageService.modalCtrl.dismiss(value);
   }
 
-  tap = 0;
-  tapEvent(e, index){
+  tapEvent(e, note){
     console.log("tapEvent >> ", e);
-    this.openPopover(e, index)
-    this.tap++;
+    this.openPopover(e, note)
   }
 
-  async openPopover(ev, index){
-    const popover = this.pageService.popoverController.create({
+  async openPopover(ev, note){
+    const popover = await this.pageService.popoverController.create({
       component: PopoverNotesComponent,
       cssClass: 'popover-notes',
       event: ev,
       side: 'top',
       showBackdrop: false,
-      componentProps: {note: index}
+      componentProps: {note}
     });
 
-    (await popover).present();
+    popover.onDidDismiss().then((item) => {
+      if (item && item.data) {
+        console.log(">>> ", item.data); 
+        this.pick(item.data);
+      }
+    });
 
+    await popover.present();
   }
+
 }

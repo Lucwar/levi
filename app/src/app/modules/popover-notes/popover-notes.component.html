@@ -1,7 +1,10 @@
 <div class="notes">
   <ion-buttons>
-    <ion-button class="note ion-text-capitalize" shape="round">
-      {{settings.notes[note-1].name}}<span class="minor-note">m</span>
+    <ion-button (click)="pick(extension)" *ngFor="let extension of settings.extensions" class="note ion-text-capitalize" shape="round">
+      {{note.name}}<span class="minor-note">{{extension}}</span>
+    </ion-button>
+    <ion-button (click)="deleteNote()" class="note ion-text-capitalize" shape="round" style="background-color: #c11515">
+      <ion-icon name="trash"></ion-icon>
     </ion-button>
   </ion-buttons>
 </div>
