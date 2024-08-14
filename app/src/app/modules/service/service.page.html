@@ -46,7 +46,6 @@
             </ion-content>
           </ng-template>
         </ion-modal>
-
       </ion-row>
     </ion-grid>
     <div *ngFor="let group of listGroups">
@@ -58,24 +57,25 @@
             <ion-icon slot="start" name="create-outline"></ion-icon>
           </ion-button>
       </ion-row>
-      <ion-card>
-        <ion-item (click)="goToSong()" lines="none" class="ion-align-items-center">
-          <ion-buttons slot="start">
-            <h1>1</h1>
-          </ion-buttons>
+      <ion-card *ngFor="let song of group.songs">
+        <ion-item (click)="goToSong(song.id)" lines="none" class="ion-align-items-center">
           <ion-label class="ion-text-wrap">
-            <h2>Es tiempo</h2>
-            <ion-label>Hillsong</ion-label>
+            <h2>{{ song.name }}</h2>
+            <ion-label>{{ song.author }}</ion-label>
           </ion-label>
           <ion-buttons slot="end">
-            <div class="note">D</div>
+            <div class="note">{{ settings.notesObject[song.tone-1].name }}</div>
           </ion-buttons>
         </ion-item>
       </ion-card>
     </div>
+    <div *ngIf="listGroups?.length == 0" class="ion-text-center ion-padding">
+      <b class="ion-margin-top">No hay canciones para mostrar</b>
+      <p *ngIf="!isWatching">Intenta agregar un grupo con el botón '+'</p>
+    </div>
 
     <ion-footer class="footer-custom" *ngIf="!isWatching">
-      <ion-toolbar>
+      <ion-toolbar *ngIf="form.value?.listGroups != null">
         <ion-button [disabled]="!form.valid" class="ion-padding-start ion-padding-end" color="secondary" expand="block" fill="solid"
           shape="round" type="submit">
           Guardar
@@ -87,7 +87,7 @@
 </ion-content>
 
 
-<ion-fab *ngIf="!isWatching" class="ion-fab-custom-2" slot="fixed" vertical="bottom" horizontal="end">
+<ion-fab *ngIf="creating || !isWatching" class="ion-fab-custom-2" slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button color="primary" (click)="pageService.navigateRoute('list-group/new/')">
     <ion-icon color="secondary" name="add"></ion-icon>
   </ion-fab-button>

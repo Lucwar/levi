@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { ItemPage } from 'src/app/core/item.page';
-import { ItemsPage } from 'src/app/core/items.page';
 
 @Component({
   selector: 'app-list-group',
@@ -15,6 +14,13 @@ export class ListGroupPage extends ItemPage {
   songsArray = [];
   textSearch: String;
   listStorage: any;
+  actionType;
+
+  async ionViewWillEnter(): Promise<void> {
+    this.activatedRoute.params.subscribe((params) => {
+      this.actionType = params.action;
+    });
+  }
 
   initializePre() {
     this.getSongs()
@@ -35,8 +41,16 @@ export class ListGroupPage extends ItemPage {
     });
   }
 
+  async loadItemPost() {
+    this.songsArray = [...await this.item.songs]; 
+  }
+
+  getPopulates(): any[] {
+    return ['songs']
+  }
+
   savePre(item): { [k: string]: any } {
-    this.form.value.songs = this.songsArray;
+    this.form.value.songs = this.songsArray.map(item => item.id);
 
     return item;
   }
@@ -49,7 +63,7 @@ export class ListGroupPage extends ItemPage {
     }
 
     this.listStorage = this.global.get(this.settings.storage.listGroups) || [];
-    console.log('Localstorage', this.listStorage)
+    item.data.songs = this.songsArray;
     let existingIndex = this.listStorage.findIndex(obj => obj.id == this.form.value.id);
     if (existingIndex != -1) {
       this.listStorage[existingIndex] = item.data;
@@ -61,16 +75,20 @@ export class ListGroupPage extends ItemPage {
     this.pageService.navigateBack()
   }
 
-  getSongs(){
+  async getSongs(){
     const endPoint = this.settings.endPoints.songs;
     let params = {
       filters: this.handleTextSearch()
     }
-    this.pageService.httpGetAll(endPoint, params)
+    await this.pageService.httpGetAll(endPoint, params)
     .then((res) => {
-      this.songs = res;
+      this.songs = res.data;
     })
     .catch(e => this.pageService.showError(e))
+  }
+
+  isSelected(song){
+    return this.songsArray.some(s => s.id == song.id)
   }
 
   handleTextSearch(): { [k: string]: any } {
@@ -79,18 +97,18 @@ export class ListGroupPage extends ItemPage {
       : {};
   }
 
-  addSong(song){
-    if(!this.songsArray.includes(song.id)){
-      this.songsArray.push(song.id);
+  async addSong(song){
+    if(!this.songsArray.includes(song)){
+      this.songsArray.push(song);
     }
-    console.log('Añadida', this.songsArray)
   }
 
   removeSong(song){
+    console.log('Eliminated')
     this.songsArray = this.songsArray.filter(function(item) {
-      return item !== song.id;
+      return item.id !== song.id;
     });
-    console.log('Removidxa', this.songsArray)
+    console.log('Arraysong final: ', this.songsArray)
   }
 
   async deleteListGroup(){
@@ -116,12 +134,14 @@ export class ListGroupPage extends ItemPage {
     this.pageService.httpDelete(endPoint)
     .then(() => {
       this.listStorage = this.global.get(this.settings.storage.listGroups);
-      let index = this.listStorage.findIndex(obj => obj.id == this.form.value.id);
+      if(this.listStorage){
+        let index = this.listStorage.findIndex(obj => obj.id == this.form.value.id);
 
-      if (index !== -1) {
-        this.listStorage.splice(index, 1);
+        if (index !== -1) {
+          this.listStorage.splice(index, 1);
+        }
+        this.listStorage = this.listStorage.filter((obj) => {obj.id == this.form.value.id});
       }
-      this.listStorage = this.listStorage.filter((obj) => {obj.id == this.form.value.id});
       this.pageService.navigateBack();
       this.pageService.showSuccess('Eliminado con éxito');
     })

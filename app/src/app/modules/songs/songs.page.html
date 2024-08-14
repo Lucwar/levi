@@ -8,16 +8,18 @@
 
   <div class="ion-padding-start ion-padding-end ion-margin-top">
     <ion-row>
-      <ion-item lines="none" class="border-10">
-        <ion-icon name="search" slot="start"></ion-icon>
-        <ion-input type="text" placeholder="Buscar"></ion-input>
-        <ion-button slot="end" fill="clear" class="ion-text-capitalize">
-          <ion-icon name="options-outline" slot="start" class="rotate"></ion-icon>
-          Ordenar
+      <ion-col size="9.5">
+        <ion-searchbar [(ngModel)]='textSearch' (ionChange)='getItems()' type="text" placeholder="Buscar"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button (click)="sortSongs()" class="ion-margin-end" fill="solid" color="dark" shape="round">
+          <ion-icon name="swap-vertical-outline"></ion-icon>
         </ion-button>
-      </ion-item>
+      </ion-col>
     </ion-row>
-    <span>Más nuevas - A-Z - Z-A</span>
+    <div class="d-flex ion-align-items-center">
+      <span>{{ this.sortAsc == null ? 'Más nuevas' : this.sortAsc == 1 ? 'A-Z' : 'Z-A'}}</span>
+    </div>
   </div>
 
   <ion-list>

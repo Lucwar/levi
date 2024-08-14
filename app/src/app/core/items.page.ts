@@ -16,19 +16,16 @@ export abstract class ItemsPage extends BasePage {
 
   ionViewWillEnter() {
     this.initialize();
-    console.log('Error reload: 1')
   }
 
   initialize() {
     this.initializePre();
     this.checkLoadingsAndGetItems();
-    console.log('Error reload: 2')
   }
 
   initializePre() {
     if (this.infiniteScroll) this.page = 1;
     this.items = [];
-    console.log('Error reload: 3')
   }
 
   getParams(): Partial<EndPointParams> {
