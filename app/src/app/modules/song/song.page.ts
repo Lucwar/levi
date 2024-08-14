@@ -70,7 +70,14 @@ export class SongPage extends ItemPage {
   }
 
   loadItemPost() {
-    this.segmentValue = this.creating ? this.segmentGeneral : this.segmentSong; 
+    this.segmentValue = this.creating ? this.segmentGeneral : this.segmentSong;
+    this.segments = this.item.annotations[0].annotation;
+    this.selectAnnotation(0);
+    console.log(">>> ", this.item)
+  }
+
+  compareWithFn = (o1: any, o2: any) => {
+    return o1 && o2 ? o1.name === o2.name && o1.grado === o2.grado && o1.extension === o2.extension : o1 === o2;
   }
 
   savePre(item): { [k: string]: any } {
@@ -116,18 +123,6 @@ export class SongPage extends ItemPage {
   save(){
     this.textRecipe = `<div style="width: 683px">${this.textRecipe ? this.textRecipe : ''}</div>`;
   }
- 
-  press(e){
-    console.log('HOLD', e)
-  }
-
-  pickNote(segmentIndex?, noteIndex?, value?){
-    // this.segments[segmentIndex].notes[noteIndex]; 
-  }
-
-  touchend(){
-    console.log('TOUCHEND')
-  }
 
   async openModalInstrument(index=-1){
     const modal = await this.pageService.modalCtrl.create({
@@ -148,7 +143,7 @@ export class SongPage extends ItemPage {
       }else{
         this.form.value.annotations.push({
           name: dismiss.data.name,
-          segments: [],
+          annotation: [],
           selected: true
         })
         this.selectAnnotation(this.form.value.annotations.length-1);
@@ -159,6 +154,7 @@ export class SongPage extends ItemPage {
   selectAnnotation(index) {
     this.form.value.annotations.forEach(a => a.selected = false);
     this.form.value.annotations[index].selected = true;
+    this.segments = this.form.value.annotations[index].annotation || [];
   }
 
   segment = {
@@ -174,7 +170,6 @@ export class SongPage extends ItemPage {
       this.pageService.showError('La parte que se quiere agregar no puede estar vacia')
       return;
     }
-    console.log("addOrEditSegment > ", this.segment);
     if(index == -1) {
       this.segments[this.segments.length] = this.segment;
     } 
@@ -203,14 +198,12 @@ export class SongPage extends ItemPage {
 
     modal.onDidDismiss().then((item) => {
       if (item && item.data) {
-        console.log(">>> ", item.data, segmentIndex, rowIndex, noteIndex);
         this.segments[segmentIndex].notes[rowIndex][noteIndex] = item.data;
         if(this.segments[segmentIndex].notes[rowIndex].length -1 == noteIndex) this.segments[segmentIndex].notes[rowIndex].push('+');
 
         if(this.segments[segmentIndex].notes.length -1 == rowIndex){
           this.segments[segmentIndex].notes.push(['+']);
         }
-        console.log(">>> ", this.segments)
       }
     });
 
@@ -240,39 +233,4 @@ export class SongPage extends ItemPage {
 
     await popover.present();
   }
-
-//   @ViewChild('paragraph') p: ElementRef;
-
-// ionViewWillEnter() {
-//   const gesture = this.pageService.gestureCtrl.create({
-//     el: this.rectangle.nativeElement,
-//    [Hammer.press]: (detail) => { this.onMove(detail); }
-//   })
-
-//   gesture.enable();
-// }
-
-// private onHold(detail) {
-//   console.log('HOLDDDDD')
-// }
-
-    // el: HTMLElement;
-    // pressGesture: Gesture;
-
-    // ionViewWillEnter() {
-    //   this.pressGesture = this.pageService.gestureCtrl.create( () = this.el, {
-    //     recognizers: [
-    //       [Hammer.Press, {time: 6000}] // Should be pressed for 6 seconds
-    //     ]
-    //   });
-    //   this.pressGesture.listen();
-    //   this.pressGesture.on('press', e => {
-    //     // Here you could also emit a value and subscribe to it
-    //     // in the component that hosts the element with the directive
-    //     console.log('pressed!!');
-    //   });
-    // }
-    // ngOnDestroy() {
-    //   this.pressGesture.destroy();
-    // }
 }

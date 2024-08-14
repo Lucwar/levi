@@ -24,7 +24,6 @@ export class Settings {
     songs: '/songs',
     lists: '/lists',
     listGroups: '/listGroups',
-    annotations: '/annotations',
   };
 
   public static endPointsMethods = {
@@ -153,18 +152,30 @@ export class Settings {
   public static notesObject = Object.values(this.notes);
 
   public static notesWithMinors = [
-    { name: 'C', grado: 1},
-    { name: 'C#', grado: 2},
-    { name: 'D', grado: 3},
-    { name: 'D#', grado: 4},
-    { name: 'E', grado: 5},
-    { name: 'F', grado: 6},
-    { name: 'F#', grado: 7},
-    { name: 'G', grado: 8},
-    { name: 'G#', grado: 9},
-    { name: 'A', grado: 10},
-    { name: 'A#', grado: 11},
-    { name: 'B', grado: 12},
+    { name: 'C', grado: 1, extension: ''},
+    { name: 'C', grado: 1, extension: 'm'},
+    { name: 'C#', grado: 2, extension: ''},
+    { name: 'C#', grado: 2, extension: 'm'},
+    { name: 'D', grado: 3, extension: ''},
+    { name: 'D', grado: 3, extension: 'm'},
+    { name: 'D#', grado: 4, extension: ''},
+    { name: 'D#', grado: 4, extension: 'm'},
+    { name: 'E', grado: 5, extension: ''},
+    { name: 'E', grado: 5, extension: 'm'},
+    { name: 'F', grado: 6, extension: ''},
+    { name: 'F', grado: 6, extension: 'm'},
+    { name: 'F#', grado: 7, extension: ''},
+    { name: 'F#', grado: 7, extension: 'm'},
+    { name: 'G', grado: 8, extension: ''},
+    { name: 'G', grado: 8, extension: 'm'},
+    { name: 'G#', grado: 9, extension: ''},
+    { name: 'G#', grado: 9, extension: 'm'},
+    { name: 'A', grado: 10, extension: ''},
+    { name: 'A', grado: 10, extension: 'm'},
+    { name: 'A#', grado: 11, extension: ''},
+    { name: 'A#', grado: 11, extension: 'm'},
+    { name: 'B', grado: 12, extension: ''},
+    { name: 'B', grado: 12, extension: 'm'},
   ]
 
   public static chunkArray(array: any[], chunkSize: number): any[] {
@@ -179,47 +190,5 @@ export class Settings {
   public static matrizNotesWithAdds = this.chunkArray(Settings.notesWithAdds, 4);
   // public static extension = ['','m','m7','7','maj7','9']
   public static extensions = ['','m','m7','7','maj7','9']
-
-  public static rates = {
-    iop: {
-      code: 'iop',
-      label: 'IOP',
-    },
-    iopFactors: {
-      code: 'iopFactors',
-      label: 'IOP',
-    },
-    icc: {
-      code: 'icc',
-      label: 'ICC',
-      sources: ['cac', 'dgec', 'indec']
-    },
-    isac: {
-      code: 'isac',
-      label: 'ISAC',
-    },
-    construya: {
-      code: 'construya',
-      label: 'ÍNDICE CONSTRUYA',
-    },
-    registeredEmployment: {
-      code: 'registeredEmployment',
-      label: 'EMPLEO REGISTRADO',
-    },
-    bnaRates: {
-      code: 'bnaRates',
-      label: 'TASA BANCO NACIÓN',
-    },
-    materials: {
-      code: 'materials',
-      label: 'MATERIALES',
-      sources: ['cac', 'dgec', 'indec']
-    },
-    labor: {
-      code: 'icc',
-      label: 'MANO DE OBRA',
-      sources: ['cac', 'dgec', 'indec']
-    },
-  };
 
 }

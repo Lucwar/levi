@@ -17,6 +17,7 @@ export class ModalPickNoteComponent extends BasePage {
   }
   
   pick(value) {
+    console.log("modal pick >> ", value)
     this.pageService.modalCtrl.dismiss(value);
   }
 
@@ -37,7 +38,7 @@ export class ModalPickNoteComponent extends BasePage {
 
     popover.onDidDismiss().then((item) => {
       if (item && item.data) {
-        console.log(">>> ", item.data); 
+        console.log("modal >>> ", item.data); 
         this.pick(item.data);
       }
     });

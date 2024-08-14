@@ -71,8 +71,9 @@ if (diferencia !== null) {
 
 
 Tareas:
-- Falta integrar deleteNote() CHECK 
-- Editar labes y eliminarlos <<<< 
-- Inputs de instrumentos integrar y automatizar
-- Boton Guardar cancion
-- Tonos + menores en selects 
+- Falta integrar deleteNote() CHECK
+- Editar labes y eliminarlos CHECK 
+- Errores de notas con extensiones CHECK
+- Inputs de instrumentos integrar y automatizar CHECK
+- Boton Guardar cancion CHECK
+- Tonos + menores en selects <<<<

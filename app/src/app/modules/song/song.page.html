@@ -44,9 +44,9 @@
 
             <ion-item class="ion-align-items-center w100 ion-margin-top" lines="none">
               <ion-label position="floating">Tono</ion-label>
-              <ion-select formControlName="tone" interface="popover" value="tone" placeholder="Seleccione el tono">
-                <ion-select-option *ngFor="let note of settings.notes"
-                  [value]="note.grado">{{note.name}}</ion-select-option>
+              <ion-select formControlName="tone" interface="popover" value="tone" placeholder="Seleccione el tono" [compareWith]="compareWithFn">
+                <ion-select-option *ngFor="let note of settings.notesWithMinors"
+                  [value]="note">{{note.name}}<span *ngIf="note.extension" class="minor-note">{{note.extension}}</span></ion-select-option>
               </ion-select>
             </ion-item>
             <div *ngIf="!isFieldValid('tone')" class="invalid-input-message">
@@ -73,9 +73,9 @@
                 <ion-item class="ion-align-items-center w100" lines="none">
                   <ion-label position="floating">Tono</ion-label>
                   <ion-select [(ngModel)]="form.value?.singers[i].note" [ngModelOptions]="{standalone: true}"
-                    interface="popover" value="tone" placeholder="Seleccione el tono">
-                    <ion-select-option *ngFor="let note of settings.notes"
-                      [value]="note.grado">{{note.name}}</ion-select-option>
+                    interface="popover" value="tone" placeholder="Seleccione el tono" [compareWith]="compareWithFn">
+                    <ion-select-option *ngFor="let note of settings.notesWithMinors"
+                      [value]="note">{{note.name}}<span *ngIf="note.extension" class="minor-note">{{note.extension}}</span></ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-col>
@@ -124,20 +124,22 @@
 
         <swiper [config]="swiperConfig" class="ion-padding-start ion-padding-end ion-align-items-center d-flex">
           <ng-template swiperSlide *ngFor="let annotation of form.value?.annotations; index as i">
-            
-            <ion-input type="text" placeholder="Instrumento/General"></ion-input>
-            
-            <ion-chip (click)="selectAnnotation(i)" (press)="openModalInstrument(i)"
+              <ion-chip (click)="selectAnnotation(i)" (press)="openModalInstrument(i)"
             [class]="annotation.selected ? 'active':''">{{annotation.name}}</ion-chip>
+            
+            <ion-button type="button" (click)="openModalInstrument()" slot="end" class="note placeholder-note" shape="round">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+
           </ng-template>
           
-          <ng-template swiperSlide>
+          <!-- <ng-template swiperSlide>
             <ion-button (click)="openModalInstrument()" class="height-custom" fill="solid" color="primary"
             shape="round">
               <ion-input type="text" placeholder="Instrumento/General"></ion-input>
               <ion-icon color="light" slot="icon-only" name="add-circle"></ion-icon>
             </ion-button>
-          </ng-template>
+          </ng-template> -->
         </swiper>
 
         <ion-card class="ion-padding">
@@ -179,9 +181,9 @@
     </div>
 
     <!-- <ion-footer *ngIf="!isWatching" class="footer-custom"> -->
-    <!-- <ion-footer  class="footer-custom">
+    <ion-footer  class="footer-custom">
       <ion-toolbar>
-        <div *ngIf="segmentValue == segmentNotes && segmentValue != segmentGeneral">
+        <!-- <div *ngIf="segmentValue == segmentNotes && segmentValue != segmentGeneral">
 
           <div class="notes " *ngFor="let row of settings.matrizNotes">
             <ion-buttons class="w100 ion-justify-content-center" *ngFor="let item of row">
@@ -190,7 +192,7 @@
               </ion-button>
             </ion-buttons>
           </div>
-        </div>
+        </div> -->
 
         <ion-button type="submit" class="ion-padding-start ion-padding-end" color="secondary" expand="block"
           fill="solid" shape="round">
@@ -199,7 +201,7 @@
         </ion-button>
 
       </ion-toolbar>
-    </ion-footer> -->
+    </ion-footer>
 
   </form>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { BasePage } from 'src/app/core/base.page';
 
 @Component({
@@ -13,9 +13,9 @@ export class PopoverNotesComponent extends BasePage {
   async pick(extension) {
     try {
       this.note['extension'] = extension;
-      await this.pageService.popoverController.dismiss(this.note);
+      await this.pageService.modalCtrl.dismiss(this.note);
     } catch (error) {
-      console.error("Error closing popover:", error);
+      await this.pageService.popoverController.dismiss(this.note);
     }
   }
   deleteNote(){

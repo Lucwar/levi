@@ -9,15 +9,16 @@ module.exports = (module) => {
 	module.schema = new global.database.mongodb.mongoose.Schema({
 		id: { type: String },
 		name: { type: String },
-		tone: { type: Number },
+		tone: {},
 		author: { type: String },
 		tag: { type: String },
 		lyrics: { type: String },
-		annotations: { type: global.database.mongodb.mongoose.Schema.Types.ObjectId, ref: 'annotations' },
+		// annotations: { type: global.database.mongodb.mongoose.Schema.Types.ObjectId, ref: 'annotations' },
+		annotations: {},
 		singers: [
 			{
 				singer: String,
-				note: Number
+				note: {}
 			}
 		],
 		links: [
