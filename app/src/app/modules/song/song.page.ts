@@ -41,6 +41,9 @@ export class SongPage extends ItemPage {
     ],
   };
 
+  transposeTone;
+  notesWithMinorIfDeclared = this.settings.notes;
+
   getFormNew() {
     return this.formBuilder.group({
       name: [null, Validators.required],
@@ -59,7 +62,6 @@ export class SongPage extends ItemPage {
       id: [item.id],
       name: [item.name, Validators.required],
       author: [item.author],
-      // FALTAN MENORES!!!!!!!!!!!!!!!!!!!!!!!
       tone: [item.tone, Validators.required],
       tag: [item.tag, Validators.required],
       lyrics: [item.lyrics],
@@ -73,7 +75,14 @@ export class SongPage extends ItemPage {
     this.segmentValue = this.creating ? this.segmentGeneral : this.segmentSong;
     this.segments = this.item.annotations[0].annotation;
     this.selectAnnotation(0);
-    console.log(">>> ", this.item)
+    this.transposeTone = this.form.value.tone;
+    this.notesWithMinorIfDeclared = this.notesWithMinorIfDeclared.map(n => { return {
+      ...n,
+      extension: this.transposeTone?.extension
+      }
+    });
+    this.segmentsOriginal = this.segments;
+    console.log("item >>> ", this.item)
   }
 
   compareWithFn = (o1: any, o2: any) => {
@@ -155,6 +164,7 @@ export class SongPage extends ItemPage {
     this.form.value.annotations.forEach(a => a.selected = false);
     this.form.value.annotations[index].selected = true;
     this.segments = this.form.value.annotations[index].annotation || [];
+    this.segmentsOriginal = this.segments;
   }
 
   segment = {
@@ -163,6 +173,7 @@ export class SongPage extends ItemPage {
   }
 
   segments = [];
+  segmentsOriginal = [];
 
   addOrEditSegment(index = -1) {
     
@@ -232,5 +243,45 @@ export class SongPage extends ItemPage {
     });
 
     await popover.present();
+  }
+  
+  // 2. Crear una función que transporte una sola nota.
+  transposeNote(note: any, difference) {
+
+    if (note.grado === -1) return note; // Nota especial, no se transpone (ej: "//")
+
+    // Encuentra el nuevo grado transpuesto
+    let newGrado = note.grado + difference;
+
+    // Asegurarse de que el nuevo grado esté dentro del rango (1-12)
+    if (newGrado > 12) newGrado -= 12;
+    if (newGrado < 1) newGrado += 12;
+
+    // Encontrar la nueva nota en base al nuevo grado
+    const transposedNote = this.settings.notes.find(n => n.grado === newGrado);
+    console.log(">> ", transposedNote);
+    // Retornar la nota transpuesta, manteniendo la extensión si la tiene
+    return {
+      ...transposedNote,
+      extension: note.extension || ''
+    };
+  }
+
+  transposeAnnotations() {
+    // 1. Calcular la diferencia entre los grados de las tonalidades.
+    const difference = this.transposeTone.grado - this.form.value.tone.grado;
+
+    // 3. Transponer todas las anotaciones
+    this.segments = this.segmentsOriginal.map(section => {
+      return {
+        label: section.label,
+        notes: section.notes.map(line => {
+          return line.map(note => {
+            if (typeof note === 'string') return note; // Manejar elementos que no son notas (ej: "+")
+            return this.transposeNote(note, difference);
+          });
+        })
+      };
+    });
   }
 }

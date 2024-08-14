@@ -69,6 +69,9 @@ if (diferencia !== null) {
 
 
 
+Front: 
+- Boton trash
+- (+) para agregar anotaciones
 
 Tareas:
 - Falta integrar deleteNote() CHECK
@@ -76,4 +79,11 @@ Tareas:
 - Errores de notas con extensiones CHECK
 - Inputs de instrumentos integrar y automatizar CHECK
 - Boton Guardar cancion CHECK
-- Tonos + menores en selects <<<<
+- Tonos + menores en selects CHECK
+- Cambiar de tonalidades CHECK
+- Agregar botones para editar/visualizar <<<<
+- Adevertencia al querer agregar algo vacio en anotaciones
+
+
+
+

@@ -142,9 +142,15 @@
           </ng-template> -->
         </swiper>
 
+        <div>
+          <ion-select (ionChange)="transposeAnnotations()" [(ngModel)]="transposeTone" [ngModelOptions]="{standalone: true}" interface="popover" value="tone" placeholder="Seleccione el tono" [compareWith]="compareWithFn">
+            <ion-select-option *ngFor="let note of notesWithMinorIfDeclared" 
+              [value]="note">{{note.name}}<span *ngIf="note.extension" class="minor-note">{{note.extension}}</span></ion-select-option>
+          </ion-select>
+        </div>
+
         <ion-card class="ion-padding">
 
-          
           <div *ngFor="let segment of segments; index as i">
                         
             <ion-item fill="outline">

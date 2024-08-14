@@ -119,18 +119,18 @@ export class Settings {
   ]
 
   public static notes = [
-    { name: 'C', grado: 1},
-    { name: 'C#', grado: 2},
-    { name: 'D', grado: 3},
-    { name: 'D#', grado: 4},
-    { name: 'E', grado: 5},
-    { name: 'F', grado: 6},
-    { name: 'F#', grado: 7},
-    { name: 'G', grado: 8},
-    { name: 'G#', grado: 9},
-    { name: 'A', grado: 10},
-    { name: 'A#', grado: 11},
-    { name: 'B', grado: 12},
+    { name: 'C', grado: 1, extension: ''},
+    { name: 'C#', grado: 2, extension: ''},
+    { name: 'D', grado: 3, extension: ''},
+    { name: 'D#', grado: 4, extension: ''},
+    { name: 'E', grado: 5, extension: ''},
+    { name: 'F', grado: 6, extension: ''},
+    { name: 'F#', grado: 7, extension: ''},
+    { name: 'G', grado: 8, extension: ''},
+    { name: 'G#', grado: 9, extension: ''},
+    { name: 'A', grado: 10, extension: ''},
+    { name: 'A#', grado: 11, extension: ''},
+    { name: 'B', grado: 12, extension: ''}
   ]
 
   public static notesWithAdds = [
