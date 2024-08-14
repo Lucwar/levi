@@ -82,6 +82,7 @@ Tareas:
 - Tonos + menores en selects CHECK
 - Cambiar de tonalidades CHECK
 - Agregar botones para editar/visualizar <<<<
+- El translator solo tiene q aparecer en 'watch' y ponerle un label, Transportar desde el tono original B
 - Adevertencia al querer agregar algo vacio en anotaciones
 
 
