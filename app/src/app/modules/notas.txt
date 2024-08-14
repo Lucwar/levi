@@ -72,6 +72,7 @@ if (diferencia !== null) {
 Front: 
 - Boton trash
 - (+) para agregar anotaciones
+- Agregar botones para editar/visualizar en el listado de las songs
 
 Tareas:
 - Falta integrar deleteNote() CHECK
@@ -81,7 +82,6 @@ Tareas:
 - Boton Guardar cancion CHECK
 - Tonos + menores en selects CHECK
 - Cambiar de tonalidades CHECK
-- Agregar botones para editar/visualizar <<<<
 - El translator solo tiene q aparecer en 'watch' y ponerle un label, Transportar desde el tono original B
 - Adevertencia al querer agregar algo vacio en anotaciones
 
