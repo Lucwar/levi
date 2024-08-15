@@ -22,10 +22,10 @@ export class ServicePage extends ItemPage {
       this.actionType = params.action;
     });
   
-    let listGroupsStorage = this.global.get(this.settings.storage.listGroups) || [];
+    let listStorage = this.global.get(this.settings.storage.listGroups) || [];
     
-    if(this.actionType == 'edit' && listGroupsStorage.length ){
-      this.listGroups = listGroupsStorage;
+    if(this.actionType == 'edit' && listStorage.length ){
+      this.listGroups = listStorage;
     }
   }
 
@@ -34,13 +34,14 @@ export class ServicePage extends ItemPage {
     this.pageService.navigateRoute('list-group/new/')
   }
   
-  loadItemPost() {
-    if(this.actionType == 'edit' && !this.listGroups.length) this.listGroups = this.form.value.listGroups;
-  }
-
   goToEditListGroup(group){
     this.global.save(this.settings.storage.listGroups, this.listGroups);
     this.pageService.navigateRoute('list-group/edit/' + group.id)
+  }
+
+  loadItemPost() {
+    if(this.actionType == 'edit' && !this.listGroups.length) this.listGroups = this.form.value.listGroups;
+    else this.listGroups = this.form.value.listGroups;
   }
 
   getFormNew() {
