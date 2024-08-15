@@ -57,7 +57,7 @@ export class ListGroupPage extends ItemPage {
   
   savePost(item): void {
     if(this.creating){
-      this.pageService.showSuccess('Creado con éxito');
+      this.pageService.showSuccess('Agregado con éxito');
     }else{
       this.pageService.showSuccess('Guardado con éxito');
     }
@@ -72,7 +72,7 @@ export class ListGroupPage extends ItemPage {
     }
     this.global.save(this.settings.storage.listGroups, this.listStorage);
     
-    this.pageService.navigateBack()
+    this.pageService.navigateBack();
   }
 
   async getSongs(){

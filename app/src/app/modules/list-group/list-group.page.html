@@ -17,7 +17,7 @@
     <ion-grid class="ion-padding" *ngIf="!isWatching">
       <ion-row>
         <ion-item class="ion-align-items-center w100 fix-floating" lines="none">
-          <ion-label color="tertiary" position="floating">Nombre</ion-label>
+          <ion-label color="tertiary" position="floating">Parte del servicio</ion-label>
           <ion-input type="text" formControlName="name"></ion-input>
         </ion-item>
         <div *ngIf="!isFieldValid('name')" class="invalid-input-message">
@@ -43,7 +43,7 @@
           <ion-label>{{ song.author }}</ion-label>
         </ion-label>
         <ion-buttons slot="end">
-          <div class="note">{{ settings.notesObject[song.tone-1].name }}</div>
+          <div class="note">{{ song.tone.name + song.tone.extension}}</div>
         </ion-buttons>
       </ion-item>
     </ion-card>

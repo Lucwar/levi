@@ -73,6 +73,7 @@ Front:
 - Boton trash
 - (+) para agregar anotaciones
 - Agregar botones para editar/visualizar en el listado de las songs
+- El translator solo tiene q aparecer en 'watch' y ponerle un label/titulo 'Transportar desde el tono original B'
 
 Tareas:
 - Falta integrar deleteNote() CHECK
@@ -82,9 +83,19 @@ Tareas:
 - Boton Guardar cancion CHECK
 - Tonos + menores en selects CHECK
 - Cambiar de tonalidades CHECK
-- El translator solo tiene q aparecer en 'watch' y ponerle un label, Transportar desde el tono original B
-- Adevertencia al querer agregar algo vacio en anotaciones
+- Adevertencia al querer agregar algo vacio en anotaciones CHECK
+
+- list-group manejar el local storage
+
+problema es el loadpost, tengo q cuando se carga ponerla en listGroups lo del form.value.listGroups,
+pero tambien cuando vengo del ls ponerlo ahi, por ende, tendria q hacer todo en loadpost????
 
 
 
+Vamos a resolver, listGroups (es un array con todos los datos populados... tambien el storage..,  cuando terminemos todos borramos )
+
+- en list-group se crea el dato, y lo guardamos en el storage, un array con un elemento
+- volvemos atras y vamos a mostrar lo q ya trae el form mas si hay algo en el storage
+- podemos entrar y crear muchas list-groups
+- y recien al ultimo cuando guardamos se pasa de un array populado a un array de ids y se borra el storage.
 

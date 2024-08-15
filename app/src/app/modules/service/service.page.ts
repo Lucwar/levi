@@ -11,34 +11,36 @@ import { ItemPage } from 'src/app/core/item.page';
 export class ServicePage extends ItemPage {
 
   endPoint: string = this.settings.endPoints.lists;
-  // dateTo;
 
   songsArray = [];
   textSearch: String;
   listGroups: any = [];
-  listGroupsStorage: any = [];
   actionType;
-
-  async ionViewWillEnter(): Promise<void> {
+  
+  ionViewWillEnter() {
     this.activatedRoute.params.subscribe((params) => {
       this.actionType = params.action;
     });
-
-    this.listGroupsStorage = await this.global.get(this.settings.storage.listGroups);
-    if(this.creating){
-      this.form.value.listGroups = await this.listGroupsStorage;
-      // console.log('Creo/edito y tomo del localstorage', this.form.value)
+  
+    let listGroupsStorage = this.global.get(this.settings.storage.listGroups) || [];
+    
+    if(this.actionType == 'edit' && listGroupsStorage.length ){
+      this.listGroups = listGroupsStorage;
     }
   }
 
-  async ionViewWillLeave(): Promise<void> {
-    // this.global.remove(this.settings.storage.listGroups);
+  goToAdd(): void {
+    this.global.save(this.settings.storage.listGroups, this.listGroups);
+    this.pageService.navigateRoute('list-group/new/')
   }
-
+  
   loadItemPost() {
-    if(this.actionType == 'edit' || this.actionType == 'watch'){
-      this.listGroups = this.form.value.listGroups;
-    }
+    if(this.actionType == 'edit' && !this.listGroups.length) this.listGroups = this.form.value.listGroups;
+  }
+
+  goToEditListGroup(group){
+    this.global.save(this.settings.storage.listGroups, this.listGroups);
+    this.pageService.navigateRoute('list-group/edit/' + group.id)
   }
 
   getFormNew() {
@@ -55,7 +57,7 @@ export class ServicePage extends ItemPage {
       id: [item.id],
       name: [item.name, Validators.required],
       dateTo: [item.dateTo, Validators.required],
-      listGroups: [item.listGroups, Validators.required],
+      listGroups: [item.listGroups],
     });
   }
 

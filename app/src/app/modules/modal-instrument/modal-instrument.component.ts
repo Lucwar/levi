@@ -16,6 +16,7 @@ export class ModalInstrumentComponent extends BasePage {
   }
 
   async acceptLabel(){
+    if(this.annotationName.trim() == '') return this.pageService.showError('No puedes guardar algo vacio');
     this.pageService.modalCtrl.dismiss({name: this.annotationName});
   }
 

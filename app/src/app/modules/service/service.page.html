@@ -50,8 +50,8 @@
     </ion-grid>
     <div *ngFor="let group of listGroups">
       <ion-row class="d-flex ion-align-items-center">
-        <h1 class="ion-padding-start">{{ group?.name }}</h1>
-          <ion-button *ngIf="!isWatching" class="btn-custom" (click)="pageService.navigateRoute('list-group/edit/' + group.id)" expand="block" fill="clear"
+        <h1 class="ion-padding-start">{{ group.name }}</h1>
+          <ion-button *ngIf="!isWatching" class="btn-custom" (click)="goToEditListGroup(group)" expand="block" fill="clear"
             shape="round">
             Editar
             <ion-icon slot="start" name="create-outline"></ion-icon>
@@ -64,7 +64,7 @@
             <ion-label>{{ song.author }}</ion-label>
           </ion-label>
           <ion-buttons slot="end">
-            <div class="note">{{ settings.notesObject[song.tone-1].name }}</div>
+            <div class="note">{{ song.tone.name + song.tone.extension}}</div>
           </ion-buttons>
         </ion-item>
       </ion-card>
@@ -75,7 +75,7 @@
     </div>
 
     <ion-footer class="footer-custom" *ngIf="!isWatching">
-      <ion-toolbar *ngIf="form.value?.listGroups != null">
+      <ion-toolbar>
         <ion-button [disabled]="!form.valid" class="ion-padding-start ion-padding-end" color="secondary" expand="block" fill="solid"
           shape="round" type="submit">
           Guardar
@@ -88,7 +88,7 @@
 
 
 <ion-fab *ngIf="creating || !isWatching" class="ion-fab-custom-2" slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button color="primary" (click)="pageService.navigateRoute('list-group/new/')">
+  <ion-fab-button color="primary" (click)="goToAdd()">
     <ion-icon color="secondary" name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

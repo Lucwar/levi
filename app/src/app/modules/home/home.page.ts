@@ -12,6 +12,10 @@ export class HomePage extends ItemsPage {
 
   endPoint: string = this.settings.endPoints.lists;
 
+  initializePre(): void {
+    this.global.remove(this.settings.storage.listGroups);
+  }
+  
   goToDetail() {
     this.pageService.navigateRoute('service');
   }
