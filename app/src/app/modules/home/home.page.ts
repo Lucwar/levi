@@ -11,6 +11,7 @@ import { SwiperOptions } from 'swiper';
 export class HomePage extends ItemsPage {
 
   endPoint: string = this.settings.endPoints.lists;
+  sortAsc: any = 0;
 
   initializePre(): void {
     this.global.remove(this.settings.storage.listGroups);
@@ -23,9 +24,24 @@ export class HomePage extends ItemsPage {
   getParams(): Partial<EndPointParams> {
     const filters = { ...this.handleTextSearch() };
     const populates = ['user'];
-    const sort = { dateTo: -1 };
+    let sort: { [key: string]: number } = { dateTo: 1 };
+    
+    if (this.sortAsc != 0 && this.sortAsc != 2) {
+      sort = { name: this.sortAsc };
+    } else {
+      sort = { dateTo: this.sortAsc == 0 ? 1 : -1};
+    }
 
     return { filters, populates, sort };
+  }
+
+  sortSongs(){
+    this.sortAsc++;
+    if (this.sortAsc > 2) {
+      this.sortAsc = -1;
+    }
+
+    this.getItems();
   }
 
 }

@@ -82,7 +82,6 @@ export class SongPage extends ItemPage {
       }
     });
     this.segmentsOriginal = this.segments;
-    console.log("item >>> ", this.item)
   }
 
   compareWithFn = (o1: any, o2: any) => {
@@ -259,7 +258,6 @@ export class SongPage extends ItemPage {
 
     // Encontrar la nueva nota en base al nuevo grado
     const transposedNote = this.settings.notes.find(n => n.grado === newGrado);
-    console.log(">> ", transposedNote);
     // Retornar la nota transpuesta, manteniendo la extensión si la tiene
     return {
       ...transposedNote,

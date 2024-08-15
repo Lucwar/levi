@@ -270,7 +270,6 @@ export class PageService {
     modal.present();
 
     const dismiss = await modal.onDidDismiss();
-    console.log("createAlertModal>",dismiss)
 
     return Promise.resolve(dismiss.data);
   }

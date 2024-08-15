@@ -84,18 +84,11 @@ Tareas:
 - Tonos + menores en selects CHECK
 - Cambiar de tonalidades CHECK
 - Adevertencia al querer agregar algo vacio en anotaciones CHECK
+- list group CHECK
+- sort en songs buscador fixear CHECK
+- sort en songs, agregar el mas reciente. CHECK
+- sort en mis listas, agregar el mas reciente, etc CHECK
+- integrar las funcionalidades de los tags, y mostrarlos.. y agregar filtros por todos lados <<<<<
 
-- list-group manejar el local storage
 
-problema es el loadpost, tengo q cuando se carga ponerla en listGroups lo del form.value.listGroups,
-pero tambien cuando vengo del ls ponerlo ahi, por ende, tendria q hacer todo en loadpost????
-
-
-
-Vamos a resolver, listGroups (es un array con todos los datos populados... tambien el storage..,  cuando terminemos todos borramos )
-
-- en list-group se crea el dato, y lo guardamos en el storage, un array con un elemento
-- volvemos atras y vamos a mostrar lo q ya trae el form mas si hay algo en el storage
-- podemos entrar y crear muchas list-groups
-- y recien al ultimo cuando guardamos se pasa de un array populado a un array de ids y se borra el storage.
 

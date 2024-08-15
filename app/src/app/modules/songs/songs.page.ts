@@ -8,7 +8,7 @@ import { ItemsPage } from 'src/app/core/items.page';
 })
 export class SongsPage extends ItemsPage{
   endPoint: string = this.settings.endPoints.songs;
-  sortAsc: any = null;
+  sortAsc: any = 0;
 
   goToSong(id){
     this.pageService.navigateRoute('song/watch/'+id);
@@ -22,9 +22,11 @@ export class SongsPage extends ItemsPage{
     const filters = { ...this.handleTextSearch() };
     const populates = [];
     let sort: { [key: string]: number } = { createdAt: -1};
-
-    if (this.sortAsc != null) {
-      sort = { name: this.sortAsc ? 1 : -1 };
+    
+    if (this.sortAsc != 0 && this.sortAsc != 2) {
+      sort = { name: this.sortAsc };
+    } else {
+      sort = { createdAt: this.sortAsc == 0 ? -1 : 1};
     }
 
     return { filters, populates, sort };
@@ -37,9 +39,12 @@ export class SongsPage extends ItemsPage{
   }
 
   sortSongs(){
-    this.sortAsc = !this.sortAsc;
+    this.sortAsc++;
+    if (this.sortAsc > 2) {
+      this.sortAsc = -1;
+    }
 
-    this.getItems()
+    this.getItems();
   }
 
 }
