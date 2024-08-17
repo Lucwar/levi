@@ -67,7 +67,7 @@ ion-popover {
 
 ion-content {
     font-family: 'Poppins' !important;
-    --background: #ECECEC !important;
+    --background: var(--ion-color-secondary) !important;
 }
 
 ion-searchbar {
@@ -80,34 +80,34 @@ ion-searchbar {
         font-family: 'Poppins' !important;
     }
     .searchbar-search-icon.sc-ion-searchbar-md.md.hydrated {
-        color: var(--ion-color-tertiary) !important;
+        color: var(--ion-color-primary) !important;
     }
 
     .searchbar-search-icon.sc-ion-searchbar-ios.ios.hydrated {
-        color: var(--ion-color-tertiary) !important;
+        color: var(--ion-color-primary) !important;
     }
 
     .searchbar-clear-icon.sc-ion-searchbar-md.md.hydrated {
-        color: var(--ion-color-tertiary) !important;
+        color: var(--ion-color-primary) !important;
     }
 
     .searchbar-clear-icon.sc-ion-searchbar-ios.ios.hydrated {
-        color: var(--ion-color-tertiary) !important;
+        color: var(--ion-color-primary) !important;
     }
 
     .searchbar-input {
-        color: var(--ion-color-tertiary) !important;
+        color: var(--ion-color-secondary) !important;
     }
 }
 
 ion-header {
-    background-color: #ECECEC !important;
+    // background-color: #ECECEC !important;
     ion-toolbar {
         font-family: 'Poppins' !important;
-        border-radius: 0px 0px 10px 10px;
+        // border-radius: 0px 0px 10px 10px;
         ion-title {
             font-family: 'Poppins' !important;
-            font-size: 1rem;
+            font-size: 1.5rem;
             font-weight: 500 !important;
         }
     }
@@ -232,6 +232,12 @@ form {
     height: 40%;
     top: 60%;
     border-radius: 40px 40px 0 0 !important;
+}
+
+.modal-instrument{
+    height: 40%;
+    top: 0%;
+    // border-radius: 40px 40px 0 0 !important;
 }
 
 // Inverse (Dark Background)
@@ -511,4 +517,26 @@ ion-item{
             height: 48px;
         }
     }
+}
+
+.shadow-circle-global {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    border-radius: 100%;
+    background-color: var(--ion-color-primary);
+    opacity: 0.5;
+    z-index: -1;
+    filter: blur(120px);
+}
+
+.global-label{
+    margin: 0;
+}
+
+ion-item::part(native) {
+    border-radius: 10px !important;
 }

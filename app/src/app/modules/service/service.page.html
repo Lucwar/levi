@@ -1,33 +1,36 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button color="light" icon="arrow-back-circle" defaultHref="/home"></ion-back-button>
-    </ion-buttons>
-    <ion-title *ngIf="isWatching" color="light">{{ form?.value?.name }} - {{ form?.value?.dateTo | date:'dd/MM/yyyy' }}</ion-title>
-    <ion-title *ngIf="creating" color="light">Nueva lista</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
+  <ion-header class="ion-no-border">
+    <ion-toolbar color="transparent">
+      <ion-buttons slot="start">
+        <ion-back-button color="light" defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title *ngIf="isWatching" color="light">{{ form?.value?.name }} - {{ form?.value?.dateTo | date:'dd/MM/yyyy' }}</ion-title>
+      <ion-title *ngIf="creating" color="light">Nueva lista</ion-title>
+    </ion-toolbar>
+  </ion-header>
   <form class="ion-margin-top" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ion-grid class="ion-padding" *ngIf="!isWatching">
       <ion-row>
+        <ion-label color="light">Nombre de la lista</ion-label>
         <ion-item class="ion-align-items-center w100 fix-floating" lines="none">
-          <ion-label color="tertiary" position="floating">Nombre de la lista</ion-label>
           <ion-input formControlName="name" type="text"></ion-input>
         </ion-item>
         <div *ngIf="!isFieldValid('name')" class="invalid-input-message">
           {{getFieldError('name')}}
         </div>
 
-        <ion-item id="service-open-modal-dateFrom" class="ion-align-items-center w100 ion-margin-top" lines="none">
-          <ion-label color="tertiary">Fecha
-            <ion-label>{{ form.value.dateTo | date:'dd/MM/yyyy' }}</ion-label>
-          </ion-label>
-          <ion-icon slot="end" name="calendar"></ion-icon>
-        </ion-item>
-        <div *ngIf="!isFieldValid('dateTo')" class="invalid-input-message">
-          {{getFieldError('dateTo')}}
+        <div class="ion-margin-top w100">
+          <ion-label color="light">Fecha</ion-label>
+          <ion-item id="service-open-modal-dateFrom" class="ion-align-items-center w100" lines="none">
+            <ion-label color="secondary">
+              <ion-label>{{ form.value.dateTo | date:'dd/MM/yyyy' }}</ion-label>
+            </ion-label>
+            <ion-icon slot="end" name="calendar"></ion-icon>
+          </ion-item>
+          <div *ngIf="!isFieldValid('dateTo')" class="invalid-input-message">
+            {{getFieldError('dateTo')}}
+          </div>
         </div>
 
         <ion-modal trigger="service-open-modal-dateFrom">
@@ -50,7 +53,9 @@
     </ion-grid>
     <div *ngFor="let group of listGroups">
       <ion-row class="d-flex ion-align-items-center">
-        <h1 class="ion-padding-start">{{ group.name }}</h1>
+        <ion-text color="light">
+          <h1 class="ion-padding-start">{{ group.name }}</h1>
+        </ion-text>
           <ion-button *ngIf="!isWatching" class="btn-custom" (click)="goToEditListGroup(group)" expand="block" fill="clear"
             shape="round">
             Editar
@@ -75,11 +80,13 @@
     </div>
 
     <ion-footer class="footer-custom" *ngIf="!isWatching">
-      <ion-toolbar>
-        <ion-button [disabled]="!form.valid" class="ion-padding-start ion-padding-end" color="secondary" expand="block" fill="solid"
+      <ion-toolbar color="transparent">
+        <ion-button [disabled]="!form.valid" class="ion-padding-start ion-padding-end" color="primary" expand="block" fill="solid"
           shape="round" type="submit">
-          Guardar
-          <ion-icon slot="start" name="save"></ion-icon>
+          <ion-text color="light">
+            Guardar
+          </ion-text>
+          <ion-icon color="light" slot="start" name="save"></ion-icon>
         </ion-button>
       </ion-toolbar>
     </ion-footer>

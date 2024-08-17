@@ -3,27 +3,31 @@
     <form class="submit-container" [formGroup]="form" (ngSubmit)="onSubmit()">
       <ion-row class="ion-justify-content-center">
         <!-- <img src="assets/imgs/logo.svg" width="120px"> -->
-        <h1 class="title-logo">Levi
-          <span>App</span>
+        <h1 class="title-logo">
+          <span class="title">
+            Leví
+          </span>
+          <span class="ion-margin-top">Por favor ingrese su cuenta</span>
         </h1>
       </ion-row>
 
-      <ion-row class="ion-margin-top">
+      <ion-row class="ion-margin-top row-control">
+        <div class="shadow-circle"></div>
         <ion-col size="12">
+          <ion-label color="light">Email</ion-label>
           <ion-item class="w100 ion-margin-top fix-floating" lines="none">
-            <ion-label color="tertiary" position="floating">Email</ion-label>
-            <ion-input type="email" formControlName="username"></ion-input>
+            <ion-input color="dark" type="email" formControlName="username"></ion-input>
           </ion-item>
           <div *ngIf="!isFieldValid('username')" class="invalid-input-message">
             {{getFieldError('username')}}
           </div>
         </ion-col>
         <ion-col size="12">
+          <ion-label color="light">Contraseña</ion-label>
           <ion-item class="ion-align-items-center w100 fix-floating" lines="none">
-            <ion-label color="tertiary" position="floating">Contraseña</ion-label>
             <ion-icon color="tertiary" slot="end" [name]="showPassword ? 'eye-off' : 'eye'"
               (click)="showPassword = !showPassword"></ion-icon>
-            <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
+            <ion-input color="dark" [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
           </ion-item>
           <div *ngIf="!isFieldValid('password')" class="invalid-input-message">
             {{getFieldError('password')}}
@@ -37,13 +41,17 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-button type="submit" class="global-btn ion-text-capitalize" color="secondary" expand="block">
-            Iniciar sesión
+          <ion-button type="submit" class="global-btn ion-text-capitalize" color="primary" expand="block">
+            <ion-text color="light">
+              Iniciar sesión
+            </ion-text>
           </ion-button>
 
-          <ion-button type="button" class="global-btn ion-text-capitalize ion-margin-top" color="tertiary"
-            expand="block" (click)="goToUser()">
-            Registrarse
+          <ion-button type="button" class="global-btn ion-text-capitalize ion-margin-top" color="light"
+            expand="block" fill="clear" (click)="goToUser()">
+            <ion-text color="light">
+              Registrarse
+            </ion-text>
           </ion-button>
         </ion-col>
       </ion-row>

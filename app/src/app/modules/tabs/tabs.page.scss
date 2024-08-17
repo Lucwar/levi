@@ -1,10 +1,10 @@
 //////// Tabs ////////
 ion-tabs {
-    background: #ECECEC !important;
+    background: var(--ion-color-secondary) !important;
     z-index: 10;
 
     ion-tab-bar {
-        --background: var(--ion-color-primary) !important;
+        --background: var(--ion-color-light) !important;
     }
 }
 
@@ -20,14 +20,14 @@ ion-tab-bar {
 }
 
 ion-tab-button {
-    --color: var(--ion-color-light);
-    --color-selected: var(--ion-color-secondary);
+    --color: var(--ion-color-medium);
+    --color-selected: var(--ion-color-primary);
     position: relative;
     --padding-bottom: 8px;
     --padding-top: 8px;
 
     &.tab-selected::before {
-        background-color: var(--ion-color-secondary) !important;
+        background-color: var(--ion-color-primary) !important;
         bottom: 3px;
         right: 0;
         left: 0;

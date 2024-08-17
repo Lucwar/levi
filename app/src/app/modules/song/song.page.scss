@@ -48,12 +48,14 @@ ion-chip {
 }
 
 .quill-editor-container{
-    height: 100vh;
-    max-height: 100vh;
+    height: 80vh;
+    max-height: 80vh;
     overflow: auto;
-    background-color: white;
+    background-color: var(--ion-color-secondary);
     // border-radius: 15px;
     padding: 5px;
+    border: none;
+    color: white;
 }
 .quill-editor{
     height: 100%;
@@ -79,4 +81,9 @@ ion-item::part(native) {
 
 ion-grid{
     margin-bottom: 64px;
+}
+
+ion-select{
+    background-color: var(--ion-color-light);
+    border-radius: 10px;
 }
