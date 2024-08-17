@@ -234,9 +234,13 @@ form {
     border-radius: 40px 40px 0 0 !important;
 }
 
-.modal-instrument{
-    height: 40%;
-    top: 0%;
+.modal-instrument {
+
+    &::part(content){
+
+        height: 230px;
+    }
+    // top: 0%;
     // border-radius: 40px 40px 0 0 !important;
 }
 
@@ -539,4 +543,7 @@ ion-item{
 
 ion-item::part(native) {
     border-radius: 10px !important;
+}
+.ml0Auto{
+    margin-left: auto;
 }

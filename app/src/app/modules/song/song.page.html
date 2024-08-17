@@ -5,7 +5,7 @@
       <ion-buttons slot="start">
         <ion-back-button color="light" defaultHref="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title color="light">{{form?.value.name}} {{ form?.value.author ? '- '+ form?.value.author : ''}}</ion-title>
+      <ion-title class="centered-title" color="light">{{form?.value.name}} {{ form?.value.author ? '- '+ form?.value.author : ''}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -139,7 +139,7 @@
 
           </ng-template>
           <ng-template swiperSlide >
-            <ion-button type="button" (click)="openModalInstrument()" slot="end" class="note placeholder-note" shape="round">
+            <ion-button type="button" (click)="openModalInstrument()" slot="end" class="button-add-control" shape="round">
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ng-template>
