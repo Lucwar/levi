@@ -72,8 +72,9 @@ ion-item::part(native) {
 }
 
 .height-custom-btn {
-    margin-top: 0px;
-    height: 59px;
+    // margin-top: 0px;
+    margin-bottom: -5px;
+    height: 45px;
     &::part(native){
         border-radius: 10px;
     }
