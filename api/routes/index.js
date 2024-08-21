@@ -3,6 +3,7 @@ const path = require('path')
 const express = require('express')
 const router = express.Router()
 
+router.get('/.well-known/assetlinks.json', (req, res) => res.sendFile('assetlink.json', { root: './.well-known' }));
 
 router.use(function (req, res, next) {
 	if (req.method == 'OPTIONS') {
