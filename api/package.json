@@ -4,7 +4,7 @@
   "description": "Diproach - Produccion - Proyecto base",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=dev DEBUG=api* nodemon --legacy-watch index.js --exec babel-node",
+    "start": "mongod --ipv6 --bind_ip_all & NODE_ENV=dev DEBUG=api* nodemon --legacy-watch index.js --exec babel-node",
     "setup": "node setup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
