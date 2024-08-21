@@ -52,7 +52,7 @@
              <ion-label class="font-light">{{ item.dateTo | date:'dd/MM/yyyy'}}</ion-label>
           </ion-label>
 
-          <ion-label class="ion-text-end" slot="end">10
+          <ion-label class="ion-text-end" slot="end">{{ countSongs(item.listGroups) }}
             <ion-label class="font-light">Canciones</ion-label>
           </ion-label>
         </ion-item>

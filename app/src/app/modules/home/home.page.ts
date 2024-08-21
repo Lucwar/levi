@@ -23,7 +23,7 @@ export class HomePage extends ItemsPage {
 
   getParams(): Partial<EndPointParams> {
     const filters = { ...this.handleTextSearch() };
-    const populates = ['user'];
+    const populates = ['user', 'listGroups'];
     let sort: { [key: string]: number } = { dateTo: 1 };
     
     if (this.sortAsc != 0 && this.sortAsc != 2) {
@@ -42,6 +42,10 @@ export class HomePage extends ItemsPage {
     }
 
     this.getItems();
+  }
+
+  countSongs(list){
+    return list.reduce((sum, group) => sum + group.songs.length, 0);
   }
 
 }
