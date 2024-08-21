@@ -5,11 +5,13 @@
       <ion-buttons slot="start">
         <ion-back-button color="light" defaultHref="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title *ngIf="isWatching" color="light">{{ form?.value?.name }} - {{ form?.value?.dateTo | date:'dd/MM/yyyy' }}</ion-title>
-      <ion-title *ngIf="creating" color="light">Nueva lista</ion-title>
+      <ion-title *ngIf="isWatching" class="centered-title" color="light">{{ form?.value?.name }}</ion-title>
+      <ion-title *ngIf="creating" class="centered-title" color="light">Nueva lista</ion-title>
     </ion-toolbar>
   </ion-header>
   <form class="ion-margin-top" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="shadow-circle-global"></div>
     <ion-grid class="ion-padding" *ngIf="!isWatching">
       <ion-row>
         <ion-label color="light">Nombre de la lista</ion-label>
@@ -96,6 +98,6 @@
 
 <ion-fab *ngIf="creating || !isWatching" class="ion-fab-custom-2" slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button color="primary" (click)="goToAdd()">
-    <ion-icon color="secondary" name="add"></ion-icon>
+    <ion-icon color="light" name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

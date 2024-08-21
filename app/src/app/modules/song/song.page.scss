@@ -72,8 +72,9 @@ ion-item::part(native) {
 }
 
 .height-custom-btn {
-    margin-top: 0px;
-    height: 59px;
+    // margin-top: 0px;
+    margin-bottom: -5px;
+    height: 45px;
     &::part(native){
         border-radius: 10px;
     }
@@ -86,4 +87,8 @@ ion-grid{
 ion-select{
     background-color: var(--ion-color-light);
     border-radius: 10px;
+}
+
+.button-add-control{
+    height: 32px !important;
 }

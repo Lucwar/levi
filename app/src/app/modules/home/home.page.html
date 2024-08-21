@@ -22,9 +22,9 @@
         </ion-button>
       </ion-col>
     </ion-row>
-    <!-- <div class="d-flex ion-align-items-center">
-      <span>{{ this.sortAsc == 0 ? 'Más recientes' : this.sortAsc == 2 ? 'Menos recientes' : this.sortAsc == 1 ? 'A-Z' : 'Z-A'}}</span>
-    </div> -->
+    <div class="d-flex ion-text-end ion-align-items-center w100">
+      <ion-text color="light" class="ml0Auto">{{ this.sortAsc == 0 ? 'Más recientes' : this.sortAsc == 2 ? 'Menos recientes' : this.sortAsc == 1 ? 'A-Z' : 'Z-A'}}</ion-text>
+    </div>
   </div>
 
   <ion-grid class="margin-bottom-custom">
@@ -45,14 +45,14 @@
   
     <!-- <ion-card class="card-control" > -->
       <!-- <ion-item-sliding > -->
-        <ion-item *ngFor="let item of items" (click)="pageService.navigateRoute('service/watch/' + item.id)" class="ion-align-items-center item-control">
+        <ion-item (press)="pageService.navigateRoute('service/edit/' + item.id)" *ngFor="let item of items" (click)="pageService.navigateRoute('service/watch/' + item.id)" class="ion-align-items-center item-control">
           <ion-label class="ion-text-wrap">
             <p>{{ item?.name }}</p>
             <!-- <ion-label><p>Creada por: <b>{{ item?.user?.fullName }}</b></p></ion-label> -->
              <ion-label class="font-light">{{ item.dateTo | date:'dd/MM/yyyy'}}</ion-label>
           </ion-label>
 
-          <ion-label class="ion-text-end" slot="end">10
+          <ion-label class="ion-text-end" slot="end">{{ countSongs(item.listGroups) }}
             <ion-label class="font-light">Canciones</ion-label>
           </ion-label>
         </ion-item>

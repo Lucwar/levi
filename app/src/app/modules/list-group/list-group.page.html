@@ -1,23 +1,24 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button color="light" icon="arrow-back-circle"></ion-back-button>
-    </ion-buttons>
-    <ion-title color="light"></ion-title>
-    <ion-buttons *ngIf="!creating && !isWatching" slot="end">
-      <ion-button (click)="deleteListGroup()" fill="clear" shape="round">
-        <ion-icon name="trash-outline" color=danger></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
+  <ion-header class="ion-no-border">
+    <ion-toolbar color="transparent">
+      <ion-buttons slot="start">
+        <ion-back-button color="light" defaultHref="service"></ion-back-button>
+      </ion-buttons>
+      <ion-title color="light"></ion-title>
+      <ion-buttons *ngIf="!creating && !isWatching" slot="end">
+        <ion-button (click)="deleteListGroup()" fill="clear" shape="round">
+          <ion-icon name="trash-outline" color="light"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   <form class="ion-margin-top" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="shadow-circle-global"></div>
     <ion-grid class="ion-padding" *ngIf="!isWatching">
       <ion-row>
+        <ion-label color="light">Parte del servicio</ion-label>
         <ion-item class="ion-align-items-center w100 fix-floating" lines="none">
-          <ion-label color="tertiary" position="floating">Parte del servicio</ion-label>
           <ion-input type="text" formControlName="name"></ion-input>
         </ion-item>
         <div *ngIf="!isFieldValid('name')" class="invalid-input-message">
@@ -48,11 +49,13 @@
       </ion-item>
     </ion-card>
     <ion-footer class="footer-custom" *ngIf="!isWatching">
-      <ion-toolbar>
-        <ion-button [disabled]="!form.valid" class="ion-padding-start ion-padding-end" color="secondary" expand="block" type="submit"
+      <ion-toolbar color="transparent">
+        <ion-button [disabled]="!form.valid" class="ion-padding-start ion-padding-end" color="primary" expand="block" type="submit"
           fill="solid" shape="round">
-          Guardar
-          <ion-icon slot="start" name="save"></ion-icon>
+          <ion-text color="light">
+            Guardar
+          </ion-text>
+          <ion-icon color="light" slot="start" name="save"></ion-icon>
         </ion-button>
       </ion-toolbar>
     </ion-footer>

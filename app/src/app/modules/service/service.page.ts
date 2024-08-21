@@ -17,7 +17,7 @@ export class ServicePage extends ItemPage {
   listGroups: any = [];
   actionType;
   
-  ionViewWillEnter() {
+  async initializePre() {
     this.activatedRoute.params.subscribe((params) => {
       this.actionType = params.action;
     });
@@ -40,8 +40,8 @@ export class ServicePage extends ItemPage {
   }
 
   loadItemPost() {
-    if(this.actionType == 'edit' && !this.listGroups.length) this.listGroups = this.form.value.listGroups;
-    else this.listGroups = this.form.value.listGroups;
+    if(this.actionType == 'edit' && this.listGroups.length == 0) this.listGroups = this.form.value.listGroups;
+    else if(this.actionType == 'watch') this.listGroups = this.form.value.listGroups;
   }
 
   getFormNew() {
