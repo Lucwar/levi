@@ -52,7 +52,7 @@ const settings = {
 	portHTTPS: process.env.PORT_HTTPS,
 	portPeer: process.env.PORT_PEER,
 	database: {
-		uri: undefined,
+		uri: 'mongodb+srv://alexislevi777:cmjuHu0ZdbKLI6Fg @leviapp.b94ht.mongodb.net/',
 		logging: process.env.LOGGER || process.env.NODE_ENV,
 		timezone: '-03:00',
 		host: 'localhost',
