@@ -52,7 +52,7 @@ const settings = {
 	portHTTPS: process.env.PORT_HTTPS,
 	portPeer: process.env.PORT_PEER,
 	database: {
-		uri: 'mongodb+srv://alexislevi777:cmjuHu0ZdbKLI6Fg@leviapp.b94ht.mongodb.net/',
+		uri: null,
 		logging: process.env.LOGGER || process.env.NODE_ENV,
 		timezone: '-03:00',
 		host: 'localhost',
@@ -110,7 +110,12 @@ const settings = {
 };
 
 if (settings.docker) settings.database.uri = process.env.DB_URI + settings.database.name;
-else settings.database.uri = `mongodb://${settings.database.host}/${settings.database.name}`;
+else {
+	// mongodb+srv://alexislevi777:cmjuHu0ZdbKLI6Fg@leviapp.b94ht.mongodb.net/
+	// settings.database.uri = `mongodb://${settings.database.host}/${settings.database.name}`
+	settings.database.uri = 'mongodb+srv://alexislevi777:cmjuHu0ZdbKLI6Fg@leviapp.b94ht.mongodb.net/'
+	console.log("\nsettings.database.uri >>> ", settings.database.uri,'\n')
+};
 
 settings.checkEnvironmentVariables = () => {
 	if ([
