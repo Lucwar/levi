@@ -5,9 +5,13 @@
 export const environment = {
   production: false,
   apiVersion: 'v1',
-  serverUrl: 'http://localhost:3122/api',
-  filesUrl: 'http://localhost:3122/files',
-  socketUrl: 'http://localhost:3122',
+  // serverUrl: 'http://localhost:3122/api',
+  // filesUrl: 'http://localhost:3122/files',
+  // socketUrl: 'http://localhost:3122',
+
+  serverUrl: 'https://leviapi.onrender.com/api',
+  filesUrl: 'https://leviapi.onrender.com/files',
+  socketUrl: 'https://leviapi.onrender.com/',
 
   // serverUrl: 'http://192.168.0.70:3122/api',
   // filesUrl: 'http://192.168.0.70:3122/files',
