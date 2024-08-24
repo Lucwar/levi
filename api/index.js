@@ -28,7 +28,7 @@ const start = async () => {
 
     [`SIGINT`, `SIGUSR1`, `SIGUSR2`, `uncaughtException`, `SIGTERM`].forEach(event => process.on(event, () => gracefulShutdown(event)));
 
-    serverHTTPS.listen(settings.portHTTPS);
+    // serverHTTPS.listen(settings.portHTTPS);
 
     serverHTTP.listen(settings.port, () => {
 
