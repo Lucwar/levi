@@ -101,7 +101,7 @@
     "cordova-plugin-camera": "^6.0.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "^7.0.0",
-    "cordova-plugin-file-transfer": "git+https://github.com/apache/cordova-plugin-file-transfer.git",
+    "cordova-plugin-file-transfer": "github:apache/cordova-plugin-file-transfer",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",

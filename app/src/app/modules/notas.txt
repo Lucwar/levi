@@ -93,7 +93,8 @@ Tareas:
 - splash misma letra 
 - margin en notas..
 - headers de nombres de cancion y autor..
-- quill editor
+- listas recientes 'ajustar texto o diseño'
+
 
 
 
