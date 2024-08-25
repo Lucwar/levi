@@ -196,6 +196,8 @@ export class SongPage extends ItemPage {
   }
 
   async openModalPickNote(segmentIndex, rowIndex, noteIndex) {
+    if(this.isWatching) return;
+
     const modal = await this.pageService.modalCtrl.create({
       component: ModalPickNoteComponent,
       componentProps: {},
@@ -219,7 +221,7 @@ export class SongPage extends ItemPage {
   }
 
   tapEvent(e, note, segmentIndex, rowIndex, noteIndex){
-    if(note == '+') return;
+    if(note == '+' || this.isWatching) return;
     this.openPopover(e, note, segmentIndex, rowIndex, noteIndex);
   }
 

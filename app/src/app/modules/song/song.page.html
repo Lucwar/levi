@@ -5,7 +5,8 @@
       <ion-buttons slot="start">
         <ion-back-button color="light" defaultHref="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title class="centered-title" color="light">{{form?.value.name}} {{ form?.value.author ? '- '+ form?.value.author : ''}}</ion-title>
+      <!-- <ion-title class="centered-title" color="light">{{form?.value.name}} {{ form?.value.author ? '- '+ form?.value.author : ''}}</ion-title> -->
+      <ion-title class="centered-title" color="light">{{form?.value.name}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -28,7 +29,7 @@
           <ion-row>
             <ion-label color="light">Nombre</ion-label>
             <ion-item class="ion-align-items-center w100 fix-floating" lines="none">
-              <ion-input type="text" formControlName="name"></ion-input>
+              <ion-input [readonly]="isWatching" type="text" formControlName="name"></ion-input>
             </ion-item>
             <div *ngIf="!isFieldValid('name')" class="invalid-input-message">
               {{getFieldError('name')}}
@@ -37,7 +38,7 @@
             <div class="ion-margin-top w100">
               <ion-label color="light">Autor</ion-label>
               <ion-item class="ion-align-items-center w100 fix-floating" lines="none">
-                <ion-input type="text" formControlName="author"></ion-input>
+                <ion-input [readonly]="isWatching" type="text" formControlName="author"></ion-input>
               </ion-item>
               <div *ngIf="!isFieldValid('author')" class="invalid-input-message">
                 {{getFieldError('author')}}
@@ -47,7 +48,7 @@
            <div class="ion-margin-top w100">
              <ion-label color="light">Tono</ion-label>
             <ion-item class="ion-align-items-center w100" lines="none">
-              <ion-select formControlName="tone" interface="popover" value="tone" placeholder="Seleccione el tono" [compareWith]="compareWithFn">
+              <ion-select [disabled]="isWatching" formControlName="tone" interface="popover" value="tone" placeholder="Seleccione el tono" [compareWith]="compareWithFn">
                 <ion-select-option *ngFor="let note of settings.notesWithMinors"
                   [value]="note">{{note.name}}<span *ngIf="note.extension" class="minor-note">{{note.extension}}</span></ion-select-option>
               </ion-select>
@@ -60,7 +61,7 @@
            <div class="ion-margin-top w100">
              <ion-label color="light">Tag</ion-label>
              <ion-item class="ion-align-items-center w100" lines="none">
-               <ion-input type="text" formControlName="tag"></ion-input>
+               <ion-input [readonly]="isWatching" type="text" formControlName="tag"></ion-input>
              </ion-item>
              <div *ngIf="!isFieldValid('tag')" class="invalid-input-message">
                {{getFieldError('tag')}}
@@ -72,7 +73,7 @@
                 <div class="w100">
                   <ion-label color="light">Cantante</ion-label>
                   <ion-item class="ion-align-items-center w100 fix-floating" lines="none">
-                    <ion-input [(ngModel)]="form.value?.singers[i].singer" [ngModelOptions]="{standalone: true}"
+                    <ion-input [readonly]="isWatching" [(ngModel)]="form.value?.singers[i].singer" [ngModelOptions]="{standalone: true}"
                       type="text"></ion-input>
                   </ion-item>
                 </div>
@@ -81,7 +82,7 @@
                 <div>
                   <ion-label color="light">Tono</ion-label>
                   <ion-item class="ion-align-items-center w100" lines="none">
-                    <ion-select [(ngModel)]="form.value?.singers[i].note" [ngModelOptions]="{standalone: true}"
+                    <ion-select [disabled]="isWatching"  [(ngModel)]="form.value?.singers[i].note" [ngModelOptions]="{standalone: true}"
                       interface="popover" value="tone" placeholder="Seleccione el tono" [compareWith]="compareWithFn">
                       <ion-select-option *ngFor="let note of settings.notesWithMinors"
                         [value]="note">{{note.name}}<span *ngIf="note.extension" class="minor-note">{{note.extension}}</span></ion-select-option>
@@ -100,14 +101,14 @@
               <ion-col size="7" class="ion-no-padding ion-padding-end">
                 <ion-label color="light" position="floating">Título</ion-label>
                 <ion-item class="ion-align-items-center w100" lines="none">
-                  <ion-input [(ngModel)]="form.value?.links[i].name" [ngModelOptions]="{standalone: true}"
+                  <ion-input [readonly]="isWatching" [(ngModel)]="form.value?.links[i].name" [ngModelOptions]="{standalone: true}"
                     type="text"></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col [size]="!isWatching ? 3 : 5" class="ion-no-padding ion-padding-end">
                 <ion-label color="light" position="floating">Link</ion-label>
                 <ion-item class="ion-align-items-center w100" lines="none">
-                  <ion-input [(ngModel)]="form.value?.links[i].link" [ngModelOptions]="{standalone: true}"
+                  <ion-input [readonly]="isWatching" [(ngModel)]="form.value?.links[i].link" [ngModelOptions]="{standalone: true}"
                     type="text"></ion-input>
                 </ion-item>
               </ion-col>
@@ -147,7 +148,7 @@
           <!-- <ng-template swiperSlide>
             <ion-button (click)="openModalInstrument()" class="height-custom" fill="solid" color="primary"
             shape="round">
-              <ion-input type="text" placeholder="Instrumento/General"></ion-input>
+              <ion-input [readonly]="isWatching" type="text" placeholder="Instrumento/General"></ion-input>
               <ion-icon color="light" slot="icon-only" name="add-circle"></ion-icon>
             </ion-button>
           </ng-template> -->
@@ -166,7 +167,7 @@
           <div *ngFor="let segment of segments; index as i">
                         
             <ion-item fill="outline">
-              <ion-input [(ngModel)]="segment.label" [ngModelOptions]="{standalone: true}" type="text"
+              <ion-input [readonly]="isWatching" [(ngModel)]="segment.label" [ngModelOptions]="{standalone: true}" type="text"
                 placeholder="Parte"></ion-input>
               <ion-button *ngIf="!isWatching" (click)="deleteSegment(i)" class="note ion-text-capitalize" slot="end" shape="round">
                 <ion-icon name="trash"></ion-icon>

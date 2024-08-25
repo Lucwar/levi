@@ -92,6 +92,7 @@ Tareas:
 
 - splash misma letra 
 - margin en notas..
+- headers de nombres de cancion y autor..
 
 
 
