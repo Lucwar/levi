@@ -25,17 +25,21 @@ export class SongPage extends ItemPage {
     spaceBetween: 5
   };
 
-   /* SEGMENT */
-   segmentSong: string = 'song';
-   segmentNotes: string = 'notes';
-   segmentGeneral: string = 'general';
-   segmentValue: string = this.segmentGeneral;
+  /* SEGMENT */
+  segmentSong: string = 'song';
+  segmentNotes: string = 'notes';
+  segmentGeneral: string = 'general';
+  segmentValue: string = this.segmentGeneral;
 
-   config = {
+  config = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
-      ['blockquote'],
-      [{ header: [2] }],
+      ['blockquote', 'code-block'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ color: [] }, { background: [] }],
+      ['link'],
+      ['clean'],
     ],
   };
 
@@ -87,7 +91,6 @@ export class SongPage extends ItemPage {
   }
 
   savePre(item): { [k: string]: any } {
-    
     for (let key in item) {
       if (item[key] === '' || (Array.isArray(item[key]) && item[key].length === 0)) {
         delete item[key];

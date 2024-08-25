@@ -125,7 +125,7 @@
 
       <div *ngSwitchCase="segmentSong">
         <div class="quill-editor-container">
-          <quill-editor class="quill-editor" format="text" placeholder="Escribe o pega la canción aquí"
+          <quill-editor class="quill-editor" placeholder="Escribe o pega la canción aquí"
             [(ngModel)]="form?.value.lyrics" [ngModelOptions]="{standalone: true}"
             [modules]="!isWatching ? config : {toolbar: false}" theme="snow"></quill-editor>
         </div>
