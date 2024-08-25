@@ -1,6 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Gesture } from '@ionic/angular';
-import { BasePage } from 'src/app/core/base.page';
+import { Component } from '@angular/core';
 import { ItemPage } from 'src/app/core/item.page';
 import { SwiperOptions } from 'swiper';
 import { Validators } from '@angular/forms';
@@ -72,7 +70,7 @@ export class SongPage extends ItemPage {
   }
 
   loadItemPost() {
-    this.segmentValue = this.creating ? this.segmentGeneral : this.segmentSong;
+    this.segmentValue = this.creating ? this.segmentGeneral : this.segmentNotes;
     this.segments = this.item.annotations[0].annotation;
     this.selectAnnotation(0);
     this.transposeTone = this.form.value.tone;

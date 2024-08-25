@@ -90,5 +90,9 @@ Tareas:
 - sort en mis listas, agregar el mas reciente, etc CHECK
 - integrar las funcionalidades de los tags, y mostrarlos.. y agregar filtros por todos lados <<<<<
 
+- splash misma letra 
+- margin en notas..
+
+
 
 

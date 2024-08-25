@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { BasePage } from 'src/app/core/base.page';
 import { ItemsPage } from 'src/app/core/items.page';
-import { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-home',

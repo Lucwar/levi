@@ -139,7 +139,7 @@
 
           </ng-template>
           <ng-template swiperSlide >
-            <ion-button type="button" (click)="openModalInstrument()" slot="end" class="button-add-control" shape="round">
+            <ion-button *ngIf="!isWatching" type="button" (click)="openModalInstrument()" slot="end" class="button-add-control" shape="round">
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ng-template>
@@ -153,8 +153,8 @@
           </ng-template> -->
         </swiper>
 
-        <div class="ion-margin-start ion-margin-top ion-margin-end">
-          <ion-label color="light">Seleccione el tono</ion-label>
+        <div *ngIf="isWatching" class="ion-margin-start  ion-margin-end">
+          <ion-label color="light">Transportar tonalidad:</ion-label>
           <ion-select (ionChange)="transposeAnnotations()" [(ngModel)]="transposeTone" [ngModelOptions]="{standalone: true}" interface="popover" value="tone" [compareWith]="compareWithFn">
             <ion-select-option *ngFor="let note of notesWithMinorIfDeclared" 
               [value]="note">{{note.name}}<span *ngIf="note.extension" class="minor-note">{{note.extension}}</span></ion-select-option>
@@ -168,25 +168,24 @@
             <ion-item fill="outline">
               <ion-input [(ngModel)]="segment.label" [ngModelOptions]="{standalone: true}" type="text"
                 placeholder="Parte"></ion-input>
-              <ion-button (click)="deleteSegment(i)" class="note ion-text-capitalize" slot="end" shape="round">
+              <ion-button *ngIf="!isWatching" (click)="deleteSegment(i)" class="note ion-text-capitalize" slot="end" shape="round">
                 <ion-icon name="trash"></ion-icon>
               </ion-button>
             </ion-item>
 
             <div class="notes" *ngFor="let rowNote of segment.notes; index as rowi">
               <div class="notes" *ngFor="let note of rowNote; index as notei">
-                <ion-buttons>
+                <ion-buttons *ngIf="!isWatching || (note != '+' && isWatching)" >
                   <ion-button (press)="tapEvent($event, note, i, rowi, notei)" (click)="openModalPickNote(i, rowi, notei)" class="note ion-text-capitalize" shape="round">
                     <ion-icon *ngIf="note == '+'" name="add"></ion-icon>
                     <div *ngIf="note != '+'" class="note">{{note.name}}<span *ngIf="note.extension" class="minor-note">{{note.extension}}</span></div>
                   </ion-button>
-                  
                 </ion-buttons>
               </div>
             </div>
           </div>
           
-          <ion-item fill="outline">
+          <ion-item *ngIf="!isWatching" fill="outline">
             <ion-input (keyup.enter)="addOrEditSegment()" [(ngModel)]="segment.label" [ngModelOptions]="{standalone: true}" type="text"
               placeholder="Parte"></ion-input>
             <ion-button type="button" (click)="addOrEditSegment()" slot="end" class="note placeholder-note" shape="round">
@@ -212,7 +211,7 @@
           </div>
         </div> -->
 
-        <ion-button type="submit" class="ion-padding-start ion-padding-end" color="primary" expand="block"
+        <ion-button *ngIf="!isWatching" type="submit" class="ion-padding-start ion-padding-end" color="primary" expand="block"
           fill="solid" shape="round">
           <ion-text color="light">
             Guardar
