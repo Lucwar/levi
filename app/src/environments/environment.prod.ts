@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   apiVersion: 'v1',
 
-  serverUrl: 'https://camarcoapp.com.ar/api',
-  filesUrl: 'https://camarcoapp.com.ar/files',
-  socketUrl: 'https://camarcoapp.com.ar',
+  serverUrl: 'https://leviapi.onrender.com/api',
+  filesUrl: 'https://leviapi.onrender.com/files',
+  socketUrl: 'https://leviapi.onrender.com/',
 };

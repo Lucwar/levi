@@ -87,7 +87,7 @@ export class AppComponent {
     this.isLoading = true;
     this.isLoadingProcessing = true;
 
-    this.loading = await this.loadingController.create({ message: this.pageService.global.settings.LOADER_TEXT });
+    this.loading = await this.loadingController.create({ mode: 'ios' });
 
     await this.loading.present();
 
