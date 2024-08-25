@@ -88,13 +88,17 @@ Tareas:
 - sort en songs buscador fixear CHECK
 - sort en songs, agregar el mas reciente. CHECK
 - sort en mis listas, agregar el mas reciente, etc CHECK
-- integrar las funcionalidades de los tags, y mostrarlos.. y agregar filtros por todos lados <<<<<
 
 - splash misma letra 
 - margin en notas..
 - headers de nombres de cancion y autor..
 - listas recientes 'ajustar texto o diseño'
-
+- icono trash en list group rojo, header arriba
+- falta agregar busqueda por tags  
+- implementar bandas.. 
+- sorts en list group
+- colores de las notas siempre en violeta o en negro.. unanimizarlos
+- infinite scroll
 
 
 
